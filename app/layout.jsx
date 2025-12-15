@@ -1,8 +1,8 @@
-import { Inter } from 'next/font/google';
+import { Inter } from "next/font/google";
 import "../styles/globals.css";
 import Navigation from "../components/Navigation";
 
-const inter = Inter({ subsets: ['latin'] });
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
   title: "Farm To Table",
