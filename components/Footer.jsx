@@ -46,7 +46,8 @@ export default function Footer() {
                 lineHeight: 1.6,
               }}
             >
-              Connecting farmers directly with buyers. No middlemen, no commissions.
+              Connecting farmers directly with buyers. No middlemen, no
+              commissions.
             </p>
           </div>
 
@@ -181,8 +182,8 @@ export default function Footer() {
               lineHeight: 1.6,
             }}
           >
-            <strong>Disclaimer:</strong> Farm To Table only connects buyers and farmers. Payments and transactions
-            happen directly between them.
+            <strong>Disclaimer:</strong> Farm To Table only connects buyers and
+            farmers. Payments and transactions happen directly between them.
           </p>
           <p
             style={{
