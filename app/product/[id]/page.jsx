@@ -33,7 +33,14 @@ export default function ProductDetailPage() {
           setFarmer(farmerDoc.data());
         }
       } catch (err) {
-        setError(err?.message || "Failed to load product");
+        // Check if error is due to offline/connectivity
+        if (err?.message?.includes("offline")) {
+          setError(
+            "You appear to be offline. Please check your internet connection and refresh the page."
+          );
+        } else {
+          setError(err?.message || "Failed to load product");
+        }
       } finally {
         setLoading(false);
       }
