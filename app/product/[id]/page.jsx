@@ -36,7 +36,7 @@ export default function ProductDetailPage() {
         // Check if error is due to offline/connectivity
         if (err?.message?.includes("offline")) {
           setError(
-            "You appear to be offline. Please check your internet connection and refresh the page."
+            "Cannot connect to Firebase. Make sure Firestore is enabled in Firebase Console and you're connected to the internet."
           );
         } else {
           setError(err?.message || "Failed to load product");
