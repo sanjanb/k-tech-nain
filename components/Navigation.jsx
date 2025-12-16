@@ -215,9 +215,18 @@ export default function Navigation() {
             </Link>
           )}
           {user ? (
-            <button onClick={handleLogout} style={mobileLogoutButtonStyle}>
-              Logout
-            </button>
+            <>
+              <Link
+                href="/profile"
+                style={mobileLinkStyle}
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Profile
+              </Link>
+              <button onClick={handleLogout} style={mobileLogoutButtonStyle}>
+                Logout
+              </button>
+            </>
           ) : (
             <Link
               href="/auth"
