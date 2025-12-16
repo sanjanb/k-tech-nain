@@ -202,7 +202,30 @@ export default function AddProductPage() {
 
         <div style={fieldStyle}>
           <label style={labelStyle}>Quantity</label>
-          <inputProduct Image (optional, max 500KB)</label>
+          <input
+            type="text"
+            value={quantity}
+            onChange={(e) => setQuantity(e.target.value)}
+            required
+            style={inputStyle}
+            placeholder="e.g., 100 kg"
+          />
+        </div>
+
+        <div style={fieldStyle}>
+          <label style={labelStyle}>UPI ID</label>
+          <input
+            type="text"
+            value={upiId}
+            onChange={(e) => setUpiId(e.target.value)}
+            required
+            style={inputStyle}
+            placeholder="e.g., farmer@upi"
+          />
+        </div>
+
+        <div style={fieldStyle}>
+          <label style={labelStyle}>Product Image (optional, max 500KB)</label>
           <input
             type="file"
             accept="image/*"
@@ -218,29 +241,6 @@ export default function AddProductPage() {
             }}
           >
             Tip: Compress images to under 500KB for best performance
-            placeholder="e.g., farmer@upi"
-          />
-        </div>
-
-        <div style={fieldStyle}>
-          <label style={labelStyle}>Image (Not available on free plan)</label>
-          <input
-            type="file"
-            accept="image/*"
-            onChange={(e) => setImage(e.target.files[0])}
-            style={inputStyle}
-            disabled
-            title="Image upload requires Firebase Storage (paid plan)"
-          />
-          <p
-            style={{
-              fontSize: 12,
-              color: "var(--color-text-secondary)",
-              marginTop: 4,
-              marginBottom: 0,
-            }}
-          >
-            Image upload disabled - Firebase Storage requires payment setup
           </p>
         </div>
 
