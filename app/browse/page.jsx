@@ -106,7 +106,7 @@ export default function BrowsePage() {
               style={{ textDecoration: "none" }}
             >
               <div style={cardStyle}>
-                {product.imageUrl && (
+                {product.imageUrl ? (
                   <img
                     src={product.imageUrl}
                     alt={product.cropName}
@@ -117,6 +117,27 @@ export default function BrowsePage() {
                       borderRadius: "8px 8px 0 0",
                     }}
                   />
+                ) : (
+                  <div
+                    style={{
+                      width: "100%",
+                      height: 200,
+                      background: "var(--color-bg)",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      borderRadius: "8px 8px 0 0",
+                    }}
+                  >
+                    <span
+                      style={{
+                        fontSize: 48,
+                        color: "var(--color-primary)",
+                      }}
+                    >
+                      🌾
+                    </span>
+                  </div>
                 )}
                 <div style={{ padding: 16 }}>
                   <h3
