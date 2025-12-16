@@ -52,6 +52,11 @@ export default function BrowsePage() {
   useEffect(() => {
     let filtered = [...allProducts];
 
+    // Filter out sold products (buyers should only see available products)
+    filtered = filtered.filter(
+      (product) => (product.status || "available") === "available"
+    );
+
     // Search filter
     if (searchQuery) {
       filtered = filtered.filter((product) =>
