@@ -95,6 +95,11 @@ export default function Navigation() {
           <Link href="/browse" style={linkStyle}>
             Browse Produce
           </Link>
+          {user?.email === "admin@farmtotable.com" && (
+            <Link href="/admin/verify" style={linkStyle}>
+              Admin
+            </Link>
+          )}
           {role === "farmer" && (
             <>
               <Link href="/farmer" style={linkStyle}>
@@ -187,6 +192,15 @@ export default function Navigation() {
           >
             Browse Produce
           </Link>
+          {user?.email === "admin@farmtotable.com" && (
+            <Link
+              href="/admin/verify"
+              style={mobileLinkStyle}
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              Admin
+            </Link>
+          )}
           {role === "farmer" && (
             <>
               <Link
