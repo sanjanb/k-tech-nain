@@ -54,18 +54,27 @@ export default function AddProductPage() {
     setSubmitting(true);
 
     try {
+      // eslint-disable-next-line no-console
+      console.log("Starting product submission...");
+
       let imageUrl = null;
 
       if (image) {
+        // eslint-disable-next-line no-console
+        console.log("Uploading image to Firebase Storage...");
         const imageRef = ref(
           storage,
           `products/${user.uid}/${Date.now()}_${image.name}`
         );
         await uploadBytes(imageRef, image);
         imageUrl = await getDownloadURL(imageRef);
+        // eslint-disable-next-line no-console
+        console.log("Image uploaded successfully:", imageUrl);
       }
 
-      await addDoc(collection(db, "products"), {
+      // eslint-disable-next-line no-console
+      console.log("Saving product to Firestore...");
+      const productData = {
         cropName,
         price: parseFloat(price),
         quantity,
@@ -73,11 +82,33 @@ export default function AddProductPage() {
         imageUrl,
         farmerId: user.uid,
         createdAt: serverTimestamp(),
-      });
+      };
+
+      await addDoc(collection(db, "products"), productData);
+      // eslint-disable-next-line no-console
+      console.log("Product added successfully!");
 
       router.push("/farmer");
     } catch (err) {
-      setError(err?.message || "Failed to add product");
+      // eslint-disable-next-line no-console
+      console.error("Error adding product:", err);
+      
+      // Better error messages
+      let errorMessage = "Failed to add product";
+      if (err?.message?.includes("offline")) {
+        errorMessage =
+          "Cannot connect to Firebase. Please check your internet connection.";
+      } else if (err?.message?.includes("permission")) {
+        errorMessage =
+          "Permission denied. Make sure Firestore rules allow write access.";
+      } else if (err?.message?.includes("storage")) {
+        errorMessage =
+          "Image upload failed. Make sure Firebase Storage is enabled.";
+      } else if (err?.message) {
+        errorMessage = err.message;
+      }
+      
+      setError(errorMessage);
     } finally {
       setSubmitting(false);
     }
