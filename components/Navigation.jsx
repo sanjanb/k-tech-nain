@@ -14,6 +14,7 @@ export default function Navigation() {
   const [role, setRole] = useState(null);
   const [loading, setLoading] = useState(true);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [profileDropdownOpen, setProfileDropdownOpen] = useState(false);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
@@ -32,6 +33,17 @@ export default function Navigation() {
     });
     return () => unsubscribe();
   }, []);
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (profileDropdownOpen && !event.target.closest("button")) {
+        setProfileDropdownOpen(false);
+      }
+    };
+    document.addEventListener("click", handleClickOutside);
+    return () => document.removeEventListener("click", handleClickOutside);
+  }, [profileDropdownOpen]);
 
   const handleLogout = async () => {
     try {
@@ -99,9 +111,46 @@ export default function Navigation() {
             </Link>
           )}
           {user ? (
-            <button onClick={handleLogout} style={logoutButtonStyle}>
-              Logout
-            </button>
+            <div style={{ position: "relative" }}>
+              <button
+                onClick={() => setProfileDropdownOpen(!profileDropdownOpen)}
+                style={profileIconStyle}
+                aria-label="Profile menu"
+              >
+                <svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                >
+                  <circle cx="12" cy="12" r="10" />
+                  <circle cx="12" cy="10" r="3" />
+                  <path d="M6.168 18.849A4 4 0 0 1 10 16h4a4 4 0 0 1 3.834 2.855" />
+                </svg>
+              </button>
+              {profileDropdownOpen && (
+                <div style={profileDropdownStyle}>
+                  <Link
+                    href="/profile"
+                    style={dropdownLinkStyle}
+                    onClick={() => setProfileDropdownOpen(false)}
+                  >
+                    Profile
+                  </Link>
+                  <button
+                    onClick={() => {
+                      handleLogout();
+                      setProfileDropdownOpen(false);
+                    }}
+                    style={dropdownButtonStyle}
+                  >
+                    Logout
+                  </button>
+                </div>
+              )}
+            </div>
           ) : (
             <Link href="/auth" style={linkStyle}>
               Login
