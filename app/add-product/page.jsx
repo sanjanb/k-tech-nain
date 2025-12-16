@@ -89,6 +89,15 @@ export default function AddProductPage() {
       } else if (err?.message?.includes("permission")) {
         errorMessage =
           "Permission denied. Make sure Firestore rules allow write access.";
+      } else if (err?.message) {
+        errorMessage = err.message;
+      }
+      
+      setError(errorMessage);
+    } finally {
+      setSubmitting(false);
+    }
+  };
 
   if (loading) {
     return (
