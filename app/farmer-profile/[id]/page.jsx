@@ -3,7 +3,14 @@
 import { useState, useEffect } from "react";
 import { useParams } from "next/navigation";
 import { db } from "../../../lib/firebase";
-import { doc, getDoc, collection, query, where, getDocs } from "firebase/firestore";
+import {
+  doc,
+  getDoc,
+  collection,
+  query,
+  where,
+  getDocs,
+} from "firebase/firestore";
 import Link from "next/link";
 
 export default function FarmerProfilePage() {
@@ -27,7 +34,7 @@ export default function FarmerProfilePage() {
         }
 
         const farmerData = farmerDoc.data();
-        
+
         // Verify this is actually a farmer
         if (farmerData.role !== "farmer") {
           setError("User is not a farmer");
@@ -58,7 +65,7 @@ export default function FarmerProfilePage() {
 
   const formatDate = (timestamp) => {
     if (!timestamp) return "Recently joined";
-    
+
     // Handle Firestore Timestamp
     let date;
     if (timestamp.seconds) {
@@ -211,7 +218,9 @@ export default function FarmerProfilePage() {
         )}
 
         {/* Email */}
-        <div style={{ ...infoRowStyle, borderBottom: "none", paddingBottom: 0 }}>
+        <div
+          style={{ ...infoRowStyle, borderBottom: "none", paddingBottom: 0 }}
+        >
           <span style={labelStyle}>Email</span>
           <span style={valueStyle}>{farmer.email}</span>
         </div>
