@@ -257,6 +257,56 @@ const logoutButtonStyle = {
   cursor: "pointer",
 };
 
+const profileIconStyle = {
+  background: "transparent",
+  border: "none",
+  color: "var(--color-text-primary)",
+  cursor: "pointer",
+  padding: 8,
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  borderRadius: "50%",
+  transition: "background 0.2s",
+};
+
+const profileDropdownStyle = {
+  position: "absolute",
+  top: "calc(100% + 8px)",
+  right: 0,
+  background: "var(--color-white)",
+  border: "1px solid #E5E7EB",
+  borderRadius: 8,
+  boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
+  minWidth: 150,
+  zIndex: 1000,
+  overflow: "hidden",
+};
+
+const dropdownLinkStyle = {
+  display: "block",
+  padding: "12px 20px",
+  color: "var(--color-text-primary)",
+  textDecoration: "none",
+  fontSize: 14,
+  fontWeight: 500,
+  borderBottom: "1px solid #F3F4F6",
+  transition: "background 0.2s",
+};
+
+const dropdownButtonStyle = {
+  width: "100%",
+  padding: "12px 20px",
+  background: "transparent",
+  border: "none",
+  color: "var(--color-text-primary)",
+  fontSize: 14,
+  fontWeight: 500,
+  cursor: "pointer",
+  textAlign: "left",
+  transition: "background 0.2s",
+};
+
 const burgerButtonStyle = {
   display: "none",
   flexDirection: "column",
