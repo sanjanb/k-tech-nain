@@ -259,7 +259,20 @@ export default function ProductDetailPage() {
             <strong style={{ color: "var(--color-text-primary)" }}>
               Farmer:
             </strong>{" "}
-            {farmer?.name || "Unknown"}
+            {farmer ? (
+              <Link
+                href={`/farmer-profile/${product.farmerId}`}
+                style={{
+                  color: "var(--color-primary)",
+                  textDecoration: "none",
+                  fontWeight: 500,
+                }}
+              >
+                {farmer.name}
+              </Link>
+            ) : (
+              "Unknown"
+            )}
           </p>
           <p
             style={{
