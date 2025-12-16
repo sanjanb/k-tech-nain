@@ -345,7 +345,8 @@ export default function FarmerProfilePage() {
                 marginLeft: 4,
               }}
             >
-              ({feedbacks.length} {feedbacks.length === 1 ? "review" : "reviews"})
+              ({feedbacks.length}{" "}
+              {feedbacks.length === 1 ? "review" : "reviews"})
             </span>
           </div>
 
@@ -374,8 +375,7 @@ export default function FarmerProfilePage() {
                       key={star}
                       style={{
                         fontSize: 16,
-                        color:
-                          star <= feedback.rating ? "#F59E0B" : "#D1D5DB",
+                        color: star <= feedback.rating ? "#F59E0B" : "#D1D5DB",
                       }}
                     >
                       ★
