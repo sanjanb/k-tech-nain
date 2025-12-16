@@ -3,7 +3,14 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { auth, db } from "@/lib/firebase";
-import { collection, getDocs, doc, updateDoc, query, where } from "firebase/firestore";
+import {
+  collection,
+  getDocs,
+  doc,
+  updateDoc,
+  query,
+  where,
+} from "firebase/firestore";
 import { onAuthStateChanged } from "firebase/auth";
 
 export default function AdminVerifyPage() {
@@ -70,7 +77,9 @@ export default function AdminVerifyPage() {
         )
       );
 
-      alert(`Farmer ${!currentStatus ? "verified" : "unverified"} successfully`);
+      alert(
+        `Farmer ${!currentStatus ? "verified" : "unverified"} successfully`
+      );
     } catch (error) {
       console.error("Error updating verification:", error);
       alert("Failed to update verification status");
@@ -245,9 +254,9 @@ export default function AdminVerifyPage() {
           }}
         >
           <strong>Note:</strong> This is a minimal admin tool for toggling
-          farmer verification. To change the admin email, update the
-          ADMIN_EMAIL constant in this file. In production, implement proper
-          admin role management.
+          farmer verification. To change the admin email, update the ADMIN_EMAIL
+          constant in this file. In production, implement proper admin role
+          management.
         </p>
       </div>
     </div>
