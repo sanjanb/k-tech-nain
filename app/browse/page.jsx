@@ -28,20 +28,23 @@ export default function BrowsePage() {
         const productsList = await Promise.all(
           snapshot.docs.map(async (docSnapshot) => {
             const productData = { id: docSnapshot.id, ...docSnapshot.data() };
-            
+
             // Fetch farmer data to get verification status
             if (productData.farmerId) {
               try {
-                const farmerDoc = await getDoc(doc(db, "users", productData.farmerId));
+                const farmerDoc = await getDoc(
+                  doc(db, "users", productData.farmerId)
+                );
                 if (farmerDoc.exists()) {
-                  productData.farmerVerified = farmerDoc.data().isVerified || false;
+                  productData.farmerVerified =
+                    farmerDoc.data().isVerified || false;
                 }
               } catch (err) {
                 // If farmer fetch fails, continue without verification status
                 productData.farmerVerified = false;
               }
             }
-            
+
             return productData;
           })
         );
