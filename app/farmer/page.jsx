@@ -63,7 +63,9 @@ export default function FarmerPage() {
               const dealData = { id: dealDoc.id, ...dealDoc.data() };
 
               // Fetch product details
-              const productDoc = await getDoc(doc(db, "products", dealData.productId));
+              const productDoc = await getDoc(
+                doc(db, "products", dealData.productId)
+              );
               const productData = productDoc.exists()
                 ? { id: productDoc.id, ...productDoc.data() }
                 : null;
@@ -71,7 +73,9 @@ export default function FarmerPage() {
               // Fetch buyer details
               let buyerData = null;
               if (dealData.buyerId) {
-                const buyerDoc = await getDoc(doc(db, "users", dealData.buyerId));
+                const buyerDoc = await getDoc(
+                  doc(db, "users", dealData.buyerId)
+                );
                 buyerData = buyerDoc.exists() ? buyerDoc.data() : null;
               }
 
@@ -274,9 +278,8 @@ export default function FarmerPage() {
                             marginTop: 8,
                           }}
                         >
-                          Buyer: <strong>{deal.buyer.name}</strong> ({
-                            deal.buyer.email
-                          })
+                          Buyer: <strong>{deal.buyer.name}</strong> (
+                          {deal.buyer.email})
                         </p>
                       )}
 
