@@ -361,43 +361,43 @@ export default function BrowsePage() {
               }}
             >
               <button
-              onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
-              disabled={currentPage === 1}
-              style={{
-                ...paginationButtonStyle,
-                opacity: currentPage === 1 ? 0.4 : 1,
-                cursor: currentPage === 1 ? "not-allowed" : "pointer",
-              }}
-            >
-              Previous
-            </button>
+                onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+                disabled={currentPage === 1}
+                style={{
+                  ...paginationButtonStyle,
+                  opacity: currentPage === 1 ? 0.4 : 1,
+                  cursor: currentPage === 1 ? "not-allowed" : "pointer",
+                }}
+              >
+                Previous
+              </button>
 
-            <span
-              style={{
-                fontSize: 14,
-                color: "var(--color-text-primary)",
-              }}
-            >
-              Page {currentPage} of {totalPages}
-            </span>
+              <span
+                style={{
+                  fontSize: 14,
+                  color: "var(--color-text-primary)",
+                }}
+              >
+                Page {currentPage} of {totalPages}
+              </span>
 
-            <button
-              onClick={() =>
-                setCurrentPage((prev) => Math.min(prev + 1, totalPages))
-              }
-              disabled={currentPage === totalPages}
-              style={{
-                ...paginationButtonStyle,
-                opacity: currentPage === totalPages ? 0.4 : 1,
-                cursor:
-                  currentPage === totalPages ? "not-allowed" : "pointer",
-              }}
-            >
-              Next
-            </button>
-          </div>
-        )}
-      </>
+              <button
+                onClick={() =>
+                  setCurrentPage((prev) => Math.min(prev + 1, totalPages))
+                }
+                disabled={currentPage === totalPages}
+                style={{
+                  ...paginationButtonStyle,
+                  opacity: currentPage === totalPages ? 0.4 : 1,
+                  cursor:
+                    currentPage === totalPages ? "not-allowed" : "pointer",
+                }}
+              >
+                Next
+              </button>
+            </div>
+          )}
+        </>
       )}
     </div>
   );
