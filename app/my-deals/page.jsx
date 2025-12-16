@@ -214,7 +214,9 @@ export default function MyDealsPage() {
               <div
                 key={deal.id}
                 style={{
-                  border: isCompleted ? "2px solid #10B981" : "1px solid #E5E7EB",
+                  border: isCompleted
+                    ? "2px solid #10B981"
+                    : "1px solid #E5E7EB",
                   borderRadius: 8,
                   padding: 20,
                   background: isCompleted ? "#F0FDF4" : "var(--color-white)",
@@ -444,8 +446,7 @@ export default function MyDealsPage() {
                       }}
                     >
                       Both parties have confirmed this transaction. This
-                      completed deal may enable feedback features in the
-                      future.
+                      completed deal may enable feedback features in the future.
                     </p>
                   </div>
                 )}
