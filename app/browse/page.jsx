@@ -74,7 +74,67 @@ export default function BrowsePage() {
     // Sort
     if (sortBy === "price-low") {
       filtered.sort((a, b) => parseFloat(a.price) - parseFloat(b.price));
-    } else if (sortBy ==24,
+    } else if (sortBy === "price-high") {
+      filtered.sort((a, b) => parseFloat(b.price) - parseFloat(a.price));
+    } else if (sortBy === "name") {
+      filtered.sort((a, b) => a.cropName.localeCompare(b.cropName));
+    } else if (sortBy === "newest") {
+      filtered.sort((a, b) => {
+        const aTime = a.createdAt?.seconds || 0;
+        const bTime = b.createdAt?.seconds || 0;
+        return bTime - aTime;
+      });
+    }
+
+    setFilteredProducts(filtered);
+    setCurrentPage(1); // Reset to first page when filters change
+  }, [searchQuery, minPrice, maxPrice, sortBy, allProducts]);
+
+  // Pagination logic
+  const totalPages = Math.ceil(filteredProducts.length / itemsPerPage);
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const currentProducts = filteredProducts.slice(startIndex, endIndex);
+
+  if (loading) {
+    return (
+      <div
+        style={{
+          minHeight: "calc(100vh - 70px)",
+          display: "grid",
+          placeItems: "center",
+        }}
+      >
+        <p style={{ color: "var(--color-text-secondary)" }}>
+          Loading products...
+        </p>
+      </div>
+    );
+  }
+
+  return (
+    <div
+      style={{
+        minHeight: "calc(100vh - 70px)",
+        padding: "40px 20px",
+        maxWidth: 1200,
+        margin: "0 auto",
+      }}
+    >
+      <h1
+        style={{
+          fontSize: 28,
+          fontWeight: 600,
+          color: "var(--color-text-primary)",
+          marginBottom: 8,
+        }}
+      >
+        Browse Produce
+      </h1>
+      <p
+        style={{
+          color: "var(--color-text-secondary)",
+          marginBottom: 24,
         }}
       >
         {filteredProducts.length}{" "}
