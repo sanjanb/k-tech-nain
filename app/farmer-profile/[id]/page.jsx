@@ -128,13 +128,13 @@ export default function FarmerProfilePage() {
     <div
       style={{
         minHeight: "calc(100vh - 70px)",
-        padding: "40px 20px",
+        padding: "clamp(24px, 5vw, 40px) 20px",
         maxWidth: 800,
         margin: "0 auto",
       }}
     >
       {/* Header */}
-      <div style={{ marginBottom: 32 }}>
+      <div style={{ marginBottom: "clamp(24px, 4vw, 32px)" }}>
         <Link
           href="/browse"
           style={{
@@ -157,11 +157,12 @@ export default function FarmerProfilePage() {
         >
           <h1
             style={{
-              fontSize: 28,
+              fontSize: "clamp(24px, 4vw, 32px)",
               fontWeight: 600,
               color: "var(--color-text-primary)",
               marginBottom: 0,
               marginTop: 0,
+              lineHeight: 1.2,
             }}
           >
             {farmer.name}
@@ -199,9 +200,9 @@ export default function FarmerProfilePage() {
         style={{
           background: "var(--color-white)",
           borderRadius: 8,
-          padding: 24,
+          padding: "clamp(20px, 4vw, 32px)",
           boxShadow: "0 1px 3px rgba(0,0,0,0.1)",
-          marginBottom: 24,
+          marginBottom: "clamp(20px, 4vw, 32px)",
         }}
       >
         {/* Location */}
@@ -257,13 +258,14 @@ export default function FarmerProfilePage() {
           href="/browse"
           style={{
             display: "inline-block",
-            padding: "12px 24px",
+            padding: "clamp(10px, 2vw, 12px) clamp(20px, 4vw, 24px)",
             background: "var(--color-primary)",
             color: "var(--color-white)",
             borderRadius: 8,
             textDecoration: "none",
-            fontSize: 16,
+            fontSize: "clamp(14px, 2.5vw, 16px)",
             fontWeight: 500,
+            transition: "opacity 0.2s",
           }}
         >
           View All Products

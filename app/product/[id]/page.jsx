@@ -97,7 +97,7 @@ export default function ProductDetailPage() {
     <div
       style={{
         minHeight: "calc(100vh - 70px)",
-        padding: "40px 20px",
+        padding: "clamp(24px, 5vw, 40px) 20px",
         maxWidth: 800,
         margin: "0 auto",
       }}
@@ -109,7 +109,7 @@ export default function ProductDetailPage() {
           textDecoration: "none",
           fontSize: 14,
           fontWeight: 500,
-          marginBottom: 32,
+          marginBottom: "clamp(24px, 4vw, 32px)",
           display: "inline-block",
         }}
       >
@@ -120,7 +120,7 @@ export default function ProductDetailPage() {
         style={{
           background: "var(--color-white)",
           borderRadius: 8,
-          padding: 32,
+          padding: "clamp(20px, 4vw, 32px)",
           boxShadow: "0 1px 3px rgba(0,0,0,0.1)",
         }}
       >
@@ -140,11 +140,12 @@ export default function ProductDetailPage() {
 
         <h1
           style={{
-            fontSize: 32,
+            fontSize: "clamp(24px, 5vw, 32px)",
             fontWeight: 600,
             color: "var(--color-text-primary)",
             marginBottom: 8,
             margin: 0,
+            lineHeight: 1.2,
           }}
         >
           {product.cropName}
@@ -152,10 +153,10 @@ export default function ProductDetailPage() {
 
         <p
           style={{
-            fontSize: 24,
-            fontWeight: 500,
+            fontSize: "clamp(20px, 4vw, 24px)",
+            fontWeight: 600,
             color: "var(--color-primary)",
-            marginBottom: 24,
+            marginBottom: "clamp(20px, 4vw, 24px)",
             margin: 0,
             marginTop: 8,
           }}
@@ -166,9 +167,9 @@ export default function ProductDetailPage() {
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: "1fr 1fr",
-            gap: 24,
-            marginBottom: 32,
+            gridTemplateColumns: "repeat(auto-fit, minmax(150px, 1fr))",
+            gap: "clamp(16px, 3vw, 24px)",
+            marginBottom: "clamp(24px, 4vw, 32px)",
           }}
         >
           <div>
@@ -262,8 +263,8 @@ export default function ProductDetailPage() {
           style={{
             border: "2px solid #E5E7EB",
             borderRadius: 8,
-            padding: 24,
-            marginBottom: 32,
+            padding: "clamp(20px, 4vw, 24px)",
+            marginBottom: "clamp(24px, 4vw, 32px)",
             background: "var(--color-white)",
           }}
         >
@@ -364,8 +365,8 @@ export default function ProductDetailPage() {
             background: "#FEF3C7",
             border: "1px solid #FCD34D",
             borderRadius: 8,
-            padding: 20,
-            marginTop: 32,
+            padding: "clamp(16px, 3vw, 20px)",
+            marginTop: "clamp(24px, 4vw, 32px)",
           }}
         >
           <p
