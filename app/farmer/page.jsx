@@ -23,6 +23,8 @@ export default function FarmerPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [updatingStatus, setUpdatingStatus] = useState({});
+  const [deals, setDeals] = useState([]);
+  const [confirmingDeal, setConfirmingDeal] = useState(null);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
@@ -49,6 +51,38 @@ export default function FarmerPage() {
             ...doc.data(),
           }));
           setProducts(productsList);
+
+          // Fetch deals for farmer's products
+          const dealsQuery = query(
+            collection(db, "deals"),
+            where("farmerId", "==", currentUser.uid)
+          );
+          const dealsSnapshot = await getDocs(dealsQuery);
+          const dealsData = await Promise.all(
+            dealsSnapshot.docs.map(async (dealDoc) => {
+              const dealData = { id: dealDoc.id, ...dealDoc.data() };
+
+              // Fetch product details
+              const productDoc = await getDoc(doc(db, "products", dealData.productId));
+              const productData = productDoc.exists()
+                ? { id: productDoc.id, ...productDoc.data() }
+                : null;
+
+              // Fetch buyer details
+              let buyerData = null;
+              if (dealData.buyerId) {
+                const buyerDoc = await getDoc(doc(db, "users", dealData.buyerId));
+                buyerData = buyerDoc.exists() ? buyerDoc.data() : null;
+              }
+
+              return {
+                ...dealData,
+                product: productData,
+                buyer: buyerData,
+              };
+            })
+          );
+          setDeals(dealsData);
         } catch (err) {
           // Check if error is due to offline/connectivity
           if (err?.message?.includes("offline")) {
@@ -66,6 +100,35 @@ export default function FarmerPage() {
     });
     return () => unsubscribe();
   }, [router]);
+
+  const confirmDeal = async (dealId, alreadyConfirmed) => {
+    if (alreadyConfirmed) {
+      alert("You have already confirmed this deal");
+      return;
+    }
+
+    setConfirmingDeal(dealId);
+    try {
+      const dealRef = doc(db, "deals", dealId);
+      await updateDoc(dealRef, {
+        farmerConfirmed: true,
+      });
+
+      // Update local state
+      setDeals((prev) =>
+        prev.map((deal) =>
+          deal.id === dealId ? { ...deal, farmerConfirmed: true } : deal
+        )
+      );
+
+      alert("Deal confirmed successfully!");
+    } catch (err) {
+      console.error("Error confirming deal:", err);
+      alert("Failed to confirm deal. Please try again.");
+    } finally {
+      setConfirmingDeal(null);
+    }
+  };
 
   const toggleStatus = async (productId, currentStatus) => {
     if (!user) return;
@@ -113,6 +176,245 @@ export default function FarmerPage() {
         margin: "0 auto",
       }}
     >
+      {/* Pending Deals Section */}
+      {deals.length > 0 && (
+        <div style={{ marginBottom: 48 }}>
+          <h2
+            style={{
+              fontSize: 24,
+              fontWeight: 600,
+              color: "var(--color-text-primary)",
+              marginBottom: 16,
+            }}
+          >
+            Pending Deals
+          </h2>
+          <p
+            style={{
+              fontSize: 14,
+              color: "var(--color-text-secondary)",
+              marginBottom: 20,
+            }}
+          >
+            Buyers who expressed interest in your products. Confirm deals after
+            completing the transaction.
+          </p>
+
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              gap: 16,
+            }}
+          >
+            {deals.map((deal) => {
+              const isCompleted = deal.buyerConfirmed && deal.farmerConfirmed;
+
+              return (
+                <div
+                  key={deal.id}
+                  style={{
+                    border: "1px solid #E5E7EB",
+                    borderRadius: 8,
+                    padding: 20,
+                    background: "var(--color-white)",
+                  }}
+                >
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "space-between",
+                      alignItems: "flex-start",
+                      gap: 20,
+                      flexWrap: "wrap",
+                    }}
+                  >
+                    <div style={{ flex: 1, minWidth: 250 }}>
+                      {deal.product ? (
+                        <>
+                          <Link
+                            href={`/product/${deal.productId}`}
+                            style={{
+                              fontSize: 18,
+                              fontWeight: 600,
+                              color: "var(--color-primary)",
+                              textDecoration: "none",
+                              marginBottom: 8,
+                              display: "block",
+                            }}
+                          >
+                            {deal.product.cropName}
+                          </Link>
+                          <p
+                            style={{
+                              fontSize: 15,
+                              color: "var(--color-text-primary)",
+                              marginBottom: 8,
+                            }}
+                          >
+                            ₹{parseFloat(deal.product.price).toFixed(2)} per kg
+                          </p>
+                        </>
+                      ) : (
+                        <p
+                          style={{
+                            fontSize: 16,
+                            color: "#9CA3AF",
+                          }}
+                        >
+                          Product no longer available
+                        </p>
+                      )}
+
+                      {deal.buyer && (
+                        <p
+                          style={{
+                            fontSize: 14,
+                            color: "var(--color-text-secondary)",
+                            marginTop: 8,
+                          }}
+                        >
+                          Buyer: <strong>{deal.buyer.name}</strong> ({
+                            deal.buyer.email
+                          })
+                        </p>
+                      )}
+
+                      <div
+                        style={{
+                          display: "flex",
+                          gap: 12,
+                          marginTop: 12,
+                          flexWrap: "wrap",
+                        }}
+                      >
+                        <span
+                          style={{
+                            fontSize: 12,
+                            fontWeight: 500,
+                            padding: "4px 10px",
+                            borderRadius: 12,
+                            background: deal.buyerConfirmed
+                              ? "#D1FAE5"
+                              : "#F3F4F6",
+                            color: deal.buyerConfirmed ? "#065F46" : "#6B7280",
+                          }}
+                        >
+                          {deal.buyerConfirmed
+                            ? "✓ Buyer confirmed"
+                            : "⏳ Buyer not confirmed"}
+                        </span>
+                        <span
+                          style={{
+                            fontSize: 12,
+                            fontWeight: 500,
+                            padding: "4px 10px",
+                            borderRadius: 12,
+                            background: deal.farmerConfirmed
+                              ? "#D1FAE5"
+                              : "#F3F4F6",
+                            color: deal.farmerConfirmed ? "#065F46" : "#6B7280",
+                          }}
+                        >
+                          {deal.farmerConfirmed
+                            ? "✓ You confirmed"
+                            : "⏳ Awaiting your confirmation"}
+                        </span>
+                        {isCompleted && (
+                          <span
+                            style={{
+                              fontSize: 12,
+                              fontWeight: 600,
+                              padding: "4px 10px",
+                              borderRadius: 12,
+                              background: "#10B981",
+                              color: "var(--color-white)",
+                            }}
+                          >
+                            ✓ Deal Completed
+                          </span>
+                        )}
+                      </div>
+                    </div>
+
+                    <div>
+                      {deal.farmerConfirmed ? (
+                        <div
+                          style={{
+                            padding: "10px 20px",
+                            fontSize: 14,
+                            fontWeight: 500,
+                            color: "#065F46",
+                            background: "#D1FAE5",
+                            border: "2px solid #10B981",
+                            borderRadius: 6,
+                          }}
+                        >
+                          Confirmed
+                        </div>
+                      ) : (
+                        <button
+                          onClick={() =>
+                            confirmDeal(deal.id, deal.farmerConfirmed)
+                          }
+                          disabled={confirmingDeal === deal.id}
+                          style={{
+                            padding: "10px 20px",
+                            fontSize: 14,
+                            fontWeight: 600,
+                            color: "var(--color-white)",
+                            background:
+                              confirmingDeal === deal.id
+                                ? "#9CA3AF"
+                                : "var(--color-primary)",
+                            border: "none",
+                            borderRadius: 6,
+                            cursor:
+                              confirmingDeal === deal.id
+                                ? "not-allowed"
+                                : "pointer",
+                          }}
+                        >
+                          {confirmingDeal === deal.id
+                            ? "Confirming..."
+                            : "Confirm Deal"}
+                        </button>
+                      )}
+                    </div>
+                  </div>
+
+                  {!deal.farmerConfirmed && (
+                    <div
+                      style={{
+                        marginTop: 16,
+                        padding: 12,
+                        background: "#FFFBEB",
+                        border: "1px solid #FDE68A",
+                        borderRadius: 6,
+                      }}
+                    >
+                      <p
+                        style={{
+                          fontSize: 13,
+                          color: "#92400E",
+                          margin: 0,
+                          lineHeight: 1.5,
+                        }}
+                      >
+                        <strong>Note:</strong> Only confirm after you've
+                        successfully completed the transaction with the buyer
+                        (payment received and product delivered).
+                      </p>
+                    </div>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      )}
+
+      {/* Products Section */}
       <div style={{ marginBottom: 32 }}>
         <h1
           style={{
