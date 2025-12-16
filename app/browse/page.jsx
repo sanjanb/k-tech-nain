@@ -312,17 +312,39 @@ export default function BrowsePage() {
                     </div>
                   )}
                   <div style={{ padding: 16 }}>
-                    <h3
+                    <div
                       style={{
-                        fontSize: 18,
-                        fontWeight: 600,
-                        color: "var(--color-text-primary)",
+                        display: "flex",
+                        justifyContent: "space-between",
+                        alignItems: "flex-start",
                         marginBottom: 8,
-                        marginTop: 0,
                       }}
                     >
-                      {product.cropName}
-                    </h3>
+                      <h3
+                        style={{
+                          fontSize: 18,
+                          fontWeight: 600,
+                          color: "var(--color-text-primary)",
+                          margin: 0,
+                        }}
+                      >
+                        {product.cropName}
+                      </h3>
+                      {(product.status || "available") === "sold" && (
+                        <span
+                          style={{
+                            fontSize: 11,
+                            fontWeight: 600,
+                            padding: "3px 8px",
+                            borderRadius: 4,
+                            background: "#FEE2E2",
+                            color: "#991B1B",
+                          }}
+                        >
+                          SOLD
+                        </span>
+                      )}
+                    </div>
                     <p
                       style={{
                         fontSize: 16,

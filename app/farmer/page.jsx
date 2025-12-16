@@ -12,6 +12,7 @@ import {
   query,
   where,
   getDocs,
+  updateDoc,
 } from "firebase/firestore";
 
 export default function FarmerPage() {
@@ -21,6 +22,7 @@ export default function FarmerPage() {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [updatingStatus, setUpdatingStatus] = useState({});
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
@@ -64,6 +66,29 @@ export default function FarmerPage() {
     });
     return () => unsubscribe();
   }, [router]);
+
+  const toggleStatus = async (productId, currentStatus) => {
+    if (!user) return;
+
+    setUpdatingStatus((prev) => ({ ...prev, [productId]: true }));
+
+    try {
+      const newStatus = currentStatus === "available" ? "sold" : "available";
+      const productRef = doc(db, "products", productId);
+      await updateDoc(productRef, { status: newStatus });
+
+      // Update local state
+      setProducts((prev) =>
+        prev.map((p) =>
+          p.id === productId ? { ...p, status: newStatus } : p
+        )
+      );
+    } catch (err) {
+      setError(err?.message || "Failed to update product status");
+    } finally {
+      setUpdatingStatus((prev) => ({ ...prev, [productId]: false }));
+    }
+  };
 
   if (loading) {
     return (
@@ -161,12 +186,12 @@ export default function FarmerPage() {
           }}
         >
           {products.map((product) => (
-            <Link
-              key={product.id}
-              href={`/product/${product.id}`}
-              style={{ textDecoration: "none" }}
-            >
-              <div style={cardStyle}>
+            <div key={product.id} style={{ position: "relative" }}>
+              <Link
+                href={`/product/${product.id}`}
+                style={{ textDecoration: "none" }}
+              >
+                <div style={cardStyle}>
                 {product.imageUrl && (
                   <img
                     src={product.imageUrl}
@@ -254,9 +279,63 @@ export default function FarmerPage() {
                   >
                     UPI: {product.upiId}
                   </p>
+                  <div
+                    style={{
+                      marginTop: 12,
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "space-between",
+                    }}
+                  >
+                    <span
+                      style={{
+                        fontSize: 12,
+                        fontWeight: 600,
+                        padding: "4px 10px",
+                        borderRadius: 4,
+                        background:
+                          (product.status || "available") === "available"
+                            ? "#D1FAE5"
+                            : "#FEE2E2",
+                        color:
+                          (product.status || "available") === "available"
+                            ? "#065F46"
+                            : "#991B1B",
+                      }}
+                    >
+                      {(product.status || "available") === "available"
+                        ? "Available"
+                        : "Sold"}
+                    </span>
+                  </div>
                 </div>
               </div>
             </Link>
+            <button
+              onClick={(e) => {
+                e.preventDefault();
+                toggleStatus(product.id, product.status || "available");
+              }}
+              disabled={updatingStatus[product.id]}
+              style={{
+                width: "100%",
+                marginTop: 8,
+                padding: "8px 16px",
+                background: "transparent",
+                border: "1px solid #E5E7EB",
+                borderRadius: 6,
+                fontSize: 13,
+                fontWeight: 500,
+                cursor: updatingStatus[product.id] ? "not-allowed" : "pointer",
+                color: "var(--color-text-primary)",
+                opacity: updatingStatus[product.id] ? 0.6 : 1,
+              }}
+            >
+              {updatingStatus[product.id]
+                ? "Updating..."
+                : `Mark as ${(product.status || "available") === "available" ? "Sold" : "Available"}`}
+            </button>
+          </div>
           ))}
         </div>
       )}

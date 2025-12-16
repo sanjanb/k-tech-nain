@@ -94,6 +94,7 @@ export default function AddProductPage() {
         upiId,
         imageUrl,
         farmerId: user.uid,
+        status: "available",
         createdAt: serverTimestamp(),
       };
 

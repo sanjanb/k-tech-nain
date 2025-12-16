@@ -138,18 +138,42 @@ export default function ProductDetailPage() {
           />
         )}
 
-        <h1
+        <div
           style={{
-            fontSize: "clamp(24px, 5vw, 32px)",
-            fontWeight: 600,
-            color: "var(--color-text-primary)",
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "flex-start",
+            gap: 16,
             marginBottom: 8,
-            margin: 0,
-            lineHeight: 1.2,
           }}
         >
-          {product.cropName}
-        </h1>
+          <h1
+            style={{
+              fontSize: "clamp(24px, 5vw, 32px)",
+              fontWeight: 600,
+              color: "var(--color-text-primary)",
+              margin: 0,
+              lineHeight: 1.2,
+            }}
+          >
+            {product.cropName}
+          </h1>
+          {(product.status || "available") === "sold" && (
+            <span
+              style={{
+                fontSize: 12,
+                fontWeight: 600,
+                padding: "6px 12px",
+                borderRadius: 6,
+                background: "#FEE2E2",
+                color: "#991B1B",
+                whiteSpace: "nowrap",
+              }}
+            >
+              SOLD
+            </span>
+          )}
+        </div>
 
         <p
           style={{
