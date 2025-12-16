@@ -229,63 +229,8 @@ export default function ProductDetailPage() {
           }}
         />
 
-        <h2
-          style={{
-            fontSize: 20,
-            fontWeight: 600,
-            color: "var(--color-text-primary)",
-            margin: 0,
-            marginBottom: 16,
-          }}
-        >
-          Farmer Details
-        </h2>
-
-        <div
-          style={{
-            background: "#F9FAFB",
-            padding: 20,
-            borderRadius: 8,
-            marginBottom: 32,
-          }}
-        >
-          <p
-            style={{
-              fontSize: 14,
-              color: "var(--color-text-secondary)",
-              margin: "0 0 8px 0",
-            }}
-          >
-            <strong style={{ color: "var(--color-text-primary)" }}>
-              Farmer:
-            </strong>{" "}
-            {farmer ? (
-              <Link
-                href={`/farmer-profile/${product.farmerId}`}
-                style={{
-                  color: "var(--color-primary)",
-                  textDecoration: "none",
-                  fontWeight: 500,
-                }}
-              >
-                {farmer.name}
-              </Link>
-            ) : (
-              "Unknown"
-            )}
-          </p>
-          <p
-            style={{
-              fontSize: 14,
-              color: "var(--color-text-secondary)",
-              margin: "0 0 8px 0",
-            }}
-          >
-            <strong style={{ color: "var(--color-text-primary)" }}>
-              Email:
-            </strong>{" "}
-            {farmer?.email || "N/A"}
-          </p>
+        {/* Sold By Section */}
+        <div style={{ marginBottom: 24 }}>
           <p
             style={{
               fontSize: 14,
@@ -293,11 +238,117 @@ export default function ProductDetailPage() {
               margin: 0,
             }}
           >
-            <strong style={{ color: "var(--color-text-primary)" }}>
-              UPI ID for Payment:
-            </strong>{" "}
-            {product.upiId || "N/A"}
+            Sold by:{" "}
+            {farmer ? (
+              <Link
+                href={`/farmer-profile/${product.farmerId}`}
+                style={{
+                  color: "var(--color-primary)",
+                  textDecoration: "none",
+                  fontWeight: 600,
+                  fontSize: 16,
+                }}
+              >
+                {farmer.name}
+              </Link>
+            ) : (
+              <span style={{ fontWeight: 600, fontSize: 16 }}>Unknown</span>
+            )}
           </p>
+        </div>
+
+        {/* Payment/Contact Section */}
+        <div
+          style={{
+            border: "2px solid #E5E7EB",
+            borderRadius: 8,
+            padding: 24,
+            marginBottom: 32,
+            background: "var(--color-white)",
+          }}
+        >
+          <h2
+            style={{
+              fontSize: 18,
+              fontWeight: 600,
+              color: "var(--color-text-primary)",
+              margin: 0,
+              marginBottom: 16,
+            }}
+          >
+            Payment & Contact Details
+          </h2>
+
+          <div style={{ marginBottom: 16 }}>
+            <p
+              style={{
+                fontSize: 12,
+                textTransform: "uppercase",
+                color: "var(--color-text-secondary)",
+                margin: "0 0 4px 0",
+                fontWeight: 600,
+                letterSpacing: "0.5px",
+              }}
+            >
+              UPI ID
+            </p>
+            <p
+              style={{
+                fontSize: 16,
+                fontWeight: 500,
+                color: "var(--color-text-primary)",
+                margin: 0,
+              }}
+            >
+              {product.upiId || "Not provided"}
+            </p>
+          </div>
+
+          <div style={{ marginBottom: 16 }}>
+            <p
+              style={{
+                fontSize: 12,
+                textTransform: "uppercase",
+                color: "var(--color-text-secondary)",
+                margin: "0 0 4px 0",
+                fontWeight: 600,
+                letterSpacing: "0.5px",
+              }}
+            >
+              Email
+            </p>
+            <p
+              style={{
+                fontSize: 14,
+                color: "var(--color-text-primary)",
+                margin: 0,
+              }}
+            >
+              {farmer?.email || "N/A"}
+            </p>
+          </div>
+
+          <div
+            style={{
+              background: "#EFF6FF",
+              border: "1px solid #BFDBFE",
+              borderRadius: 6,
+              padding: 12,
+              marginTop: 20,
+            }}
+          >
+            <p
+              style={{
+                fontSize: 13,
+                color: "#1E40AF",
+                margin: 0,
+                lineHeight: 1.5,
+              }}
+            >
+              💳 <strong>Direct payment to farmer</strong> - Complete payment
+              directly using the UPI ID provided above.
+            </p>
+          </div>
         </div>
 
         <hr
