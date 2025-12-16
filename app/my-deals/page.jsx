@@ -570,8 +570,7 @@ export default function MyDealsPage() {
                                   border: "none",
                                   cursor: "pointer",
                                   fontSize: 24,
-                                  color:
-                                    star <= rating ? "#F59E0B" : "#D1D5DB",
+                                  color: star <= rating ? "#F59E0B" : "#D1D5DB",
                                 }}
                               >
                                 ★
