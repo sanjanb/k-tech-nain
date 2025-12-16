@@ -53,7 +53,9 @@ export default function MyDealsPage() {
           const dealData = { id: dealDoc.id, ...dealDoc.data() };
 
           // Fetch product details
-          const productDoc = await getDoc(doc(db, "products", dealData.productId));
+          const productDoc = await getDoc(
+            doc(db, "products", dealData.productId)
+          );
           const productData = productDoc.exists()
             ? { id: productDoc.id, ...productDoc.data() }
             : null;
@@ -198,8 +200,7 @@ export default function MyDealsPage() {
           }}
         >
           {deals.map((deal) => {
-            const isCompleted =
-              deal.buyerConfirmed && deal.farmerConfirmed;
+            const isCompleted = deal.buyerConfirmed && deal.farmerConfirmed;
 
             return (
               <div
@@ -369,9 +370,7 @@ export default function MyDealsPage() {
                           border: "none",
                           borderRadius: 6,
                           cursor:
-                            confirming === deal.id
-                              ? "not-allowed"
-                              : "pointer",
+                            confirming === deal.id ? "not-allowed" : "pointer",
                         }}
                       >
                         {confirming === deal.id
