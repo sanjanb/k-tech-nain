@@ -271,63 +271,96 @@ export default function BrowsePage() {
               marginBottom: 32,
             }}
           >
-            {currentPe={{
-          minHeight: "calc(100vh - 70px)",
-          display: "grid",
-          placeItems: "center",
-        }}
-      >
-        <p style={{ color: "var(--color-text-secondary)" }}>
-          Loading products...
-        </p>
-      </div>
-    );
-  }
+            {currentProducts.map((product) => (
+              <Link
+                key={product.id}
+                href={`/product/${product.id}`}
+                style={{ textDecoration: "none" }}
+              >
+                <div style={cardStyle}>
+                  {product.imageUrl ? (
+                    <img
+                      src={product.imageUrl}
+                      alt={product.cropName}
+                      style={{
+                        width: "100%",
+                        height: 200,
+                        objectFit: "cover",
+                        borderRadius: "8px 8px 0 0",
+                      }}
+                    />
+                  ) : (
+                    <div
+                      style={{
+                        width: "100%",
+                        height: 200,
+                        background: "var(--color-bg)",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        borderRadius: "8px 8px 0 0",
+                      }}
+                    >
+                      <span
+                        style={{
+                          fontSize: 48,
+                          color: "var(--color-primary)",
+                        }}
+                      >
+                        🌾
+                      </span>
+                    </div>
+                  )}
+                  <div style={{ padding: 16 }}>
+                    <h3
+                      style={{
+                        fontSize: 18,
+                        fontWeight: 600,
+                        color: "var(--color-text-primary)",
+                        marginBottom: 8,
+                        marginTop: 0,
+                      }}
+                    >
+                      {product.cropName}
+                    </h3>
+                    <p
+                      style={{
+                        fontSize: 16,
+                        fontWeight: 500,
+                        color: "var(--color-primary)",
+                        marginBottom: 8,
+                        margin: 0,
+                      }}
+                    >
+                      ₹{parseFloat(product.price).toFixed(2)} per kg
+                    </p>
+                    <p
+                      style={{
+                        fontSize: 14,
+                        color: "var(--color-text-secondary)",
+                        margin: 0,
+                      }}
+                    >
+                      Available: {product.quantity}
+                    </p>
+                  </div>
+                </div>
+              </Link>
+            ))}
+          </div>
 
-  return (
-    <div
-      style={{
-        minHeight: "calc(100vh - 70px)",
-        padding: "40px 20px",
-        maxWidth: 1200,
-        margin: "0 auto",
-      }}
-    >
-      <h1
-        style={{
-          fontSize: 28,
-
-        {/* Pagination */}
-        {totalPages > 1 && (
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              gap: 12,
-              marginTop: 32,
-            }}
-          >
-  
-
-const inputStyle = {
-  width: "100%",
-  padding: "8px 12px",
-  border: "1px solid #E5E7EB",
-  borderRadius: 6,
-  fontSize: 14,
-  color: "var(--color-text-primary)",
-};
-
-const paginationButtonStyle = {
-  padding: "8px 16px",
-  background: "var(--color-primary)",
-  color: "var(--color-white)",
-  border: "none",
-  borderRadius: 6,
-  fontSize: 14,
-  fontWeight: 500,
-};          <button
+          {/* Pagination */}
+          {totalPages > 1 && (
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                gap: 12,
+                marginTop: 32,
+              }}
+            >
+              <button
               onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
               disabled={currentPage === 1}
               style={{
