@@ -19,6 +19,8 @@ export default function FarmerProfilePage() {
 
   const [farmer, setFarmer] = useState(null);
   const [productsCount, setProductsCount] = useState(0);
+  const [feedbacks, setFeedbacks] = useState([]);
+  const [averageRating, setAverageRating] = useState(0);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
@@ -51,6 +53,28 @@ export default function FarmerProfilePage() {
         );
         const productsSnapshot = await getDocs(productsQuery);
         setProductsCount(productsSnapshot.size);
+
+        // Fetch feedback for this farmer
+        const feedbackQuery = query(
+          collection(db, "feedback"),
+          where("recipientId", "==", farmerId)
+        );
+        const feedbackSnapshot = await getDocs(feedbackQuery);
+        const feedbackList = feedbackSnapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        setFeedbacks(feedbackList);
+
+        // Calculate average rating
+        if (feedbackList.length > 0) {
+          const totalRating = feedbackList.reduce(
+            (sum, fb) => sum + fb.rating,
+            0
+          );
+          const avg = totalRating / feedbackList.length;
+          setAverageRating(avg);
+        }
       } catch (err) {
         setError(err?.message || "Failed to load farmer profile");
       } finally {
@@ -268,6 +292,115 @@ export default function FarmerProfilePage() {
           <span style={valueStyle}>{farmer.email}</span>
         </div>
       </div>
+
+      {/* Feedback Section */}
+      {feedbacks.length > 0 && (
+        <div
+          style={{
+            background: "var(--color-white)",
+            borderRadius: 8,
+            padding: "clamp(20px, 4vw, 32px)",
+            boxShadow: "0 1px 3px rgba(0,0,0,0.1)",
+            marginBottom: "clamp(20px, 4vw, 32px)",
+          }}
+        >
+          <h2
+            style={{
+              fontSize: "clamp(18px, 3vw, 20px)",
+              fontWeight: 600,
+              color: "var(--color-text-primary)",
+              marginTop: 0,
+              marginBottom: 16,
+            }}
+          >
+            Buyer Feedback
+          </h2>
+
+          {/* Average Rating */}
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: 8,
+              marginBottom: 20,
+              padding: 12,
+              background: "#FEF3C7",
+              borderRadius: 6,
+            }}
+          >
+            <span
+              style={{
+                fontSize: 24,
+                fontWeight: 600,
+                color: "#92400E",
+              }}
+            >
+              {averageRating.toFixed(1)}
+            </span>
+            <span style={{ fontSize: 20, color: "#F59E0B" }}>★</span>
+            <span
+              style={{
+                fontSize: 14,
+                color: "#92400E",
+                marginLeft: 4,
+              }}
+            >
+              ({feedbacks.length} {feedbacks.length === 1 ? "review" : "reviews"})
+            </span>
+          </div>
+
+          {/* Feedback List */}
+          <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+            {feedbacks.map((feedback) => (
+              <div
+                key={feedback.id}
+                style={{
+                  padding: 16,
+                  background: "#F9FAFB",
+                  borderRadius: 6,
+                  borderLeft: "3px solid var(--color-primary)",
+                }}
+              >
+                {/* Star Rating */}
+                <div
+                  style={{
+                    display: "flex",
+                    gap: 4,
+                    marginBottom: 8,
+                  }}
+                >
+                  {[1, 2, 3, 4, 5].map((star) => (
+                    <span
+                      key={star}
+                      style={{
+                        fontSize: 16,
+                        color:
+                          star <= feedback.rating ? "#F59E0B" : "#D1D5DB",
+                      }}
+                    >
+                      ★
+                    </span>
+                  ))}
+                </div>
+
+                {/* Comment */}
+                {feedback.comment && (
+                  <p
+                    style={{
+                      margin: 0,
+                      fontSize: 14,
+                      color: "var(--color-text-primary)",
+                      lineHeight: 1.6,
+                    }}
+                  >
+                    {feedback.comment}
+                  </p>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
 
       {/* View Listings Button */}
       {productsCount > 0 && (
