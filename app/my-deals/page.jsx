@@ -11,6 +11,7 @@ import {
   doc,
   getDoc,
   updateDoc,
+  addDoc,
 } from "firebase/firestore";
 import { onAuthStateChanged } from "firebase/auth";
 import Link from "next/link";
@@ -28,6 +29,11 @@ export default function MyDealsPage() {
   const [deals, setDeals] = useState([]);
   const [loading, setLoading] = useState(true);
   const [confirming, setConfirming] = useState(null);
+  const [feedbackGiven, setFeedbackGiven] = useState({});
+  const [showFeedbackForm, setShowFeedbackForm] = useState(null);
+  const [rating, setRating] = useState(5);
+  const [comment, setComment] = useState("");
+  const [submittingFeedback, setSubmittingFeedback] = useState(false);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -74,10 +80,20 @@ export default function MyDealsPage() {
             farmerData = farmerDoc.exists() ? farmerDoc.data() : null;
           }
 
+          // Check if feedback already given
+          const feedbackQuery = query(
+            collection(db, "feedback"),
+            where("dealId", "==", dealDoc.id),
+            where("authorId", "==", currentUser.uid)
+          );
+          const feedbackSnapshot = await getDocs(feedbackQuery);
+          const hasFeedback = !feedbackSnapshot.empty;
+
           return {
             ...dealData,
             product: productData,
             farmer: farmerData,
+            hasFeedback,
           };
         })
       );
@@ -119,27 +135,46 @@ export default function MyDealsPage() {
     }
   };
 
-  if (loading) {
-    return (
-      <div
-        style={{
-          minHeight: "60vh",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        <p style={{ color: "var(--color-text-secondary)" }}>Loading...</p>
-      </div>
-    );
-  }
+  const submitFeedback = async (dealId, recipientId) => {
+    if (!rating || rating < 1 || rating > 5) {
+      alert("Please select a rating between 1 and 5");
+      return;
+    }
 
-  return (
-    <div
-      style={{
-        maxWidth: 1000,
-        margin: "0 auto",
-        padding: "40px 20px",
+    if (comment.length > 200) {
+      alert("Comment must be 200 characters or less");
+      return;
+    }
+
+    setSubmittingFeedback(true);
+    try {
+      // Create feedback document
+      await addDoc(collection(db, "feedback"), {
+        dealId,
+        authorId: currentUser.uid,
+        recipientId,
+        rating,
+        comment: comment.trim() || null,
+      });
+
+      // Update local state
+      setDeals((prev) =>
+        prev.map((deal) =>
+          deal.id === dealId ? { ...deal, hasFeedback: true } : deal
+        )
+      );
+
+      setShowFeedbackForm(null);
+      setRating(5);
+      setComment("");
+      alert("Feedback submitted successfully!");
+    } catch (error) {
+      console.error("Error submitting feedback:", error);
+      alert("Failed to submit feedback. Please try again.");
+    } finally {
+      setSubmittingFeedback(false);
+    }
+  };
       }}
     >
       <h1
