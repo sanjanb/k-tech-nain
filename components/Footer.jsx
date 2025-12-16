@@ -178,12 +178,33 @@ export default function Footer() {
             style={{
               fontSize: 14,
               color: "var(--color-text-secondary)",
-              margin: "0 0 16px 0",
+              margin: "0 0 12px 0",
               lineHeight: 1.6,
+              maxWidth: 800,
+              marginLeft: "auto",
+              marginRight: "auto",
             }}
           >
-            <strong>Disclaimer:</strong> Farm To Table only connects buyers and
-            farmers. Payments and transactions happen directly between them.
+            <strong>Disclaimer:</strong> Farm To Table is a connection platform
+            only. Payments and transactions happen directly between buyers and
+            farmers. The platform does not process payments, handle deliveries,
+            or mediate disputes.
+          </p>
+          <p
+            style={{
+              fontSize: 13,
+              color: "var(--color-text-secondary)",
+              margin: "0 0 16px 0",
+              lineHeight: 1.6,
+              maxWidth: 800,
+              marginLeft: "auto",
+              marginRight: "auto",
+            }}
+          >
+            <strong>Verification:</strong> The "Verified Farmer" badge
+            indicates that basic identity documentation has been reviewed by the
+            platform. Verification does not guarantee product quality, delivery,
+            or transaction success.
           </p>
           <p
             style={{

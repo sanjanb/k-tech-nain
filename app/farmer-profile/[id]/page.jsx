@@ -193,6 +193,23 @@ export default function FarmerProfilePage() {
         >
           Farmer Profile
         </p>
+        {farmer.isVerified && (
+          <p
+            style={{
+              color: "var(--color-text-secondary)",
+              fontSize: 13,
+              margin: 0,
+              marginTop: 12,
+              padding: 12,
+              background: "#F9FAFB",
+              borderRadius: 6,
+              lineHeight: 1.5,
+            }}
+          >
+            <strong>Verified:</strong> This farmer's identity has been verified
+            by the platform through basic documentation checks.
+          </p>
+        )}
       </div>
 
       {/* Profile Card */}
