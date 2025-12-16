@@ -58,18 +58,19 @@ export default function HomePage() {
       {/* 2. How It Works */}
       <section
         style={{
-          padding: "clamp(48px, 8vw, 80px) 20px",
-          maxWidth: 1000,
+          padding: "clamp(60px, 10vw, 100px) 20px",
+          maxWidth: 1100,
           margin: "0 auto",
         }}
       >
         <h2
           style={{
-            fontSize: "clamp(24px, 4vw, 32px)",
+            fontSize: "clamp(24px, 4vw, 36px)",
             fontWeight: 600,
             color: "var(--color-text-primary)",
             textAlign: "center",
-            marginBottom: "clamp(40px, 6vw, 60px)",
+            marginBottom: "clamp(48px, 8vw, 72px)",
+            letterSpacing: "-0.02em",
           }}
         >
           How it works
@@ -77,8 +78,8 @@ export default function HomePage() {
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
-            gap: "clamp(32px, 5vw, 48px)",
+            gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
+            gap: "clamp(40px, 6vw, 64px)",
           }}
         >
           <div style={stepStyle}>
@@ -103,64 +104,21 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 3. Trust & Transparency */}
+      {/* 3. Light CTA */}
       <section
         style={{
-          padding: "clamp(48px, 8vw, 80px) 20px",
-          background: "var(--color-bg)",
-        }}
-      >
-        <div style={{ maxWidth: 700, margin: "0 auto", textAlign: "center" }}>
-          <h2
-            style={{
-              fontSize: "clamp(24px, 4vw, 32px)",
-              fontWeight: 600,
-              color: "var(--color-text-primary)",
-              marginBottom: 32,
-            }}
-          >
-            Transparent by design
-          </h2>
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              gap: 20,
-              textAlign: "left",
-              maxWidth: 500,
-              margin: "0 auto",
-            }}
-          >
-            <div style={bulletStyle}>
-              <span style={bulletDotStyle}>•</span>
-              <span>No platform commission</span>
-            </div>
-            <div style={bulletStyle}>
-              <span style={bulletDotStyle}>•</span>
-              <span>No in-app payments</span>
-            </div>
-            <div style={bulletStyle}>
-              <span style={bulletDotStyle}>•</span>
-              <span>Farmers control pricing</span>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 4. Light CTA */}
-      <section
-        style={{
-          padding: "clamp(48px, 8vw, 80px) 20px",
+          padding: "clamp(60px, 10vw, 100px) 20px clamp(80px, 12vw, 120px)",
           textAlign: "center",
+          background: "var(--color-bg)",
         }}
       >
         <p
           style={{
-            fontSize: "clamp(16px, 2.5vw, 18px)",
+            fontSize: "clamp(17px, 2.8vw, 20px)",
             color: "var(--color-text-secondary)",
-            maxWidth: 600,
-            margin: "0 auto 32px",
-            lineHeight: 1.6,
+            maxWidth: 640,
+            margin: "0 auto 40px",
+            lineHeight: 1.7,
           }}
         >
           Start by browsing available produce or list your crops in minutes.
@@ -210,45 +168,36 @@ const secondaryButtonStyle = {
 
 const stepStyle = {
   textAlign: "center",
+  padding: "20px",
 };
 
 const stepNumberStyle = {
-  width: 48,
-  height: 48,
+  width: 56,
+  height: 56,
   borderRadius: "50%",
   background: "var(--color-primary)",
   color: "var(--color-white)",
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
-  fontSize: 20,
+  fontSize: 24,
   fontWeight: 600,
-  margin: "0 auto 16px",
+  margin: "0 auto 20px",
+  boxShadow: "0 2px 8px rgba(46, 125, 50, 0.15)",
 };
 
 const stepTitleStyle = {
-  fontSize: "clamp(16px, 2.5vw, 18px)",
+  fontSize: "clamp(17px, 2.8vw, 20px)",
   fontWeight: 600,
   color: "var(--color-text-primary)",
-  marginBottom: 12,
+  marginBottom: 14,
+  letterSpacing: "-0.01em",
 };
 
 const stepTextStyle = {
-  fontSize: 14,
+  fontSize: "clamp(14px, 2.2vw, 15px)",
   color: "var(--color-text-secondary)",
-  lineHeight: 1.6,
-};
-
-const bulletStyle = {
-  display: "flex",
-  alignItems: "flex-start",
-  gap: 12,
-  fontSize: "clamp(15px, 2.5vw, 16px)",
-  color: "var(--color-text-primary)",
-};
-
-const bulletDotStyle = {
-  color: "var(--color-primary)",
-  fontSize: 24,
-  lineHeight: 1,
+  lineHeight: 1.7,
+  maxWidth: 320,
+  margin: "0 auto",
 };
