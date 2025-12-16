@@ -147,22 +147,47 @@ export default function FarmerProfilePage() {
         >
           ← Back to Browse
         </Link>
-        <h1
+        <div
           style={{
-            fontSize: 28,
-            fontWeight: 600,
-            color: "var(--color-text-primary)",
-            marginBottom: 8,
-            marginTop: 0,
+            display: "flex",
+            alignItems: "center",
+            gap: 12,
+            flexWrap: "wrap",
           }}
         >
-          {farmer.name}
-        </h1>
+          <h1
+            style={{
+              fontSize: 28,
+              fontWeight: 600,
+              color: "var(--color-text-primary)",
+              marginBottom: 0,
+              marginTop: 0,
+            }}
+          >
+            {farmer.name}
+          </h1>
+          {farmer.isVerified && (
+            <span
+              style={{
+                display: "inline-block",
+                padding: "4px 12px",
+                background: "#D1FAE5",
+                color: "#065F46",
+                borderRadius: 6,
+                fontSize: 12,
+                fontWeight: 500,
+              }}
+            >
+              ✓ Basic details verified
+            </span>
+          )}
+        </div>
         <p
           style={{
             color: "var(--color-text-secondary)",
             fontSize: 14,
             margin: 0,
+            marginTop: 8,
           }}
         >
           Farmer Profile
