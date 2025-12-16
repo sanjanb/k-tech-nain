@@ -13,6 +13,7 @@ export default function Navigation() {
   const [user, setUser] = useState(null);
   const [role, setRole] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
@@ -36,6 +37,7 @@ export default function Navigation() {
     try {
       await signOut(auth);
       router.push("/");
+      setMobileMenuOpen(false);
     } catch (err) {
       console.error("Logout error:", err);
     }
@@ -49,6 +51,7 @@ export default function Navigation() {
         background: "var(--color-white)",
         borderBottom: "1px solid #E5E7EB",
         padding: "16px 20px",
+        position: "relative",
       }}
     >
       <div
@@ -58,8 +61,6 @@ export default function Navigation() {
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
-          flexWrap: "wrap",
-          gap: 16,
         }}
       >
         <Link
@@ -74,14 +75,8 @@ export default function Navigation() {
           Farm To Table
         </Link>
 
-        <div
-          style={{
-            display: "flex",
-            gap: 20,
-            alignItems: "center",
-            flexWrap: "wrap",
-          }}
-        >
+        {/* Desktop Navigation */}
+        <div style={desktopNavStyle}>
           <Link href="/" style={linkStyle}>
             Home
           </Link>
@@ -103,10 +98,69 @@ export default function Navigation() {
             </Link>
           )}
         </div>
+
+        {/* Mobile Burger Menu Button */}
+        <button
+          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          style={burgerButtonStyle}
+          aria-label="Toggle menu"
+        >
+          <div style={burgerLineStyle}></div>
+          <div style={burgerLineStyle}></div>
+          <div style={burgerLineStyle}></div>
+        </button>
       </div>
+
+      {/* Mobile Menu Dropdown */}
+      {mobileMenuOpen && (
+        <div style={mobileMenuStyle}>
+          <Link
+            href="/"
+            style={mobileLinkStyle}
+            onClick={() => setMobileMenuOpen(false)}
+          >
+            Home
+          </Link>
+          <Link
+            href="/browse"
+            style={mobileLinkStyle}
+            onClick={() => setMobileMenuOpen(false)}
+          >
+            Browse Produce
+          </Link>
+          {role === "farmer" && (
+            <Link
+              href="/add-product"
+              style={mobileLinkStyle}
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              Add Product
+            </Link>
+          )}
+          {user ? (
+            <button onClick={handleLogout} style={mobileLogoutButtonStyle}>
+              Logout
+            </button>
+          ) : (
+            <Link
+              href="/auth"
+              style={mobileLinkStyle}
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              Login
+            </Link>
+          )}
+        </div>
+      )}
     </nav>
   );
 }
+
+const desktopNavStyle = {
+  display: "flex",
+  gap: 20,
+  alignItems: "center",
+};
 
 const linkStyle = {
   color: "var(--color-text-primary)",
@@ -124,4 +178,52 @@ const logoutButtonStyle = {
   fontSize: 14,
   fontWeight: 500,
   cursor: "pointer",
+};
+
+const burgerButtonStyle = {
+  display: "none",
+  flexDirection: "column",
+  gap: 5,
+  background: "transparent",
+  border: "none",
+  cursor: "pointer",
+  padding: 8,
+};
+
+const burgerLineStyle = {
+  width: 24,
+  height: 2,
+  background: "var(--color-text-primary)",
+  borderRadius: 2,
+};
+
+const mobileMenuStyle = {
+  display: "none",
+  flexDirection: "column",
+  gap: 12,
+  padding: "16px 0",
+  borderTop: "1px solid #E5E7EB",
+  marginTop: 16,
+};
+
+const mobileLinkStyle = {
+  color: "var(--color-text-primary)",
+  textDecoration: "none",
+  fontSize: 16,
+  fontWeight: 500,
+  padding: "8px 0",
+  display: "block",
+};
+
+const mobileLogoutButtonStyle = {
+  background: "transparent",
+  border: "1px solid var(--color-primary)",
+  color: "var(--color-primary)",
+  padding: "10px 16px",
+  borderRadius: 6,
+  fontSize: 16,
+  fontWeight: 500,
+  cursor: "pointer",
+  textAlign: "left",
+  width: "100%",
 };

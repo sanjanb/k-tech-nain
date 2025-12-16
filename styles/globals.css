@@ -22,3 +22,28 @@ body {
   --color-text-secondary: #6b7280;
   --color-white: #ffffff;
 }
+
+/* Mobile Navigation Styles */
+@media (max-width: 768px) {
+  nav div[style*="display: flex"][style*="gap: 20"] {
+    display: none !important;
+  }
+  
+  nav button[aria-label="Toggle menu"] {
+    display: flex !important;
+  }
+  
+  nav div[style*="flexDirection: column"][style*="borderTop"] {
+    display: flex !important;
+  }
+}
+
+@media (min-width: 769px) {
+  nav button[aria-label="Toggle menu"] {
+    display: none !important;
+  }
+  
+  nav div[style*="flexDirection: column"][style*="borderTop"] {
+    display: none !important;
+  }
+}
