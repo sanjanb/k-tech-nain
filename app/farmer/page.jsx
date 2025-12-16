@@ -79,9 +79,7 @@ export default function FarmerPage() {
 
       // Update local state
       setProducts((prev) =>
-        prev.map((p) =>
-          p.id === productId ? { ...p, status: newStatus } : p
-        )
+        prev.map((p) => (p.id === productId ? { ...p, status: newStatus } : p))
       );
     } catch (err) {
       setError(err?.message || "Failed to update product status");
@@ -192,150 +190,156 @@ export default function FarmerPage() {
                 style={{ textDecoration: "none" }}
               >
                 <div style={cardStyle}>
-                {product.imageUrl && (
-                  <img
-                    src={product.imageUrl}
-                    alt={product.cropName}
-                    style={{
-                      width: "100%",
-                      height: 180,
-                      objectFit: "cover",
-                      borderRadius: "8px 8px 0 0",
-                    }}
-                  />
-                )}
-                <div style={{ padding: 16 }}>
-                  <h3
-                    style={{
-                      fontSize: 18,
-                      fontWeight: 600,
-                      color: "var(--color-text-primary)",
-                      marginBottom: 8,
-                      marginTop: 0,
-                      margin: 0,
-                      marginBottom: 8,
-                    }}
-                  >
-                    {product.cropName}
-                  </h3>
-                  <div
-                    style={{
-                      display: "grid",
-                      gridTemplateColumns: "1fr 1fr",
-                      gap: 12,
-                      marginBottom: 12,
-                    }}
-                  >
-                    <div>
-                      <p
-                        style={{
-                          fontSize: 12,
-                          color: "var(--color-text-secondary)",
-                          margin: "0 0 4px 0",
-                          fontWeight: 500,
-                        }}
-                      >
-                        Price
-                      </p>
-                      <p
-                        style={{
-                          fontSize: 16,
-                          fontWeight: 600,
-                          color: "var(--color-primary)",
-                          margin: 0,
-                        }}
-                      >
-                        ₹{parseFloat(product.price).toFixed(2)}/kg
-                      </p>
-                    </div>
-                    <div>
-                      <p
-                        style={{
-                          fontSize: 12,
-                          color: "var(--color-text-secondary)",
-                          margin: "0 0 4px 0",
-                          fontWeight: 500,
-                        }}
-                      >
-                        Available
-                      </p>
-                      <p
-                        style={{
-                          fontSize: 14,
-                          color: "var(--color-text-primary)",
-                          margin: 0,
-                        }}
-                      >
-                        {product.quantity}
-                      </p>
-                    </div>
-                  </div>
-                  <p
-                    style={{
-                      fontSize: 13,
-                      color: "var(--color-text-secondary)",
-                      margin: 0,
-                    }}
-                  >
-                    UPI: {product.upiId}
-                  </p>
-                  <div
-                    style={{
-                      marginTop: 12,
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "space-between",
-                    }}
-                  >
-                    <span
+                  {product.imageUrl && (
+                    <img
+                      src={product.imageUrl}
+                      alt={product.cropName}
                       style={{
-                        fontSize: 12,
+                        width: "100%",
+                        height: 180,
+                        objectFit: "cover",
+                        borderRadius: "8px 8px 0 0",
+                      }}
+                    />
+                  )}
+                  <div style={{ padding: 16 }}>
+                    <h3
+                      style={{
+                        fontSize: 18,
                         fontWeight: 600,
-                        padding: "4px 10px",
-                        borderRadius: 4,
-                        background:
-                          (product.status || "available") === "available"
-                            ? "#D1FAE5"
-                            : "#FEE2E2",
-                        color:
-                          (product.status || "available") === "available"
-                            ? "#065F46"
-                            : "#991B1B",
+                        color: "var(--color-text-primary)",
+                        marginBottom: 8,
+                        marginTop: 0,
+                        margin: 0,
+                        marginBottom: 8,
                       }}
                     >
-                      {(product.status || "available") === "available"
-                        ? "Available"
-                        : "Sold"}
-                    </span>
+                      {product.cropName}
+                    </h3>
+                    <div
+                      style={{
+                        display: "grid",
+                        gridTemplateColumns: "1fr 1fr",
+                        gap: 12,
+                        marginBottom: 12,
+                      }}
+                    >
+                      <div>
+                        <p
+                          style={{
+                            fontSize: 12,
+                            color: "var(--color-text-secondary)",
+                            margin: "0 0 4px 0",
+                            fontWeight: 500,
+                          }}
+                        >
+                          Price
+                        </p>
+                        <p
+                          style={{
+                            fontSize: 16,
+                            fontWeight: 600,
+                            color: "var(--color-primary)",
+                            margin: 0,
+                          }}
+                        >
+                          ₹{parseFloat(product.price).toFixed(2)}/kg
+                        </p>
+                      </div>
+                      <div>
+                        <p
+                          style={{
+                            fontSize: 12,
+                            color: "var(--color-text-secondary)",
+                            margin: "0 0 4px 0",
+                            fontWeight: 500,
+                          }}
+                        >
+                          Available
+                        </p>
+                        <p
+                          style={{
+                            fontSize: 14,
+                            color: "var(--color-text-primary)",
+                            margin: 0,
+                          }}
+                        >
+                          {product.quantity}
+                        </p>
+                      </div>
+                    </div>
+                    <p
+                      style={{
+                        fontSize: 13,
+                        color: "var(--color-text-secondary)",
+                        margin: 0,
+                      }}
+                    >
+                      UPI: {product.upiId}
+                    </p>
+                    <div
+                      style={{
+                        marginTop: 12,
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "space-between",
+                      }}
+                    >
+                      <span
+                        style={{
+                          fontSize: 12,
+                          fontWeight: 600,
+                          padding: "4px 10px",
+                          borderRadius: 4,
+                          background:
+                            (product.status || "available") === "available"
+                              ? "#D1FAE5"
+                              : "#FEE2E2",
+                          color:
+                            (product.status || "available") === "available"
+                              ? "#065F46"
+                              : "#991B1B",
+                        }}
+                      >
+                        {(product.status || "available") === "available"
+                          ? "Available"
+                          : "Sold"}
+                      </span>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </Link>
-            <button
-              onClick={(e) => {
-                e.preventDefault();
-                toggleStatus(product.id, product.status || "available");
-              }}
-              disabled={updatingStatus[product.id]}
-              style={{
-                width: "100%",
-                marginTop: 8,
-                padding: "8px 16px",
-                background: "transparent",
-                border: "1px solid #E5E7EB",
-                borderRadius: 6,
-                fontSize: 13,
-                fontWeight: 500,
-                cursor: updatingStatus[product.id] ? "not-allowed" : "pointer",
-                color: "var(--color-text-primary)",
-                opacity: updatingStatus[product.id] ? 0.6 : 1,
-              }}
-            >
-              {updatingStatus[product.id]
-                ? "Updating..."
-                : `Mark as ${(product.status || "available") === "available" ? "Sold" : "Available"}`}
-            </button>
-          </div>
+              </Link>
+              <button
+                onClick={(e) => {
+                  e.preventDefault();
+                  toggleStatus(product.id, product.status || "available");
+                }}
+                disabled={updatingStatus[product.id]}
+                style={{
+                  width: "100%",
+                  marginTop: 8,
+                  padding: "8px 16px",
+                  background: "transparent",
+                  border: "1px solid #E5E7EB",
+                  borderRadius: 6,
+                  fontSize: 13,
+                  fontWeight: 500,
+                  cursor: updatingStatus[product.id]
+                    ? "not-allowed"
+                    : "pointer",
+                  color: "var(--color-text-primary)",
+                  opacity: updatingStatus[product.id] ? 0.6 : 1,
+                }}
+              >
+                {updatingStatus[product.id]
+                  ? "Updating..."
+                  : `Mark as ${
+                      (product.status || "available") === "available"
+                        ? "Sold"
+                        : "Available"
+                    }`}
+              </button>
+            </div>
           ))}
         </div>
       )}
