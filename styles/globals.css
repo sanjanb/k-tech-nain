@@ -28,11 +28,11 @@ body {
   nav div[style*="display: flex"][style*="gap: 20"] {
     display: none !important;
   }
-  
+
   nav button[aria-label="Toggle menu"] {
     display: flex !important;
   }
-  
+
   nav div[style*="flexDirection: column"][style*="borderTop"] {
     display: flex !important;
   }
@@ -42,7 +42,7 @@ body {
   nav button[aria-label="Toggle menu"] {
     display: none !important;
   }
-  
+
   nav div[style*="flexDirection: column"][style*="borderTop"] {
     display: none !important;
   }
