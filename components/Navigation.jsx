@@ -84,8 +84,18 @@ export default function Navigation() {
             Browse Produce
           </Link>
           {role === "farmer" && (
-            <Link href="/add-product" style={linkStyle}>
-              Add Product
+            <>
+              <Link href="/farmer" style={linkStyle}>
+                Dashboard
+              </Link>
+              <Link href="/add-product" style={linkStyle}>
+                Add Product
+              </Link>
+            </>
+          )}
+          {role === "buyer" && user && (
+            <Link href="/my-deals" style={linkStyle}>
+              My Deals
             </Link>
           )}
           {user ? (
@@ -129,12 +139,30 @@ export default function Navigation() {
             Browse Produce
           </Link>
           {role === "farmer" && (
+            <>
+              <Link
+                href="/farmer"
+                style={mobileLinkStyle}
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Dashboard
+              </Link>
+              <Link
+                href="/add-product"
+                style={mobileLinkStyle}
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Add Product
+              </Link>
+            </>
+          )}
+          {role === "buyer" && user && (
             <Link
-              href="/add-product"
+              href="/my-deals"
               style={mobileLinkStyle}
               onClick={() => setMobileMenuOpen(false)}
             >
-              Add Product
+              My Deals
             </Link>
           )}
           {user ? (
