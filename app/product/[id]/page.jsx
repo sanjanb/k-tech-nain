@@ -3,7 +3,16 @@
 import { useState, useEffect } from "react";
 import { useParams } from "next/navigation";
 import { auth, db } from "../../../lib/firebase";
-import { doc, getDoc, collection, addDoc, serverTimestamp, query, where, getDocs } from "firebase/firestore";
+import {
+  doc,
+  getDoc,
+  collection,
+  addDoc,
+  serverTimestamp,
+  query,
+  where,
+  getDocs,
+} from "firebase/firestore";
 import { onAuthStateChanged } from "firebase/auth";
 import Link from "next/link";
 
@@ -421,9 +430,7 @@ export default function ProductDetailPage() {
                   fontSize: 16,
                   fontWeight: 600,
                   color: "var(--color-white)",
-                  background: creatingDeal
-                    ? "#9CA3AF"
-                    : "var(--color-primary)",
+                  background: creatingDeal ? "#9CA3AF" : "var(--color-primary)",
                   border: "none",
                   borderRadius: 6,
                   cursor: creatingDeal ? "not-allowed" : "pointer",
