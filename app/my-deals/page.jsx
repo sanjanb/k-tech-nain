@@ -452,38 +452,216 @@ export default function MyDealsPage() {
                 )}
 
                 {isCompleted && (
-                  <div
-                    style={{
-                      marginTop: 16,
-                      padding: 16,
-                      background: "#D1FAE5",
-                      border: "2px solid #10B981",
-                      borderRadius: 6,
-                    }}
-                  >
-                    <p
+                  <>
+                    <div
                       style={{
-                        fontSize: 14,
-                        color: "#065F46",
-                        margin: 0,
-                        fontWeight: 600,
-                        marginBottom: 4,
+                        marginTop: 16,
+                        padding: 16,
+                        background: "#D1FAE5",
+                        border: "2px solid #10B981",
+                        borderRadius: 6,
                       }}
                     >
-                      ✓ Deal Completed Successfully
-                    </p>
-                    <p
-                      style={{
-                        fontSize: 13,
-                        color: "#065F46",
-                        margin: 0,
-                        lineHeight: 1.5,
-                      }}
-                    >
-                      Both parties have confirmed this transaction. This
-                      completed deal may enable feedback features in the future.
-                    </p>
-                  </div>
+                      <p
+                        style={{
+                          fontSize: 14,
+                          color: "#065F46",
+                          margin: 0,
+                          fontWeight: 600,
+                          marginBottom: 4,
+                        }}
+                      >
+                        ✓ Deal Completed Successfully
+                      </p>
+                      <p
+                        style={{
+                          fontSize: 13,
+                          color: "#065F46",
+                          margin: 0,
+                          lineHeight: 1.5,
+                        }}
+                      >
+                        Both parties have confirmed this transaction.
+                      </p>
+                    </div>
+
+                    {/* Feedback Section */}
+                    {deal.hasFeedback ? (
+                      <div
+                        style={{
+                          marginTop: 16,
+                          padding: 12,
+                          background: "#F3F4F6",
+                          border: "1px solid #D1D5DB",
+                          borderRadius: 6,
+                        }}
+                      >
+                        <p
+                          style={{
+                            fontSize: 13,
+                            color: "#6B7280",
+                            margin: 0,
+                          }}
+                        >
+                          ✓ You've already left feedback for this deal
+                        </p>
+                      </div>
+                    ) : showFeedbackForm === deal.id ? (
+                      <div
+                        style={{
+                          marginTop: 16,
+                          padding: 16,
+                          background: "#F9FAFB",
+                          border: "1px solid #E5E7EB",
+                          borderRadius: 6,
+                        }}
+                      >
+                        <h4
+                          style={{
+                            fontSize: 14,
+                            fontWeight: 600,
+                            color: "var(--color-text-primary)",
+                            marginBottom: 12,
+                          }}
+                        >
+                          Leave Feedback
+                        </h4>
+                        <div style={{ marginBottom: 12 }}>
+                          <label
+                            style={{
+                              fontSize: 13,
+                              fontWeight: 500,
+                              color: "var(--color-text-secondary)",
+                              display: "block",
+                              marginBottom: 6,
+                            }}
+                          >
+                            Rating (1-5 stars)
+                          </label>
+                          <div style={{ display: "flex", gap: 8 }}>
+                            {[1, 2, 3, 4, 5].map((star) => (
+                              <button
+                                key={star}
+                                onClick={() => setRating(star)}
+                                style={{
+                                  background: "transparent",
+                                  border: "none",
+                                  cursor: "pointer",
+                                  fontSize: 24,
+                                  color:
+                                    star <= rating ? "#F59E0B" : "#D1D5DB",
+                                }}
+                              >
+                                ★
+                              </button>
+                            ))}
+                          </div>
+                        </div>
+                        <div style={{ marginBottom: 12 }}>
+                          <label
+                            style={{
+                              fontSize: 13,
+                              fontWeight: 500,
+                              color: "var(--color-text-secondary)",
+                              display: "block",
+                              marginBottom: 6,
+                            }}
+                          >
+                            Comment (optional, max 200 chars)
+                          </label>
+                          <textarea
+                            value={comment}
+                            onChange={(e) => setComment(e.target.value)}
+                            maxLength={200}
+                            placeholder="Share your experience..."
+                            style={{
+                              width: "100%",
+                              minHeight: 80,
+                              padding: 10,
+                              fontSize: 14,
+                              borderRadius: 6,
+                              border: "1px solid #E5E7EB",
+                              resize: "vertical",
+                            }}
+                          />
+                          <p
+                            style={{
+                              fontSize: 12,
+                              color: "#9CA3AF",
+                              marginTop: 4,
+                              textAlign: "right",
+                            }}
+                          >
+                            {comment.length}/200
+                          </p>
+                        </div>
+                        <div style={{ display: "flex", gap: 8 }}>
+                          <button
+                            onClick={() =>
+                              submitFeedback(deal.id, deal.farmerId)
+                            }
+                            disabled={submittingFeedback}
+                            style={{
+                              padding: "8px 16px",
+                              fontSize: 14,
+                              fontWeight: 600,
+                              color: "var(--color-white)",
+                              background: submittingFeedback
+                                ? "#9CA3AF"
+                                : "var(--color-primary)",
+                              border: "none",
+                              borderRadius: 6,
+                              cursor: submittingFeedback
+                                ? "not-allowed"
+                                : "pointer",
+                            }}
+                          >
+                            {submittingFeedback ? "Submitting..." : "Submit"}
+                          </button>
+                          <button
+                            onClick={() => {
+                              setShowFeedbackForm(null);
+                              setRating(5);
+                              setComment("");
+                            }}
+                            disabled={submittingFeedback}
+                            style={{
+                              padding: "8px 16px",
+                              fontSize: 14,
+                              fontWeight: 500,
+                              color: "var(--color-text-primary)",
+                              background: "transparent",
+                              border: "1px solid #E5E7EB",
+                              borderRadius: 6,
+                              cursor: submittingFeedback
+                                ? "not-allowed"
+                                : "pointer",
+                            }}
+                          >
+                            Cancel
+                          </button>
+                        </div>
+                      </div>
+                    ) : (
+                      <button
+                        onClick={() => setShowFeedbackForm(deal.id)}
+                        style={{
+                          marginTop: 16,
+                          padding: "8px 16px",
+                          fontSize: 14,
+                          fontWeight: 500,
+                          color: "var(--color-primary)",
+                          background: "transparent",
+                          border: "2px solid var(--color-primary)",
+                          borderRadius: 6,
+                          cursor: "pointer",
+                          width: "100%",
+                        }}
+                      >
+                        Leave Feedback
+                      </button>
+                    )}
+                  </>
                 )}
               </div>
             );
