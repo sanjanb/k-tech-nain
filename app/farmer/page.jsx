@@ -15,6 +15,13 @@ import {
   updateDoc,
 } from "firebase/firestore";
 
+// Helper function to determine if a deal is fully completed
+// A deal is completed ONLY when both buyer and farmer have confirmed
+// This derived status will be used for future feedback eligibility
+const isDealCompleted = (deal) => {
+  return deal.buyerConfirmed === true && deal.farmerConfirmed === true;
+};
+
 export default function FarmerPage() {
   const router = useRouter();
   const [user, setUser] = useState(null);
@@ -212,16 +219,17 @@ export default function FarmerPage() {
             }}
           >
             {deals.map((deal) => {
-              const isCompleted = deal.buyerConfirmed && deal.farmerConfirmed;
+              // Derived completion status - no database field needed
+              const isCompleted = isDealCompleted(deal);
 
               return (
                 <div
                   key={deal.id}
                   style={{
-                    border: "1px solid #E5E7EB",
+                    border: isCompleted ? "2px solid #10B981" : "1px solid #E5E7EB",
                     borderRadius: 8,
                     padding: 20,
-                    background: "var(--color-white)",
+                    background: isCompleted ? "#F0FDF4" : "var(--color-white)",
                   }}
                 >
                   <div
@@ -407,6 +415,42 @@ export default function FarmerPage() {
                         <strong>Note:</strong> Only confirm after you've
                         successfully completed the transaction with the buyer
                         (payment received and product delivered).
+                      </p>
+                    </div>
+                  )}
+
+                  {isCompleted && (
+                    <div
+                      style={{
+                        marginTop: 16,
+                        padding: 16,
+                        background: "#D1FAE5",
+                        border: "2px solid #10B981",
+                        borderRadius: 6,
+                      }}
+                    >
+                      <p
+                        style={{
+                          fontSize: 14,
+                          color: "#065F46",
+                          margin: 0,
+                          fontWeight: 600,
+                          marginBottom: 4,
+                        }}
+                      >
+                        ✓ Deal Completed Successfully
+                      </p>
+                      <p
+                        style={{
+                          fontSize: 13,
+                          color: "#065F46",
+                          margin: 0,
+                          lineHeight: 1.5,
+                        }}
+                      >
+                        Both parties have confirmed this transaction. This
+                        completed deal may enable feedback features in the
+                        future.
                       </p>
                     </div>
                   )}
