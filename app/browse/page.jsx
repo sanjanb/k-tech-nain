@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { db } from "../../lib/firebase";
-import { collection, getDocs } from "firebase/firestore";
+import { collection, getDocs, doc, getDoc } from "firebase/firestore";
 
 export default function BrowsePage() {
   const [allProducts, setAllProducts] = useState([]);
@@ -25,10 +25,26 @@ export default function BrowsePage() {
     const fetchProducts = async () => {
       try {
         const snapshot = await getDocs(collection(db, "products"));
-        const productsList = snapshot.docs.map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
-        }));
+        const productsList = await Promise.all(
+          snapshot.docs.map(async (docSnapshot) => {
+            const productData = { id: docSnapshot.id, ...docSnapshot.data() };
+            
+            // Fetch farmer data to get verification status
+            if (productData.farmerId) {
+              try {
+                const farmerDoc = await getDoc(doc(db, "users", productData.farmerId));
+                if (farmerDoc.exists()) {
+                  productData.farmerVerified = farmerDoc.data().isVerified || false;
+                }
+              } catch (err) {
+                // If farmer fetch fails, continue without verification status
+                productData.farmerVerified = false;
+              }
+            }
+            
+            return productData;
+          })
+        );
         setAllProducts(productsList);
         setFilteredProducts(productsList);
       } catch (err) {
@@ -350,6 +366,22 @@ export default function BrowsePage() {
                         </span>
                       )}
                     </div>
+                    {product.farmerVerified && (
+                      <div style={{ marginBottom: 8 }}>
+                        <span
+                          style={{
+                            fontSize: 11,
+                            fontWeight: 500,
+                            padding: "3px 8px",
+                            borderRadius: 4,
+                            background: "#D1FAE5",
+                            color: "#065F46",
+                          }}
+                        >
+                          ✓ Verified Farmer
+                        </span>
+                      </div>
+                    )}
                     <p
                       style={{
                         fontSize: 16,

@@ -261,21 +261,39 @@ export default function ProductDetailPage() {
               fontSize: 14,
               color: "var(--color-text-secondary)",
               margin: 0,
+              marginBottom: 8,
             }}
           >
             Sold by:{" "}
             {farmer ? (
-              <Link
-                href={`/farmer-profile/${product.farmerId}`}
-                style={{
-                  color: "var(--color-primary)",
-                  textDecoration: "none",
-                  fontWeight: 600,
-                  fontSize: 16,
-                }}
-              >
-                {farmer.name}
-              </Link>
+              <>
+                <Link
+                  href={`/farmer-profile/${product.farmerId}`}
+                  style={{
+                    color: "var(--color-primary)",
+                    textDecoration: "none",
+                    fontWeight: 600,
+                    fontSize: 16,
+                  }}
+                >
+                  {farmer.name}
+                </Link>
+                {farmer.isVerified && (
+                  <span
+                    style={{
+                      marginLeft: 8,
+                      fontSize: 11,
+                      fontWeight: 500,
+                      padding: "3px 8px",
+                      borderRadius: 4,
+                      background: "#D1FAE5",
+                      color: "#065F46",
+                    }}
+                  >
+                    ✓ Verified
+                  </span>
+                )}
+              </>
             ) : (
               <span style={{ fontWeight: 600, fontSize: 16 }}>Unknown</span>
             )}
