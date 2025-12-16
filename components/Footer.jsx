@@ -201,10 +201,10 @@ export default function Footer() {
               marginRight: "auto",
             }}
           >
-            <strong>Verification:</strong> The "Verified Farmer" badge
-            indicates that basic identity documentation has been reviewed by the
-            platform. Verification does not guarantee product quality, delivery,
-            or transaction success.
+            <strong>Verification:</strong> The "Verified Farmer" badge indicates
+            that basic identity documentation has been reviewed by the platform.
+            Verification does not guarantee product quality, delivery, or
+            transaction success.
           </p>
           <p
             style={{
