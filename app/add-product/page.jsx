@@ -80,7 +80,7 @@ export default function AddProductPage() {
     } catch (err) {
       // eslint-disable-next-line no-console
       console.error("Error adding product:", err);
-      
+
       // Better error messages
       let errorMessage = "Failed to add product";
       if (err?.message?.includes("offline")) {
@@ -92,7 +92,7 @@ export default function AddProductPage() {
       } else if (err?.message) {
         errorMessage = err.message;
       }
-      
+
       setError(errorMessage);
     } finally {
       setSubmitting(false);
