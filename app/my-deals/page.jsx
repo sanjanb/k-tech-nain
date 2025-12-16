@@ -175,6 +175,28 @@ export default function MyDealsPage() {
       setSubmittingFeedback(false);
     }
   };
+
+  if (loading) {
+    return (
+      <div
+        style={{
+          minHeight: "60vh",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <p style={{ color: "var(--color-text-secondary)" }}>Loading...</p>
+      </div>
+    );
+  }
+
+  return (
+    <div
+      style={{
+        maxWidth: 1000,
+        margin: "0 auto",
+        padding: "40px 20px",
       }}
     >
       <h1
