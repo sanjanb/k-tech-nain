@@ -411,3 +411,22 @@ const cardStyle = {
   cursor: "pointer",
   transition: "box-shadow 0.2s ease",
 };
+
+const inputStyle = {
+  width: "100%",
+  padding: "8px 12px",
+  border: "1px solid #E5E7EB",
+  borderRadius: 6,
+  fontSize: 14,
+  color: "var(--color-text-primary)",
+};
+
+const paginationButtonStyle = {
+  padding: "8px 16px",
+  background: "var(--color-primary)",
+  color: "var(--color-white)",
+  border: "none",
+  borderRadius: 6,
+  fontSize: 14,
+  fontWeight: 500,
+};
