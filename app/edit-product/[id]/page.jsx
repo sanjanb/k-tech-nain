@@ -4,11 +4,7 @@ import { useState, useEffect } from "react";
 import { useRouter, useParams } from "next/navigation";
 import { auth, db } from "../../../lib/firebase";
 import { onAuthStateChanged } from "firebase/auth";
-import {
-  doc,
-  getDoc,
-  updateDoc,
-} from "firebase/firestore";
+import { doc, getDoc, updateDoc } from "firebase/firestore";
 import Link from "next/link";
 
 export default function EditProductPage() {
@@ -35,7 +31,7 @@ export default function EditProductPage() {
       try {
         // Fetch product data
         const productDoc = await getDoc(doc(db, "products", productId));
-        
+
         if (!productDoc.exists()) {
           setError("Product not found");
           setLoading(false);
@@ -74,7 +70,7 @@ export default function EditProductPage() {
 
     try {
       const productRef = doc(db, "products", productId);
-      
+
       await updateDoc(productRef, {
         cropName,
         price: parseFloat(price),
@@ -88,7 +84,8 @@ export default function EditProductPage() {
         errorMessage =
           "Cannot connect to Firebase. Please check your internet connection.";
       } else if (err?.message?.includes("permission")) {
-        errorMessage = "Permission denied. You may not have access to edit this product.";
+        errorMessage =
+          "Permission denied. You may not have access to edit this product.";
       } else if (err?.message) {
         errorMessage = err.message;
       }

@@ -309,36 +309,61 @@ export default function FarmerPage() {
                   </div>
                 </div>
               </Link>
-              <button
-                onClick={(e) => {
-                  e.preventDefault();
-                  toggleStatus(product.id, product.status || "available");
-                }}
-                disabled={updatingStatus[product.id]}
+              <div
                 style={{
-                  width: "100%",
+                  display: "flex",
+                  gap: 8,
                   marginTop: 8,
-                  padding: "8px 16px",
-                  background: "transparent",
-                  border: "1px solid #E5E7EB",
-                  borderRadius: 6,
-                  fontSize: 13,
-                  fontWeight: 500,
-                  cursor: updatingStatus[product.id]
-                    ? "not-allowed"
-                    : "pointer",
-                  color: "var(--color-text-primary)",
-                  opacity: updatingStatus[product.id] ? 0.6 : 1,
                 }}
               >
-                {updatingStatus[product.id]
-                  ? "Updating..."
-                  : `Mark as ${
-                      (product.status || "available") === "available"
-                        ? "Sold"
-                        : "Available"
-                    }`}
-              </button>
+                <Link
+                  href={`/edit-product/${product.id}`}
+                  style={{
+                    flex: 1,
+                    padding: "8px 16px",
+                    background: "transparent",
+                    border: "1px solid var(--color-primary)",
+                    color: "var(--color-primary)",
+                    borderRadius: 6,
+                    fontSize: 13,
+                    fontWeight: 500,
+                    textDecoration: "none",
+                    textAlign: "center",
+                    display: "block",
+                  }}
+                >
+                  Edit
+                </Link>
+                <button
+                  onClick={(e) => {
+                    e.preventDefault();
+                    toggleStatus(product.id, product.status || "available");
+                  }}
+                  disabled={updatingStatus[product.id]}
+                  style={{
+                    flex: 1,
+                    padding: "8px 16px",
+                    background: "transparent",
+                    border: "1px solid #E5E7EB",
+                    borderRadius: 6,
+                    fontSize: 13,
+                    fontWeight: 500,
+                    cursor: updatingStatus[product.id]
+                      ? "not-allowed"
+                      : "pointer",
+                    color: "var(--color-text-primary)",
+                    opacity: updatingStatus[product.id] ? 0.6 : 1,
+                  }}
+                >
+                  {updatingStatus[product.id]
+                    ? "Updating..."
+                    : `Mark as ${
+                        (product.status || "available") === "available"
+                          ? "Sold"
+                          : "Available"
+                      }`}
+                </button>
+              </div>
             </div>
           ))}
         </div>
