@@ -2,8 +2,9 @@
 
 import { useState, useEffect } from "react";
 import { useParams } from "next/navigation";
-import { db } from "../../../lib/firebase";
-import { doc, getDoc } from "firebase/firestore";
+import { auth, db } from "../../../lib/firebase";
+import { doc, getDoc, collection, addDoc, serverTimestamp, query, where, getDocs } from "firebase/firestore";
+import { onAuthStateChanged } from "firebase/auth";
 import Link from "next/link";
 
 export default function ProductDetailPage() {
@@ -14,6 +15,17 @@ export default function ProductDetailPage() {
   const [farmer, setFarmer] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [currentUser, setCurrentUser] = useState(null);
+  const [creatingDeal, setCreatingDeal] = useState(false);
+  const [existingDeal, setExistingDeal] = useState(null);
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      setCurrentUser(user);
+    });
+
+    return () => unsubscribe();
+  }, []);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -32,6 +44,19 @@ export default function ProductDetailPage() {
         if (farmerDoc.exists()) {
           setFarmer(farmerDoc.data());
         }
+
+        // Check if deal already exists for current user
+        if (currentUser) {
+          const dealsQuery = query(
+            collection(db, "deals"),
+            where("buyerId", "==", currentUser.uid),
+            where("productId", "==", productId)
+          );
+          const dealsSnapshot = await getDocs(dealsQuery);
+          if (!dealsSnapshot.empty) {
+            setExistingDeal(dealsSnapshot.docs[0].data());
+          }
+        }
       } catch (err) {
         // Check if error is due to offline/connectivity
         if (err?.message?.includes("offline")) {
@@ -49,7 +74,40 @@ export default function ProductDetailPage() {
     if (productId) {
       fetchData();
     }
-  }, [productId]);
+  }, [productId, currentUser]);
+
+  const createDeal = async () => {
+    if (!currentUser) {
+      alert("Please log in to express interest");
+      return;
+    }
+
+    if (currentUser.uid === product.farmerId) {
+      alert("You cannot create a deal for your own product");
+      return;
+    }
+
+    setCreatingDeal(true);
+    try {
+      const dealData = {
+        buyerId: currentUser.uid,
+        farmerId: product.farmerId,
+        productId: product.id,
+        buyerConfirmed: false,
+        farmerConfirmed: false,
+        createdAt: serverTimestamp(),
+      };
+
+      await addDoc(collection(db, "deals"), dealData);
+      setExistingDeal(dealData);
+      alert("Interest expressed successfully! A deal record has been created.");
+    } catch (err) {
+      console.error("Error creating deal:", err);
+      alert("Failed to create deal. Please try again.");
+    } finally {
+      setCreatingDeal(false);
+    }
+  };
 
   if (loading) {
     return (
@@ -299,6 +357,83 @@ export default function ProductDetailPage() {
             )}
           </p>
         </div>
+
+        {/* Express Interest Section (Buyers Only) */}
+        {currentUser && currentUser.uid !== product.farmerId && (
+          <div
+            style={{
+              border: "2px solid var(--color-primary)",
+              borderRadius: 8,
+              padding: "clamp(20px, 4vw, 24px)",
+              marginBottom: "clamp(24px, 4vw, 32px)",
+              background: "#F0F9FF",
+            }}
+          >
+            <h2
+              style={{
+                fontSize: 18,
+                fontWeight: 600,
+                color: "var(--color-text-primary)",
+                margin: 0,
+                marginBottom: 12,
+              }}
+            >
+              Interested in this product?
+            </h2>
+            <p
+              style={{
+                fontSize: 14,
+                color: "var(--color-text-secondary)",
+                marginBottom: 16,
+                lineHeight: 1.5,
+              }}
+            >
+              Express your interest to start a deal record. Both you and the
+              farmer can confirm the transaction later.
+            </p>
+
+            {existingDeal ? (
+              <div
+                style={{
+                  background: "#D1FAE5",
+                  border: "1px solid #10B981",
+                  borderRadius: 6,
+                  padding: 12,
+                }}
+              >
+                <p
+                  style={{
+                    fontSize: 14,
+                    color: "#065F46",
+                    margin: 0,
+                    fontWeight: 500,
+                  }}
+                >
+                  ✓ You've already expressed interest in this product
+                </p>
+              </div>
+            ) : (
+              <button
+                onClick={createDeal}
+                disabled={creatingDeal}
+                style={{
+                  padding: "12px 24px",
+                  fontSize: 16,
+                  fontWeight: 600,
+                  color: "var(--color-white)",
+                  background: creatingDeal
+                    ? "#9CA3AF"
+                    : "var(--color-primary)",
+                  border: "none",
+                  borderRadius: 6,
+                  cursor: creatingDeal ? "not-allowed" : "pointer",
+                }}
+              >
+                {creatingDeal ? "Creating Deal..." : "Express Interest"}
+              </button>
+            )}
+          </div>
+        )}
 
         {/* Payment/Contact Section */}
         <div
