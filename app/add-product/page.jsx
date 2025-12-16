@@ -48,6 +48,15 @@ export default function AddProductPage() {
     return () => unsubscribe();
   }, [router]);
 
+  const convertImageToBase64 = (file) => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = (error) => reject(error);
+      reader.readAsDataURL(file);
+    });
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
@@ -57,8 +66,22 @@ export default function AddProductPage() {
       // eslint-disable-next-line no-console
       console.log("Starting product submission...");
 
-      // Skip image upload - use placeholder or null
-      const imageUrl = null;
+      let imageUrl = null;
+
+      if (image) {
+        // Check file size (max 500KB for performance)
+        if (image.size > 500000) {
+          setError("Image must be less than 500KB. Please compress your image.");
+          setSubmitting(false);
+          return;
+        }
+
+        // eslint-disable-next-line no-console
+        console.log("Converting image to Base64...");
+        imageUrl = await convertImageToBase64(image);
+        // eslint-disable-next-line no-console
+        console.log("Image converted successfully");
+      }
 
       // eslint-disable-next-line no-console
       console.log("Saving product to Firestore...");
@@ -179,24 +202,22 @@ export default function AddProductPage() {
 
         <div style={fieldStyle}>
           <label style={labelStyle}>Quantity</label>
+          <inputProduct Image (optional, max 500KB)</label>
           <input
-            type="text"
-            value={quantity}
-            onChange={(e) => setQuantity(e.target.value)}
-            required
+            type="file"
+            accept="image/*"
+            onChange={(e) => setImage(e.target.files[0])}
             style={inputStyle}
-            placeholder="e.g., 100 kg"
           />
-        </div>
-
-        <div style={fieldStyle}>
-          <label style={labelStyle}>UPI ID</label>
-          <input
-            type="text"
-            value={upiId}
-            onChange={(e) => setUpiId(e.target.value)}
-            required
-            style={inputStyle}
+          <p
+            style={{
+              fontSize: 12,
+              color: "var(--color-text-secondary)",
+              marginTop: 4,
+              marginBottom: 0,
+            }}
+          >
+            Tip: Compress images to under 500KB for best performance
             placeholder="e.g., farmer@upi"
           />
         </div>
