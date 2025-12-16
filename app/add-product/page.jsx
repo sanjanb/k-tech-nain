@@ -71,7 +71,9 @@ export default function AddProductPage() {
       if (image) {
         // Check file size (max 500KB for performance)
         if (image.size > 500000) {
-          setError("Image must be less than 500KB. Please compress your image.");
+          setError(
+            "Image must be less than 500KB. Please compress your image."
+          );
           setSubmitting(false);
           return;
         }
