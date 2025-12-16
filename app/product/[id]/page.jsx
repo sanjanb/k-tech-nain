@@ -370,7 +370,7 @@ export default function ProductDetailPage() {
                 lineHeight: 1.5,
               }}
             >
-              💳 <strong>Direct payment to farmer</strong> - Complete payment
+              <strong>Direct payment to farmer</strong> - Complete payment
               directly using the UPI ID provided above.
             </p>
           </div>
