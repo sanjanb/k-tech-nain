@@ -37,6 +37,8 @@ export default function AuthPage() {
           name: name.trim(),
           email: cred.user.email,
           role,
+          createdAt: new Date(),
+          isVerified: false,
         });
         // Redirect based on selected role
         router.replace(role === "farmer" ? "/farmer" : "/browse");
