@@ -26,14 +26,10 @@ export default function Footer() {
           }}
         >
           {/* Column 1: Placeholder for Phase 2 */}
-          <div>
-            {/* Identity section will be added in Phase 2 */}
-          </div>
+          <div>{/* Identity section will be added in Phase 2 */}</div>
 
           {/* Column 2: Placeholder for Phase 3 */}
-          <div>
-            {/* Navigation section will be added in Phase 3 */}
-          </div>
+          <div>{/* Navigation section will be added in Phase 3 */}</div>
 
           {/* Column 3: Placeholder for Phase 4 */}
           <div>
