@@ -4,8 +4,6 @@
 
 Farm To Table is a minimal web platform that allows farmers to list their produce directly and enables buyers to discover and transact with them without platform fees, commissions, or in-app payments.
 
-## Screenshot
-
 ![Homepage – minimal design](/assets/Screenshot%202025-12-17%20101852.png)
 
 ---
