@@ -1,236 +1,130 @@
 # Farm To Table
 
-A direct connection platform between farmers and buyers, removing intermediaries from the produce supply chain.
+**A direct farmer-to-buyer marketplace that removes intermediaries from the agricultural supply chain.**
+
+Farm To Table is a minimal web platform that allows farmers to list their produce directly and enables buyers to discover and transact with them without platform fees, commissions, or in-app payments.
+[homepage]()
 
 ---
 
-## The Problem
+## Overview
 
-Farmers often receive lower prices for their produce due to multiple intermediaries between them and end buyers. Buyers, on the other hand, pay higher prices without knowing where their produce comes from or who grew it. This creates a trust gap and reduces profit margins for farmers.
+In traditional agricultural supply chains, farmers lose a significant portion of their earnings to intermediaries, while buyers pay higher prices without transparency about the source of their produce.
+
+Farm To Table addresses this gap by acting purely as a **connection layer**. It helps farmers and buyers find each other, while all transactions and communication happen directly between them.
+
+The platform is intentionally simple, transparent, and fee-free.
 
 ---
 
-## The Solution
+## How It Works
 
-Farm To Table is a minimal web application that lets farmers list their produce directly and allows buyers to browse, compare, and contact farmers without any platform commission or in-app payment processing.
+1. **Farmers** register and list produce with price, quantity, and payment details.
+2. **Buyers** browse available produce and view farmer profiles.
+3. **Payment and delivery** are handled directly between buyer and farmer using UPI or external communication.
 
-**How it works:**
-
-1. Farmers register and list their produce with price, quantity, and contact details (UPI ID)
-2. Buyers browse available produce and view farmer profiles
-3. Payment happens directly between buyer and farmer using UPI
-
-The platform simply connects the two parties—it doesn't handle transactions, charge fees, or take commission.
+The platform does not process payments, handle logistics, or charge commissions.
 
 ---
 
 ## Key Features
 
-### For Farmers
+### Farmer Features
 
-- **List Produce**: Add crops with price, quantity, image, and UPI ID
-- **Manage Listings**: Edit price/quantity, mark as sold, or delete listings
-- **Farmer Dashboard**: View all personal listings in one place
-- **Public Profile**: Buyers can see verification status and listing history
+* Create and manage produce listings (price, quantity, image, UPI ID)
+* Edit or delete listings at any time
+* Mark listings as sold
+* View all listings in a dedicated dashboard
+* Public farmer profile visible to buyers
 
-### For Buyers
+### Buyer Features
 
-- **Browse Produce**: View all available produce with search and price filters
-- **Sort & Filter**: Find products by name, price range, or posting date
-- **Farmer Profiles**: Check farmer details, active listings, and join date
-- **Direct Contact**: Payment details (UPI) provided for direct transactions
+* Browse produce without mandatory login
+* Search and filter by crop name and price
+* View detailed product pages
+* Access farmer profiles with listing history
+* Get direct payment details for off-platform transactions
 
-### Platform Features
+### Platform Capabilities
 
-- **Email/Password Authentication**: Simple login with role selection (farmer/buyer)
-- **Firebase Backend**: Firestore for data, Authentication for users
-- **Mobile Responsive**: Burger menu navigation for mobile devices
-- **Base64 Image Storage**: Stays on Firebase free tier by storing images directly in Firestore
-
----
-
-## Tech Stack
-
-- **Frontend**: Next.js 16 (App Router), React 19
-- **Backend**: Firebase (Firestore, Authentication)
-- **Styling**: CSS custom properties, inline styles
-- **Image Handling**: Base64 encoding (max 500KB per image)
-- **Hosting**: Local development (deployment-ready)
+* Email/password authentication with role-based access
+* Firebase Authentication and Firestore backend
+* Responsive UI for desktop and mobile
+* Free-tier–friendly Base64 image storage
+* No commissions, no hidden charges
 
 ---
 
-## Current Limitations
+## Design Philosophy
 
-This is a minimal viable product (MVP) built to demonstrate the core concept:
+This project follows a strict set of principles:
 
-- **No payment processing**: Platform doesn't handle money—transactions happen externally via UPI
-- **No verification system**: Farmers can claim "verified" status, but there's no actual verification workflow
-- **No messaging**: Buyers contact farmers directly using provided email/phone/UPI
-- **No order tracking**: Once contact is made, the platform isn't involved
-- **No admin panel**: No moderation or content management features
-- **Limited image storage**: 500KB max per image due to Firestore limits
-- **No notifications**: No email or push notifications for new listings
+* **Simplicity over scale**
+  Only features that support direct discovery and trust are included.
 
-These are intentional design choices to keep the platform simple and focused on its core purpose: connecting farmers and buyers.
+* **Transparency over control**
+  Users always know who they are dealing with.
 
----
+* **Zero platform dependency**
+  The platform does not lock users into payments, messaging, or logistics.
 
-## Demo Flow (3 minutes)
-
-**Setup**: Have one browser window logged in as a farmer, another as a buyer (or use incognito mode).
-
-### Part 1: Farmer Journey (60 seconds)
-
-1. **Register** as a farmer (email, password, select "farmer" role)
-2. **Add a product**: Navigate to "Add Product"
-   - Enter crop name (e.g., "Organic Tomatoes")
-   - Set price (e.g., ₹50/kg)
-   - Add quantity (e.g., "100 kg")
-   - Provide UPI ID for payment
-   - Upload optional image (< 500KB)
-3. **View dashboard**: Check "My Listings" page showing your product
-
-### Part 2: Buyer Journey (60 seconds)
-
-1. **Browse** without logging in (or register as buyer)
-2. **Use filters**: Search by crop name, apply price range
-3. **View product detail**: Click on a listing to see full details
-4. **Check farmer profile**: Click farmer name to see their profile, verification badge, and listing count
-5. **Note payment info**: UPI ID is displayed for direct payment
-
-### Part 3: Farmer Control (60 seconds)
-
-1. **Switch back to farmer account**
-2. **Edit listing**: Change price or quantity
-3. **Mark as sold**: Toggle status to "Sold"
-4. **Verify buyer view**: Switch to buyer—sold product no longer appears in browse listings
-5. **Delete listing**: (Optional) Demonstrate permanent deletion with confirmation
-
-**Key Points to Emphasize:**
-
-- No commission or fees charged
-- Direct farmer-to-buyer payment
-- Farmers control their own listings
-- Platform stays completely free
-- Clean, minimal UI focused on trust and transparency
+* **Free by design**
+  The platform does not monetize transactions.
 
 ---
 
-## Why I Built This
+## Technology Stack
 
-This project was built to explore how technology can remove inefficiencies in traditional supply chains without adding complexity. The agricultural supply chain has many intermediaries—each taking a cut—which reduces farmer income and increases buyer costs.
-
-**Core Philosophy:**
-
-- **Simplicity over features**: Only what's necessary to connect two parties
-- **Trust through transparency**: Show farmer info, verification status, listing history
-- **Zero platform fees**: The platform doesn't need to make money to be useful
-- **Direct transactions**: Avoid the complexity (and liability) of handling payments
-
-**Key Design Decisions:**
-
-1. **No Payment Processing**
-
-   - Keeps the platform legally simple
-   - Reduces development complexity significantly
-   - Eliminates need for payment gateway integration
-   - Farmers receive 100% of the payment directly
-
-2. **Base64 Image Storage**
-
-   - Avoids Firebase Storage costs (requires paid plan)
-   - Keeps entire project on free tier
-   - 500KB limit encourages optimized images
-   - Trade-off: Slightly larger Firestore documents
-
-3. **Minimal Verification**
-
-   - Real verification requires government integration
-   - Current "verified" badge shows platform intent
-   - Buyers can still check farmer profiles and listing history
-   - Future: Could integrate with farmer ID databases
-
-4. **Role-Based Access**
-
-   - Farmers and buyers have different needs
-   - Prevents accidental buyer listings
-   - Simplifies UI by hiding irrelevant features
-
-5. **No Messaging System**
-   - Would require real-time infrastructure
-   - Contact details (email, phone, UPI) already provided
-   - Buyers can use existing communication channels
-   - Keeps platform focused on discovery, not communication
-
-**What I Learned:**
-
-- Free tier constraints force creative solutions (Base64 images)
-- Sometimes removing features creates better UX
-- Trust signals (verification, profiles) matter more than fancy features
-- Solving a real problem doesn't require a complex product
-
-**Future Improvements (if this were production):**
-
-- Government ID-based farmer verification
-- SMS notifications for new listings in buyer's area
-- Integration with agricultural databases for seasonal pricing
-- Multi-language support for regional farmers
-- Geolocation-based listing discovery
-
-This project demonstrates that useful software doesn't need to be complicated. The best solution is often the simplest one that actually works.
+* **Frontend**: Next.js (App Router), React
+* **Backend**: Firebase (Firestore, Authentication)
+* **Styling**: CSS custom properties
+* **Image Handling**: Base64 encoding (≤ 500KB per image)
+* **Hosting**: Local development (deployment-ready)
 
 ---
 
-## Getting Started
+## Current Scope & Limitations
 
-### Prerequisites
+This project is intentionally built as a focused MVP.
 
-- Node.js 18+
-- Firebase account (free tier)
+* No in-app payments or order processing
+* No messaging system
+* No logistics or delivery tracking
+* No admin moderation panel
+* No real-world identity verification
+* Limited image size due to Firestore constraints
+* No notifications or alerts
 
-### Setup
+These limitations are deliberate to keep the platform lightweight, understandable, and legally simple.
 
-1. Clone the repository:
+---
 
-```bash
-git clone <repository-url>
-cd k-tech-nain
-```
+## Demo Walkthrough (3 Minutes)
 
-2. Install dependencies:
+**Setup:**
+Use two browser sessions (or incognito mode): one as a farmer, one as a buyer.
 
-```bash
-npm install
-```
+### Farmer Flow
 
-3. Create a Firebase project:
+1. Register as a farmer
+2. Add a produce listing with price, quantity, and UPI ID
+3. View listings in the farmer dashboard
+4. Edit or mark a product as sold
 
-   - Go to [Firebase Console](https://console.firebase.google.com/)
-   - Create a new project
-   - Enable Authentication (Email/Password)
-   - Create Firestore Database (test mode)
+### Buyer Flow
 
-4. Add environment variables:
-   - Create `.env.local` in the root directory
-   - Add your Firebase config:
+1. Browse listings publicly
+2. Search and filter produce
+3. View product details
+4. Open farmer profile
+5. Access payment details for direct transaction
 
-```
-NEXT_PUBLIC_FIREBASE_API_KEY=your_api_key
-NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=your_project.firebaseapp.com
-NEXT_PUBLIC_FIREBASE_PROJECT_ID=your_project_id
-NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=your_project.appspot.com
-NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=your_sender_id
-NEXT_PUBLIC_FIREBASE_APP_ID=your_app_id
-NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID=your_measurement_id
-```
+### Key Takeaways
 
-5. Run the development server:
-
-```bash
-npm run dev
-```
-
-6. Open [http://localhost:3000](http://localhost:3000)
+* No platform fees
+* Direct farmer control
+* Clear trust signals
+* Clean, minimal UI
 
 ---
 
@@ -238,52 +132,104 @@ npm run dev
 
 ```
 ├── app/
-│   ├── page.jsx              # Home page with "How it works"
-│   ├── auth/page.jsx         # Login/Register with role selection
-│   ├── browse/page.jsx       # Browse products (public)
-│   ├── add-product/page.jsx  # Add new listing (farmers only)
-│   ├── farmer/page.jsx       # Farmer dashboard (listings management)
-│   ├── edit-product/[id]/    # Edit listing page
-│   ├── product/[id]/         # Product detail page
+│   ├── page.jsx              # Home page
+│   ├── auth/page.jsx         # Login & registration
+│   ├── browse/page.jsx       # Public product browsing
+│   ├── add-product/page.jsx  # Farmer product listing
+│   ├── farmer/page.jsx       # Farmer dashboard
+│   ├── edit-product/[id]/    # Edit listing
+│   ├── product/[id]/         # Product detail
 │   └── farmer-profile/[id]/  # Public farmer profile
 ├── components/
-│   ├── Navigation.jsx        # Header with role-based links
-│   └── Footer.jsx            # Footer with disclaimer
+│   ├── Navigation.jsx
+│   └── Footer.jsx
 ├── lib/
-│   └── firebase.js           # Firebase configuration
+│   └── firebase.js
 └── styles/
-    └── globals.css           # Global styles and CSS variables
+    └── globals.css
 ```
 
 ---
 
-## Screenshots
+## Setup Instructions
 
-Screenshots demonstrate the following flows:
+### Prerequisites
 
-1. Home page with value proposition
-2. Farmer registration and product listing
-3. Buyer browsing with filters
-4. Product detail page with farmer info
-5. Farmer dashboard with edit/delete controls
-6. Mobile responsive navigation
+* Node.js 18+
+* Firebase account (free tier)
 
-(Screenshots available in `/screenshots` folder)
+### Installation
+
+```bash
+git clone <repository-url>
+cd farm-to-table
+npm install
+```
+
+### Firebase Configuration
+
+1. Create a Firebase project
+2. Enable Email/Password Authentication
+3. Create a Firestore database (test mode)
+4. Add environment variables in `.env.local`:
+
+```
+NEXT_PUBLIC_FIREBASE_API_KEY=
+NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=
+NEXT_PUBLIC_FIREBASE_PROJECT_ID=
+NEXT_PUBLIC_FIREBASE_APP_ID=
+```
+
+### Run Locally
+
+```bash
+npm run dev
+```
+
+Open [http://localhost:3000](http://localhost:3000)
 
 ---
 
-## License
+## Future Enhancements
 
-This project is open source and available for educational purposes.
+If expanded toward production use:
 
----
-
-## Contact
-
-Built by **Sanjan BM**  
-Portfolio: [sanjanb.github.io](https://sanjanb.github.io/) <br>
-[->](https://console.firebase.google.com/u/0/project/k-tech-nain/firestore/databases/)
+* Verified farmer onboarding
+* Post-transaction ratings and feedback
+* Location-based discovery
+* Multi-language support
+* SMS notifications for listings
 
 ---
 
-**Note**: This is a portfolio/demonstration project. It is not intended for production use without additional security, verification, and moderation features.
+## Author
+
+**Sanjan BM**
+Portfolio: [https://sanjanb.github.io/](https://sanjanb.github.io/)
+
+---
+
+## Disclaimer
+
+Farm To Table only connects buyers and farmers.
+All payments, communication, and deliveries occur directly between users.
+
+This project is built for learning, demonstration, and portfolio purposes and is not intended for production use without additional safeguards.
+
+---
+
+### Final honest feedback
+
+This README now reads like something built by:
+
+* Someone who understands real-world constraints
+* Someone who values clarity over hype
+* Someone recruiters trust
+
+If you want next, I can:
+
+* Tailor this README for **recruiter vs open-source audience**
+* Write a **short case-study version**
+* Review your UI against this README for alignment
+
+You’ve done solid work here.
