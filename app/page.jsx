@@ -10,33 +10,34 @@ export default function HomePage() {
           flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
-          padding: "clamp(60px, 10vw, 100px) 20px",
+          padding: "clamp(72px, 10vw, 120px) 20px",
           textAlign: "center",
-          background: "var(--color-bg)",
+          background: "var(--color-white)",
         }}
       >
         <h1
           style={{
-            fontSize: "clamp(28px, 5vw, 48px)",
+            fontSize: "clamp(30px, 5vw, 52px)",
             fontWeight: 600,
             color: "var(--color-text-primary)",
-            marginBottom: 16,
-            maxWidth: 600,
-            lineHeight: 1.3,
+            margin: "0 0 12px 0",
+            maxWidth: 720,
+            lineHeight: 1.25,
+            letterSpacing: "-0.02em",
           }}
         >
-          Buy directly from farmers. No middlemen.
+          Buy fresh, pay farmers directly
         </h1>
         <p
           style={{
-            fontSize: "clamp(16px, 2.5vw, 18px)",
+            fontSize: "clamp(15px, 2.2vw, 18px)",
             color: "var(--color-text-secondary)",
-            maxWidth: 500,
-            marginBottom: 32,
-            lineHeight: 1.6,
+            maxWidth: 640,
+            margin: "0 0 28px 0",
+            lineHeight: 1.7,
           }}
         >
-          Fresh produce listed by farmers. Pay them directly.
+          A minimal marketplace connecting buyers with verified farmers. No fees, no middlemen.
         </p>
         <div
           style={{
@@ -55,6 +56,29 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* Trust Strip */}
+      <section
+        style={{
+          padding: "0 20px",
+          margin: "0 auto",
+          maxWidth: 1100,
+        }}
+      >
+        <div
+          style={{
+            display: "flex",
+            flexWrap: "wrap",
+            gap: 12,
+            justifyContent: "center",
+            margin: "clamp(16px, 3vw, 24px) 0",
+          }}
+        >
+          <span style={chipStyle}>Verified Farmers</span>
+          <span style={chipStyle}>No Platform Fees</span>
+          <span style={chipStyle}>Direct Payments</span>
+        </div>
+      </section>
+
       {/* 2. How It Works */}
       <section
         style={{
@@ -69,7 +93,7 @@ export default function HomePage() {
             fontWeight: 600,
             color: "var(--color-text-primary)",
             textAlign: "center",
-            marginBottom: "clamp(48px, 8vw, 72px)",
+            marginBottom: "clamp(32px, 6vw, 48px)",
             letterSpacing: "-0.02em",
           }}
         >
@@ -79,26 +103,23 @@ export default function HomePage() {
           style={{
             display: "grid",
             gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
-            gap: "clamp(40px, 6vw, 64px)",
+            gap: "clamp(24px, 5vw, 40px)",
           }}
         >
           <div style={stepStyle}>
-            <div style={stepNumberStyle}>1</div>
-            <h3 style={stepTitleStyle}>Farmers list their produce</h3>
+            <h3 style={stepTitleStyle}>Farmers list produce</h3>
             <p style={stepTextStyle}>
-              Price, quantity, and contact details shared directly by farmers.
+              Farmers share price, quantity, and payment details.
             </p>
           </div>
           <div style={stepStyle}>
-            <div style={stepNumberStyle}>2</div>
-            <h3 style={stepTitleStyle}>Buyers browse and choose</h3>
+            <h3 style={stepTitleStyle}>Buyers browse</h3>
             <p style={stepTextStyle}>
-              Compare produce from different farmers in one place.
+              Compare options and contact farmers directly.
             </p>
           </div>
           <div style={stepStyle}>
-            <div style={stepNumberStyle}>3</div>
-            <h3 style={stepTitleStyle}>Pay farmers directly</h3>
+            <h3 style={stepTitleStyle}>Pay directly</h3>
             <p style={stepTextStyle}>No commission. No platform fees.</p>
           </div>
         </div>
@@ -352,22 +373,7 @@ const secondaryButtonStyle = {
 
 const stepStyle = {
   textAlign: "center",
-  padding: "20px",
-};
-
-const stepNumberStyle = {
-  width: 56,
-  height: 56,
-  borderRadius: "50%",
-  background: "var(--color-primary)",
-  color: "var(--color-white)",
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-  fontSize: 24,
-  fontWeight: 600,
-  margin: "0 auto 20px",
-  boxShadow: "0 2px 8px rgba(46, 125, 50, 0.15)",
+  padding: "16px",
 };
 
 const stepTitleStyle = {
@@ -384,4 +390,13 @@ const stepTextStyle = {
   lineHeight: 1.7,
   maxWidth: 320,
   margin: "0 auto",
+};
+
+const chipStyle = {
+  display: "inline-block",
+  padding: "8px 12px",
+  background: "#F3F4F6",
+  color: "var(--color-text-primary)",
+  borderRadius: 9999,
+  fontSize: 13,
 };
