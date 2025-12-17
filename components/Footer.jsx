@@ -205,8 +205,8 @@ export default function Footer() {
               textAlign: "center",
             }}
           >
-            Farm To Table only connects buyers and farmers. All transactions
-            and deliveries happen directly between them.
+            Farm To Table only connects buyers and farmers. All transactions and
+            deliveries happen directly between them.
           </p>
         </div>
       </div>
