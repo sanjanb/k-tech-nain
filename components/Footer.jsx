@@ -120,9 +120,72 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Column 3: Placeholder for Phase 4 */}
+          {/* Column 3: Transparency & Contact */}
           <div>
-            {/* Transparency & Contact section will be added in Phase 4 */}
+            <h3
+              style={{
+                fontSize: 18,
+                fontWeight: 600,
+                color: "var(--color-text-primary)",
+                margin: "0 0 12px 0",
+              }}
+            >
+              Transparency
+            </h3>
+            <ul
+              style={{
+                listStyle: "none",
+                padding: 0,
+                margin: "0 0 16px 0",
+              }}
+            >
+              <li style={{ marginBottom: 8 }}>
+                <Link
+                  href="/#verification"
+                  style={{
+                    fontSize: 14,
+                    color: "var(--color-text-secondary)",
+                    textDecoration: "none",
+                  }}
+                >
+                  How verification works
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/#disclaimer"
+                  style={{
+                    fontSize: 14,
+                    color: "var(--color-text-secondary)",
+                    textDecoration: "none",
+                  }}
+                >
+                  Disclaimer
+                </Link>
+              </li>
+            </ul>
+            <div style={{ marginTop: 16 }}>
+              <p
+                style={{
+                  fontSize: 14,
+                  fontWeight: 500,
+                  color: "var(--color-text-primary)",
+                  margin: "0 0 6px 0",
+                }}
+              >
+                Contact
+              </p>
+              <a
+                href="mailto:sanjanacharaya1234@gmail.com"
+                style={{
+                  fontSize: 14,
+                  color: "var(--color-text-secondary)",
+                  textDecoration: "none",
+                }}
+              >
+                sanjanacharaya1234@gmail.com
+              </a>
+            </div>
           </div>
         </div>
       </div>
