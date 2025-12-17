@@ -131,18 +131,21 @@ export default function HomePage() {
         id="verification"
         style={{
           padding: "clamp(60px, 10vw, 100px) 20px",
-          maxWidth: 900,
+          maxWidth: 960,
           margin: "0 auto",
           background: "var(--color-white)",
         }}
       >
+        <div style={{ textAlign: "center", marginBottom: 12 }}>
+          <span style={chipStyle}>Trust & Verification</span>
+        </div>
         <h2
           style={{
-            fontSize: "clamp(24px, 4vw, 36px)",
+            fontSize: "clamp(26px, 4.5vw, 40px)",
             fontWeight: 600,
             color: "var(--color-text-primary)",
             textAlign: "center",
-            marginBottom: "clamp(24px, 4vw, 32px)",
+            marginBottom: "clamp(20px, 4vw, 28px)",
             letterSpacing: "-0.02em",
           }}
         >
@@ -152,7 +155,9 @@ export default function HomePage() {
           style={{
             background: "#F9FAFB",
             padding: "clamp(24px, 4vw, 32px)",
-            borderRadius: 8,
+            borderRadius: 10,
+            border: "1px solid #E5E7EB",
+            boxShadow: "0 2px 8px rgba(0,0,0,0.04)",
             borderLeft: "4px solid var(--color-primary)",
           }}
         >
@@ -222,18 +227,21 @@ export default function HomePage() {
         id="disclaimer"
         style={{
           padding: "clamp(60px, 10vw, 100px) 20px",
-          maxWidth: 900,
+          maxWidth: 960,
           margin: "0 auto",
           background: "var(--color-bg)",
         }}
       >
+        <div style={{ textAlign: "center", marginBottom: 12 }}>
+          <span style={chipStyle}>Important</span>
+        </div>
         <h2
           style={{
-            fontSize: "clamp(24px, 4vw, 36px)",
+            fontSize: "clamp(26px, 4.5vw, 40px)",
             fontWeight: 600,
             color: "var(--color-text-primary)",
             textAlign: "center",
-            marginBottom: "clamp(24px, 4vw, 32px)",
+            marginBottom: "clamp(20px, 4vw, 28px)",
             letterSpacing: "-0.02em",
           }}
         >
@@ -243,8 +251,9 @@ export default function HomePage() {
           style={{
             background: "var(--color-white)",
             padding: "clamp(24px, 4vw, 32px)",
-            borderRadius: 8,
+            borderRadius: 10,
             border: "1px solid #E5E7EB",
+            boxShadow: "0 2px 8px rgba(0,0,0,0.04)",
           }}
         >
           <p
