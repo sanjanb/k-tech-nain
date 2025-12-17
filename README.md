@@ -214,22 +214,3 @@ Portfolio: [https://sanjanb.github.io/](https://sanjanb.github.io/)
 Farm To Table only connects buyers and farmers.
 All payments, communication, and deliveries occur directly between users.
 
-This project is built for learning, demonstration, and portfolio purposes and is not intended for production use without additional safeguards.
-
----
-
-### Final honest feedback
-
-This README now reads like something built by:
-
-* Someone who understands real-world constraints
-* Someone who values clarity over hype
-* Someone recruiters trust
-
-If you want next, I can:
-
-* Tailor this README for **recruiter vs open-source audience**
-* Write a **short case-study version**
-* Review your UI against this README for alignment
-
-You’ve done solid work here.
