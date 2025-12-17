@@ -78,7 +78,14 @@ export default function Footer() {
                     fontSize: 14,
                     color: "var(--color-text-secondary)",
                     textDecoration: "none",
+                    transition: "color 0.2s",
                   }}
+                  onMouseEnter={(e) =>
+                    (e.target.style.color = "var(--color-text-primary)")
+                  }
+                  onMouseLeave={(e) =>
+                    (e.target.style.color = "var(--color-text-secondary)")
+                  }
                 >
                   Browse Produce
                 </Link>
@@ -90,7 +97,14 @@ export default function Footer() {
                     fontSize: 14,
                     color: "var(--color-text-secondary)",
                     textDecoration: "none",
+                    transition: "color 0.2s",
                   }}
+                  onMouseEnter={(e) =>
+                    (e.target.style.color = "var(--color-text-primary)")
+                  }
+                  onMouseLeave={(e) =>
+                    (e.target.style.color = "var(--color-text-secondary)")
+                  }
                 >
                   Farmer Login
                 </Link>
@@ -102,7 +116,14 @@ export default function Footer() {
                     fontSize: 14,
                     color: "var(--color-text-secondary)",
                     textDecoration: "none",
+                    transition: "color 0.2s",
                   }}
+                  onMouseEnter={(e) =>
+                    (e.target.style.color = "var(--color-text-primary)")
+                  }
+                  onMouseLeave={(e) =>
+                    (e.target.style.color = "var(--color-text-secondary)")
+                  }
                 >
                   Profile
                 </Link>
@@ -114,7 +135,14 @@ export default function Footer() {
                     fontSize: 14,
                     color: "var(--color-text-secondary)",
                     textDecoration: "none",
+                    transition: "color 0.2s",
                   }}
+                  onMouseEnter={(e) =>
+                    (e.target.style.color = "var(--color-text-primary)")
+                  }
+                  onMouseLeave={(e) =>
+                    (e.target.style.color = "var(--color-text-secondary)")
+                  }
                 >
                   About
                 </Link>
