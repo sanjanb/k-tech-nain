@@ -3,7 +3,10 @@
 **A direct farmer-to-buyer marketplace that removes intermediaries from the agricultural supply chain.**
 
 Farm To Table is a minimal web platform that allows farmers to list their produce directly and enables buyers to discover and transact with them without platform fees, commissions, or in-app payments.
-![homepage](/assets/Screenshot 2025-12-17 101852.png)
+
+## Screenshot
+
+![Homepage – minimal design](/assets/Screenshot%202025-12-17%20101852.png)
 
 ---
 
@@ -31,27 +34,27 @@ The platform does not process payments, handle logistics, or charge commissions.
 
 ### Farmer Features
 
-* Create and manage produce listings (price, quantity, image, UPI ID)
-* Edit or delete listings at any time
-* Mark listings as sold
-* View all listings in a dedicated dashboard
-* Public farmer profile visible to buyers
+- Create and manage produce listings (price, quantity, image, UPI ID)
+- Edit or delete listings at any time
+- Mark listings as sold
+- View all listings in a dedicated dashboard
+- Public farmer profile visible to buyers
 
 ### Buyer Features
 
-* Browse produce without mandatory login
-* Search and filter by crop name and price
-* View detailed product pages
-* Access farmer profiles with listing history
-* Get direct payment details for off-platform transactions
+- Browse produce without mandatory login
+- Search and filter by crop name and price
+- View detailed product pages
+- Access farmer profiles with listing history
+- Get direct payment details for off-platform transactions
 
 ### Platform Capabilities
 
-* Email/password authentication with role-based access
-* Firebase Authentication and Firestore backend
-* Responsive UI for desktop and mobile
-* Free-tier–friendly Base64 image storage
-* No commissions, no hidden charges
+- Email/password authentication with role-based access
+- Firebase Authentication and Firestore backend
+- Responsive UI for desktop and mobile
+- Free-tier–friendly Base64 image storage
+- No commissions, no hidden charges
 
 ---
 
@@ -59,27 +62,27 @@ The platform does not process payments, handle logistics, or charge commissions.
 
 This project follows a strict set of principles:
 
-* **Simplicity over scale**
+- **Simplicity over scale**
   Only features that support direct discovery and trust are included.
 
-* **Transparency over control**
+- **Transparency over control**
   Users always know who they are dealing with.
 
-* **Zero platform dependency**
+- **Zero platform dependency**
   The platform does not lock users into payments, messaging, or logistics.
 
-* **Free by design**
+- **Free by design**
   The platform does not monetize transactions.
 
 ---
 
 ## Technology Stack
 
-* **Frontend**: Next.js (App Router), React
-* **Backend**: Firebase (Firestore, Authentication)
-* **Styling**: CSS custom properties
-* **Image Handling**: Base64 encoding (≤ 500KB per image)
-* **Hosting**: Local development (deployment-ready)
+- **Frontend**: Next.js (App Router), React
+- **Backend**: Firebase (Firestore, Authentication)
+- **Styling**: CSS custom properties
+- **Image Handling**: Base64 encoding (≤ 500KB per image)
+- **Hosting**: Local development (deployment-ready)
 
 ---
 
@@ -87,13 +90,13 @@ This project follows a strict set of principles:
 
 This project is intentionally built as a focused MVP.
 
-* No in-app payments or order processing
-* No messaging system
-* No logistics or delivery tracking
-* No admin moderation panel
-* No real-world identity verification
-* Limited image size due to Firestore constraints
-* No notifications or alerts
+- No in-app payments or order processing
+- No messaging system
+- No logistics or delivery tracking
+- No admin moderation panel
+- No real-world identity verification
+- Limited image size due to Firestore constraints
+- No notifications or alerts
 
 These limitations are deliberate to keep the platform lightweight, understandable, and legally simple.
 
@@ -121,10 +124,10 @@ Use two browser sessions (or incognito mode): one as a farmer, one as a buyer.
 
 ### Key Takeaways
 
-* No platform fees
-* Direct farmer control
-* Clear trust signals
-* Clean, minimal UI
+- No platform fees
+- Direct farmer control
+- Clear trust signals
+- Clean, minimal UI
 
 ---
 
@@ -155,8 +158,8 @@ Use two browser sessions (or incognito mode): one as a farmer, one as a buyer.
 
 ### Prerequisites
 
-* Node.js 18+
-* Firebase account (free tier)
+- Node.js 18+
+- Firebase account (free tier)
 
 ### Installation
 
@@ -194,11 +197,11 @@ Open [http://localhost:3000](http://localhost:3000)
 
 If expanded toward production use:
 
-* Verified farmer onboarding
-* Post-transaction ratings and feedback
-* Location-based discovery
-* Multi-language support
-* SMS notifications for listings
+- Verified farmer onboarding
+- Post-transaction ratings and feedback
+- Location-based discovery
+- Multi-language support
+- SMS notifications for listings
 
 ---
 
@@ -213,4 +216,3 @@ Portfolio: [https://sanjanb.github.io/](https://sanjanb.github.io/)
 
 Farm To Table only connects buyers and farmers.
 All payments, communication, and deliveries occur directly between users.
-
