@@ -189,8 +189,9 @@ export default function HomePage() {
                   margin: 0,
                 }}
               >
-                The badge indicates the farmer submitted basic identity documentation
-                (e.g., ID proof or land records) reviewed by the platform admin.
+                The badge indicates the farmer submitted basic identity
+                documentation (e.g., ID proof or land records) reviewed by the
+                platform admin.
               </p>
             </div>
 
@@ -233,8 +234,8 @@ export default function HomePage() {
             }}
           >
             Verification is a basic trust signal, not a guarantee. Buyers should
-            communicate directly with farmers and assess listings carefully before
-            making any commitments.
+            communicate directly with farmers and assess listings carefully
+            before making any commitments.
           </p>
         </div>
       </section>
