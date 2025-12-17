@@ -25,8 +25,30 @@ export default function Footer() {
             marginBottom: "clamp(32px, 6vw, 48px)",
           }}
         >
-          {/* Column 1: Placeholder for Phase 2 */}
-          <div>{/* Identity section will be added in Phase 2 */}</div>
+          {/* Column 1: Identity */}
+          <div>
+            <h3
+              style={{
+                fontSize: 18,
+                fontWeight: 600,
+                color: "var(--color-text-primary)",
+                margin: "0 0 12px 0",
+              }}
+            >
+              Farm To Table
+            </h3>
+            <p
+              style={{
+                fontSize: 14,
+                color: "var(--color-text-secondary)",
+                margin: 0,
+                lineHeight: 1.6,
+              }}
+            >
+              Connecting farmers and buyers directly. No middlemen. No platform
+              fees.
+            </p>
+          </div>
 
           {/* Column 2: Placeholder for Phase 3 */}
           <div>{/* Navigation section will be added in Phase 3 */}</div>
