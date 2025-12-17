@@ -37,7 +37,8 @@ export default function HomePage() {
             lineHeight: 1.7,
           }}
         >
-          A minimal marketplace connecting buyers with verified farmers. No fees, no middlemen.
+          A minimal marketplace connecting buyers with verified farmers. No
+          fees, no middlemen.
         </p>
         <div
           style={{
