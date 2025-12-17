@@ -161,52 +161,69 @@ export default function HomePage() {
             borderLeft: "4px solid var(--color-primary)",
           }}
         >
-          <p
+          <div
             style={{
-              fontSize: 15,
-              color: "var(--color-text-primary)",
-              lineHeight: 1.7,
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
+              gap: "clamp(16px, 4vw, 24px)",
               marginBottom: 16,
             }}
           >
-            <strong>What does the "Verified Farmer" badge mean?</strong>
-          </p>
-          <p
-            style={{
-              fontSize: 14,
-              color: "var(--color-text-secondary)",
-              lineHeight: 1.7,
-              marginBottom: 16,
-            }}
-          >
-            The verification badge indicates that the farmer has submitted basic
-            identity documentation (such as ID proof or land ownership records)
-            which has been reviewed by the platform admin.
-          </p>
-          <p
-            style={{
-              fontSize: 15,
-              color: "var(--color-text-primary)",
-              lineHeight: 1.7,
-              marginBottom: 16,
-            }}
-          >
-            <strong>What verification does NOT guarantee:</strong>
-          </p>
-          <ul
-            style={{
-              fontSize: 14,
-              color: "var(--color-text-secondary)",
-              lineHeight: 1.7,
-              paddingLeft: 20,
-              marginBottom: 16,
-            }}
-          >
-            <li>Product quality or freshness</li>
-            <li>Delivery timing or reliability</li>
-            <li>Transaction success or payment security</li>
-            <li>Resolution of disputes</li>
-          </ul>
+            {/* Column: What it means */}
+            <div>
+              <p
+                style={{
+                  fontSize: 15,
+                  color: "var(--color-text-primary)",
+                  lineHeight: 1.7,
+                  marginBottom: 10,
+                }}
+              >
+                <strong>What the "Verified Farmer" badge means</strong>
+              </p>
+              <p
+                style={{
+                  fontSize: 14,
+                  color: "var(--color-text-secondary)",
+                  lineHeight: 1.7,
+                  margin: 0,
+                }}
+              >
+                The badge indicates the farmer submitted basic identity documentation
+                (e.g., ID proof or land records) reviewed by the platform admin.
+              </p>
+            </div>
+
+            {/* Column: Not guaranteed */}
+            <div>
+              <p
+                style={{
+                  fontSize: 15,
+                  color: "var(--color-text-primary)",
+                  lineHeight: 1.7,
+                  marginBottom: 10,
+                }}
+              >
+                <strong>What verification does NOT guarantee</strong>
+              </p>
+              <ul
+                style={{
+                  fontSize: 14,
+                  color: "var(--color-text-secondary)",
+                  lineHeight: 1.7,
+                  paddingLeft: 20,
+                  margin: 0,
+                }}
+              >
+                <li>Product quality or freshness</li>
+                <li>Delivery timing or reliability</li>
+                <li>Transaction success or payment security</li>
+                <li>Resolution of disputes</li>
+              </ul>
+            </div>
+          </div>
+
+          {/* Note */}
           <p
             style={{
               fontSize: 14,
@@ -215,9 +232,9 @@ export default function HomePage() {
               margin: 0,
             }}
           >
-            Verification is a basic trust signal, not a comprehensive guarantee.
-            Buyers should communicate directly with farmers and assess listings
-            carefully before making any commitments.
+            Verification is a basic trust signal, not a guarantee. Buyers should
+            communicate directly with farmers and assess listings carefully before
+            making any commitments.
           </p>
         </div>
       </section>
