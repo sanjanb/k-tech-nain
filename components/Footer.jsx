@@ -176,7 +176,14 @@ export default function Footer() {
                     fontSize: 14,
                     color: "var(--color-text-secondary)",
                     textDecoration: "none",
+                    transition: "color 0.2s",
                   }}
+                  onMouseEnter={(e) =>
+                    (e.target.style.color = "var(--color-text-primary)")
+                  }
+                  onMouseLeave={(e) =>
+                    (e.target.style.color = "var(--color-text-secondary)")
+                  }
                 >
                   How verification works
                 </Link>
@@ -188,7 +195,14 @@ export default function Footer() {
                     fontSize: 14,
                     color: "var(--color-text-secondary)",
                     textDecoration: "none",
+                    transition: "color 0.2s",
                   }}
+                  onMouseEnter={(e) =>
+                    (e.target.style.color = "var(--color-text-primary)")
+                  }
+                  onMouseLeave={(e) =>
+                    (e.target.style.color = "var(--color-text-secondary)")
+                  }
                 >
                   Disclaimer
                 </Link>
@@ -211,7 +225,14 @@ export default function Footer() {
                   fontSize: 14,
                   color: "var(--color-text-secondary)",
                   textDecoration: "none",
+                  transition: "color 0.2s",
                 }}
+                onMouseEnter={(e) =>
+                  (e.target.style.color = "var(--color-primary)")
+                }
+                onMouseLeave={(e) =>
+                  (e.target.style.color = "var(--color-text-secondary)")
+                }
               >
                 sanjanacharaya1234@gmail.com
               </a>
