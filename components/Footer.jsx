@@ -244,7 +244,7 @@ export default function Footer() {
                 (e.target.style.borderBottomColor = "transparent")
               }
             >
-              Sanjan Acharya
+              Sanjan B M
             </a>
           </p>
         </div>
