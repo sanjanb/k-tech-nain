@@ -261,7 +261,7 @@ export default function Footer() {
           </p>
         </div>
 
-        {/* Creator Credit */}
+        {/* Creator Credit & Copyright */}
         <div
           style={{
             paddingTop: 16,
@@ -272,7 +272,7 @@ export default function Footer() {
             style={{
               fontSize: 12,
               color: "#9CA3AF",
-              margin: 0,
+              margin: "0 0 8px 0",
             }}
           >
             Created by{" "}
@@ -295,6 +295,15 @@ export default function Footer() {
             >
               Sanjan B M
             </a>
+          </p>
+          <p
+            style={{
+              fontSize: 12,
+              color: "#9CA3AF",
+              margin: 0,
+            }}
+          >
+            © 2025 Farm To Table. All rights reserved.
           </p>
         </div>
       </div>
