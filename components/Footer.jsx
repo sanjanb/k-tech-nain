@@ -209,6 +209,43 @@ export default function Footer() {
             deliveries happen directly between them.
           </p>
         </div>
+
+        {/* Creator Credit */}
+        <div
+          style={{
+            paddingTop: 16,
+            textAlign: "center",
+          }}
+        >
+          <p
+            style={{
+              fontSize: 12,
+              color: "#9CA3AF",
+              margin: 0,
+            }}
+          >
+            Created by{" "}
+            <a
+              href="https://sanjanb.github.io/"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                color: "#9CA3AF",
+                textDecoration: "none",
+                borderBottom: "1px solid transparent",
+                transition: "border-color 0.2s",
+              }}
+              onMouseEnter={(e) =>
+                (e.target.style.borderBottomColor = "#9CA3AF")
+              }
+              onMouseLeave={(e) =>
+                (e.target.style.borderBottomColor = "transparent")
+              }
+            >
+              Sanjan Acharya
+            </a>
+          </p>
+        </div>
       </div>
     </footer>
   );
