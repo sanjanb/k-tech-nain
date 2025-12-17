@@ -104,12 +104,196 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 3. Light CTA */}
+      {/* 3. How Verification Works */}
+      <section
+        id="verification"
+        style={{
+          padding: "clamp(60px, 10vw, 100px) 20px",
+          maxWidth: 900,
+          margin: "0 auto",
+          background: "var(--color-white)",
+        }}
+      >
+        <h2
+          style={{
+            fontSize: "clamp(24px, 4vw, 36px)",
+            fontWeight: 600,
+            color: "var(--color-text-primary)",
+            textAlign: "center",
+            marginBottom: "clamp(24px, 4vw, 32px)",
+            letterSpacing: "-0.02em",
+          }}
+        >
+          How Verification Works
+        </h2>
+        <div
+          style={{
+            background: "#F9FAFB",
+            padding: "clamp(24px, 4vw, 32px)",
+            borderRadius: 8,
+            borderLeft: "4px solid var(--color-primary)",
+          }}
+        >
+          <p
+            style={{
+              fontSize: 15,
+              color: "var(--color-text-primary)",
+              lineHeight: 1.7,
+              marginBottom: 16,
+            }}
+          >
+            <strong>What does the "Verified Farmer" badge mean?</strong>
+          </p>
+          <p
+            style={{
+              fontSize: 14,
+              color: "var(--color-text-secondary)",
+              lineHeight: 1.7,
+              marginBottom: 16,
+            }}
+          >
+            The verification badge indicates that the farmer has submitted basic
+            identity documentation (such as ID proof or land ownership records)
+            which has been reviewed by the platform admin.
+          </p>
+          <p
+            style={{
+              fontSize: 15,
+              color: "var(--color-text-primary)",
+              lineHeight: 1.7,
+              marginBottom: 16,
+            }}
+          >
+            <strong>What verification does NOT guarantee:</strong>
+          </p>
+          <ul
+            style={{
+              fontSize: 14,
+              color: "var(--color-text-secondary)",
+              lineHeight: 1.7,
+              paddingLeft: 20,
+              marginBottom: 16,
+            }}
+          >
+            <li>Product quality or freshness</li>
+            <li>Delivery timing or reliability</li>
+            <li>Transaction success or payment security</li>
+            <li>Resolution of disputes</li>
+          </ul>
+          <p
+            style={{
+              fontSize: 14,
+              color: "var(--color-text-secondary)",
+              lineHeight: 1.7,
+              margin: 0,
+            }}
+          >
+            Verification is a basic trust signal, not a comprehensive guarantee.
+            Buyers should communicate directly with farmers and assess listings
+            carefully before making any commitments.
+          </p>
+        </div>
+      </section>
+
+      {/* 4. Disclaimer */}
+      <section
+        id="disclaimer"
+        style={{
+          padding: "clamp(60px, 10vw, 100px) 20px",
+          maxWidth: 900,
+          margin: "0 auto",
+          background: "var(--color-bg)",
+        }}
+      >
+        <h2
+          style={{
+            fontSize: "clamp(24px, 4vw, 36px)",
+            fontWeight: 600,
+            color: "var(--color-text-primary)",
+            textAlign: "center",
+            marginBottom: "clamp(24px, 4vw, 32px)",
+            letterSpacing: "-0.02em",
+          }}
+        >
+          Platform Disclaimer
+        </h2>
+        <div
+          style={{
+            background: "var(--color-white)",
+            padding: "clamp(24px, 4vw, 32px)",
+            borderRadius: 8,
+            border: "1px solid #E5E7EB",
+          }}
+        >
+          <p
+            style={{
+              fontSize: 15,
+              color: "var(--color-text-primary)",
+              lineHeight: 1.7,
+              marginBottom: 16,
+            }}
+          >
+            <strong>Farm To Table is a connection platform only.</strong>
+          </p>
+          <p
+            style={{
+              fontSize: 14,
+              color: "var(--color-text-secondary)",
+              lineHeight: 1.7,
+              marginBottom: 16,
+            }}
+          >
+            We provide a space where farmers can list their produce and buyers
+            can browse listings. All transactions, payments, and deliveries
+            happen directly between buyers and farmers.
+          </p>
+          <p
+            style={{
+              fontSize: 15,
+              color: "var(--color-text-primary)",
+              lineHeight: 1.7,
+              marginBottom: 16,
+            }}
+          >
+            <strong>What we do NOT do:</strong>
+          </p>
+          <ul
+            style={{
+              fontSize: 14,
+              color: "var(--color-text-secondary)",
+              lineHeight: 1.7,
+              paddingLeft: 20,
+              marginBottom: 16,
+            }}
+          >
+            <li>Process payments or handle money</li>
+            <li>Arrange or manage deliveries</li>
+            <li>Store or handle produce</li>
+            <li>Mediate disputes between buyers and farmers</li>
+            <li>Guarantee product quality or delivery</li>
+          </ul>
+          <p
+            style={{
+              fontSize: 14,
+              color: "var(--color-text-secondary)",
+              lineHeight: 1.7,
+              margin: 0,
+            }}
+          >
+            By using this platform, you acknowledge that all agreements,
+            transactions, and communications are your own responsibility. We
+            encourage clear communication and careful verification before any
+            transaction.
+          </p>
+        </div>
+      </section>
+
+      {/* 5. Light CTA */}
       <section
         style={{
           padding: "clamp(60px, 10vw, 100px) 20px clamp(80px, 12vw, 120px)",
           textAlign: "center",
-          background: "var(--color-bg)",
+          background: "var(--color-white)",
         }}
       >
         <p
