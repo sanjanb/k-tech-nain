@@ -188,6 +188,27 @@ export default function Footer() {
             </div>
           </div>
         </div>
+
+        {/* Disclaimer */}
+        <div
+          style={{
+            paddingTop: "clamp(24px, 4vw, 32px)",
+            borderTop: "1px solid #E5E7EB",
+          }}
+        >
+          <p
+            style={{
+              fontSize: 13,
+              color: "#6B7280",
+              margin: 0,
+              lineHeight: 1.6,
+              textAlign: "center",
+            }}
+          >
+            Farm To Table only connects buyers and farmers. All transactions
+            and deliveries happen directly between them.
+          </p>
+        </div>
       </div>
     </footer>
   );
