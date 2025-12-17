@@ -3,7 +3,7 @@
 **A direct farmer-to-buyer marketplace that removes intermediaries from the agricultural supply chain.**
 
 Farm To Table is a minimal web platform that allows farmers to list their produce directly and enables buyers to discover and transact with them without platform fees, commissions, or in-app payments.
-[homepage]()
+![homepage](/assets/Screenshot 2025-12-17 101852.png)
 
 ---
 
