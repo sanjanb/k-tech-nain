@@ -226,7 +226,8 @@ export default function BrowsePage() {
               style={inputStyle}
             />
           </div>
-          Category Filter */}
+
+          {/* Category Filter */}
           <div>
             <label
               style={{
