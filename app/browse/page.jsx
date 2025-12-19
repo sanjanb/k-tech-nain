@@ -556,19 +556,22 @@ const cardStyle = {
 
 const inputStyle = {
   width: "100%",
-  padding: "8px 12px",
+  padding: "12px 14px",
   border: "1px solid #E5E7EB",
   borderRadius: 6,
-  fontSize: 14,
+  fontSize: 16,
   color: "var(--color-text-primary)",
+  minHeight: 44,
 };
 
 const paginationButtonStyle = {
-  padding: "8px 16px",
+  padding: "12px 20px",
   background: "var(--color-primary)",
   color: "var(--color-white)",
   border: "none",
   borderRadius: 6,
-  fontSize: 14,
+  fontSize: 16,
   fontWeight: 500,
+  minHeight: 44,
+  cursor: "pointer",
 };

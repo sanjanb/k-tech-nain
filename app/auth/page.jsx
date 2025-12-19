@@ -238,12 +238,15 @@ export default function AuthPage() {
           disabled={loading}
           style={{
             width: "100%",
-            padding: "10px 12px",
+            padding: "14px 12px",
             background: "#2E7D32",
             color: "#FFFFFF",
             border: "none",
             borderRadius: 6,
             cursor: "pointer",
+            fontSize: 16,
+            fontWeight: 500,
+            minHeight: 48,
           }}
         >
           {loading

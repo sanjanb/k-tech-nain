@@ -76,16 +76,11 @@ export default function Footer() {
                   href="/browse"
                   style={{
                     fontSize: 14,
-                    color: "var(--color-text-secondary)",
+                    color: "var(--color-text-primary)",
                     textDecoration: "none",
-                    transition: "color 0.2s",
+                    display: "block",
+                    padding: "8px 0",
                   }}
-                  onMouseEnter={(e) =>
-                    (e.target.style.color = "var(--color-text-primary)")
-                  }
-                  onMouseLeave={(e) =>
-                    (e.target.style.color = "var(--color-text-secondary)")
-                  }
                 >
                   Browse Produce
                 </Link>
@@ -95,16 +90,11 @@ export default function Footer() {
                   href="/auth"
                   style={{
                     fontSize: 14,
-                    color: "var(--color-text-secondary)",
+                    color: "var(--color-text-primary)",
                     textDecoration: "none",
-                    transition: "color 0.2s",
+                    display: "block",
+                    padding: "8px 0",
                   }}
-                  onMouseEnter={(e) =>
-                    (e.target.style.color = "var(--color-text-primary)")
-                  }
-                  onMouseLeave={(e) =>
-                    (e.target.style.color = "var(--color-text-secondary)")
-                  }
                 >
                   Farmer Login
                 </Link>
@@ -114,16 +104,11 @@ export default function Footer() {
                   href="/profile"
                   style={{
                     fontSize: 14,
-                    color: "var(--color-text-secondary)",
+                    color: "var(--color-text-primary)",
                     textDecoration: "none",
-                    transition: "color 0.2s",
+                    display: "block",
+                    padding: "8px 0",
                   }}
-                  onMouseEnter={(e) =>
-                    (e.target.style.color = "var(--color-text-primary)")
-                  }
-                  onMouseLeave={(e) =>
-                    (e.target.style.color = "var(--color-text-secondary)")
-                  }
                 >
                   Profile
                 </Link>
@@ -133,16 +118,11 @@ export default function Footer() {
                   href="/"
                   style={{
                     fontSize: 14,
-                    color: "var(--color-text-secondary)",
+                    color: "var(--color-text-primary)",
                     textDecoration: "none",
-                    transition: "color 0.2s",
+                    display: "block",
+                    padding: "8px 0",
                   }}
-                  onMouseEnter={(e) =>
-                    (e.target.style.color = "var(--color-text-primary)")
-                  }
-                  onMouseLeave={(e) =>
-                    (e.target.style.color = "var(--color-text-secondary)")
-                  }
                 >
                   About
                 </Link>
@@ -174,16 +154,11 @@ export default function Footer() {
                   href="/terms"
                   style={{
                     fontSize: 14,
-                    color: "var(--color-text-secondary)",
+                    color: "var(--color-text-primary)",
                     textDecoration: "none",
-                    transition: "color 0.2s",
+                    display: "block",
+                    padding: "8px 0",
                   }}
-                  onMouseEnter={(e) =>
-                    (e.target.style.color = "var(--color-text-primary)")
-                  }
-                  onMouseLeave={(e) =>
-                    (e.target.style.color = "var(--color-text-secondary)")
-                  }
                 >
                   Terms of Service
                 </Link>
@@ -193,16 +168,11 @@ export default function Footer() {
                   href="/privacy"
                   style={{
                     fontSize: 14,
-                    color: "var(--color-text-secondary)",
+                    color: "var(--color-text-primary)",
                     textDecoration: "none",
-                    transition: "color 0.2s",
+                    display: "block",
+                    padding: "8px 0",
                   }}
-                  onMouseEnter={(e) =>
-                    (e.target.style.color = "var(--color-text-primary)")
-                  }
-                  onMouseLeave={(e) =>
-                    (e.target.style.color = "var(--color-text-secondary)")
-                  }
                 >
                   Privacy Policy
                 </Link>
@@ -212,16 +182,11 @@ export default function Footer() {
                   href="/#verification"
                   style={{
                     fontSize: 14,
-                    color: "var(--color-text-secondary)",
+                    color: "var(--color-text-primary)",
                     textDecoration: "none",
-                    transition: "color 0.2s",
+                    display: "block",
+                    padding: "8px 0",
                   }}
-                  onMouseEnter={(e) =>
-                    (e.target.style.color = "var(--color-text-primary)")
-                  }
-                  onMouseLeave={(e) =>
-                    (e.target.style.color = "var(--color-text-secondary)")
-                  }
                 >
                   How verification works
                 </Link>
@@ -231,16 +196,11 @@ export default function Footer() {
                   href="/#disclaimer"
                   style={{
                     fontSize: 14,
-                    color: "var(--color-text-secondary)",
+                    color: "var(--color-text-primary)",
                     textDecoration: "none",
-                    transition: "color 0.2s",
+                    display: "block",
+                    padding: "8px 0",
                   }}
-                  onMouseEnter={(e) =>
-                    (e.target.style.color = "var(--color-text-primary)")
-                  }
-                  onMouseLeave={(e) =>
-                    (e.target.style.color = "var(--color-text-secondary)")
-                  }
                 >
                   Disclaimer
                 </Link>

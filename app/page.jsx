@@ -377,19 +377,22 @@ export default function HomePage() {
 }
 
 const buttonStyle = {
-  display: "inline-block",
-  padding: "14px 32px",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  padding: "16px 32px",
   background: "var(--color-primary)",
   color: "var(--color-white)",
   textDecoration: "none",
   borderRadius: 8,
   fontSize: 16,
   fontWeight: 500,
+  minHeight: 48,
 };
 
 const secondaryButtonStyle = {
   display: "inline-block",
-  padding: "14px 32px",
+  padding: "16px 32px",
   background: "transparent",
   color: "var(--color-primary)",
   textDecoration: "none",
@@ -397,6 +400,10 @@ const secondaryButtonStyle = {
   borderRadius: 8,
   fontSize: 16,
   fontWeight: 500,
+  minHeight: 48,
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
 };
 
 const stepStyle = {
