@@ -232,7 +232,7 @@ export default function Footer() {
                   (e.target.style.color = "var(--color-text-secondary)")
                 }
               >
-                sanjanacharaya1234@gmail.com
+                anupamashetter@gmail.com
               </a>
             </div>
           </div>
