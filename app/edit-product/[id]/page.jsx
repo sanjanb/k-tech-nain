@@ -18,8 +18,18 @@ export default function EditProductPage() {
   const [error, setError] = useState("");
 
   const [cropName, setCropName] = useState("");
+  const [category, setCategory] = useState("Vegetables");
   const [price, setPrice] = useState("");
   const [quantity, setQuantity] = useState("");
+
+  const categories = [
+    "Vegetables",
+    "Fruits",
+    "Grains",
+    "Dairy",
+    "Spices",
+    "Others",
+  ];
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
@@ -49,6 +59,7 @@ export default function EditProductPage() {
 
         // Pre-fill form
         setCropName(productData.cropName || "");
+        setCategory(productData.category || "Vegetables");
         setPrice(productData.price?.toString() || "");
         setQuantity(productData.quantity || "");
 
@@ -72,6 +83,7 @@ export default function EditProductPage() {
       const productRef = doc(db, "products", productId);
 
       await updateDoc(productRef, {
+        category,
         cropName,
         price: parseFloat(price),
         quantity,
