@@ -226,7 +226,7 @@ export default function BrowsePage() {
               style={inputStyle}
             />
           </div>
-Category Filter */}
+          Category Filter */}
           <div>
             <label
               style={{
@@ -251,7 +251,6 @@ Category Filter */}
               ))}
             </select>
           </div>
-
           {/* 
           {/* Min Price */}
           <div>
@@ -274,7 +273,6 @@ Category Filter */}
               style={inputStyle}
             />
           </div>
-
           {/* Max Price */}
           <div>
             <label
@@ -296,7 +294,6 @@ Category Filter */}
               style={inputStyle}
             />
           </div>
-
           {/* Sort By */}
           <div>
             <label
