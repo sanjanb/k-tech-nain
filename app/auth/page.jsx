@@ -15,6 +15,7 @@ export default function AuthPage() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
   const [role, setRole] = useState("buyer"); // 'farmer' | 'buyer'
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -36,6 +37,7 @@ export default function AuthPage() {
           uid,
           name: name.trim(),
           email: cred.user.email,
+          phoneNumber: phoneNumber.trim() || null,
           role,
           createdAt: new Date(),
           isVerified: false,
@@ -96,25 +98,46 @@ export default function AuthPage() {
           {mode === "login" ? "Login" : "Register"}
         </h1>
 
-        {mode === "register" && (
-          <div style={{ marginBottom: 12 }}>
-            <label
-              style={{ display: "block", marginBottom: 6, color: "#6B7280" }}
-            >
-              Name
-            </label>
-            <input
-              type="text"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              required
-              style={{
-                width: "100%",
-                padding: "10px 12px",
-                border: "1px solid #E5E7EB",
-                borderRadius: 6,
-              }}
-            />
+        {mo>
+            <div style={{ marginBottom: 12 }}>
+              <label
+                style={{ display: "block", marginBottom: 6, color: "#6B7280" }}
+              >
+                Name
+              </label>
+              <input
+                type="text"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                required
+                style={{
+                  width: "100%",
+                  padding: "10px 12px",
+                  border: "1px solid #E5E7EB",
+                  borderRadius: 6,
+                }}
+              />
+            </div>
+            <div style={{ marginBottom: 12 }}>
+              <label
+                style={{ display: "block", marginBottom: 6, color: "#6B7280" }}
+              >
+                Phone Number (Optional)
+              </label>
+              <input
+                type="tel"
+                value={phoneNumber}
+                onChange={(e) => setPhoneNumber(e.target.value)}
+                placeholder="+91 9876543210"
+                style={{
+                  width: "100%",
+                  padding: "10px 12px",
+                  border: "1px solid #E5E7EB",
+                  borderRadius: 6,
+                }}
+              />
+            </div>
+          </
           </div>
         )}
 

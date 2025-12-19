@@ -26,6 +26,9 @@ export default function ProfilePage() {
   const [loading, setLoading] = useState(true);
   const [deals, setDeals] = useState([]);
   const [products, setProducts] = useState([]);
+  const [isEditing, setIsEditing] = useState(false);
+  const [editPhone, setEditPhone] = useState("");
+  const [saving, setSaving] = useState(false);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
