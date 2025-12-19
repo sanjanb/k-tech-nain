@@ -88,7 +88,7 @@ export default function Navigation() {
         </Link>
 
         {/* Desktop Navigation */}
-        <div style={desktopNavStyle}>
+        <div className="desktop-nav" style={desktopNavStyle}>
           <Link href="/" style={linkStyle}>
             Home
           </Link>
@@ -166,6 +166,7 @@ export default function Navigation() {
         {/* Mobile Burger Menu Button */}
         <button
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          className="mobile-burger"
           style={burgerButtonStyle}
           aria-label="Toggle menu"
         >
@@ -177,7 +178,7 @@ export default function Navigation() {
 
       {/* Mobile Menu Dropdown */}
       {mobileMenuOpen && (
-        <div style={mobileMenuStyle}>
+        <div className="mobile-menu" style={mobileMenuStyle}>
           <Link
             href="/"
             style={mobileLinkStyle}
@@ -262,6 +263,8 @@ const desktopNavStyle = {
   alignItems: "center",
 };
 
+// CSS class will handle responsive display via media queries
+
 const linkStyle = {
   color: "var(--color-text-primary)",
   textDecoration: "none",
@@ -336,7 +339,6 @@ const dropdownButtonStyle = {
 };
 
 const burgerButtonStyle = {
-  display: "none",
   flexDirection: "column",
   gap: 5,
   background: "transparent",
@@ -357,7 +359,7 @@ const burgerLineStyle = {
 };
 
 const mobileMenuStyle = {
-  display: "none",
+  display: "flex",
   flexDirection: "column",
   gap: 12,
   padding: "16px 0",

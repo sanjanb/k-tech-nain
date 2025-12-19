@@ -25,25 +25,35 @@ body {
 
 /* Mobile Navigation Styles */
 @media (max-width: 768px) {
-  nav div[style*="display: flex"][style*="gap: 20"] {
+  /* Hide desktop navigation on mobile */
+  .desktop-nav {
     display: none !important;
   }
 
-  nav button[aria-label="Toggle menu"] {
+  /* Show burger button on mobile */
+  .mobile-burger {
     display: flex !important;
   }
 
-  nav div[style*="flexDirection: column"][style*="borderTop"] {
+  /* Mobile menu visible when open (controlled by React state) */
+  .mobile-menu {
     display: flex !important;
   }
 }
 
 @media (min-width: 769px) {
-  nav button[aria-label="Toggle menu"] {
+  /* Show desktop navigation on desktop */
+  .desktop-nav {
+    display: flex !important;
+  }
+
+  /* Hide burger button on desktop */
+  .mobile-burger {
     display: none !important;
   }
 
-  nav div[style*="flexDirection: column"][style*="borderTop"] {
+  /* Hide mobile menu on desktop */
+  .mobile-menu {
     display: none !important;
   }
 }
