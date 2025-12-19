@@ -423,8 +423,10 @@ const stepTextStyle = {
 const chipStyle = {
   display: "inline-block",
   padding: "8px 12px",
-  background: "#F3F4F6",
-  color: "var(--color-text-primary)",
+  background: "transparent",
+  color: "var(--color-primary)",
+  border: "2px solid var(--color-primary)",
   borderRadius: 9999,
   fontSize: 13,
+  fontWeight: 600,
 };
