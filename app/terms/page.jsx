@@ -95,9 +95,7 @@ export default function TermsPage() {
           <h2 style={{ fontSize: 24, fontWeight: 600, marginBottom: 16 }}>
             3. Platform Limitations
           </h2>
-          <p>
-            Farm To Table explicitly does NOT provide:
-          </p>
+          <p>Farm To Table explicitly does NOT provide:</p>
           <ul style={{ marginLeft: 20 }}>
             <li>Payment processing or escrow services</li>
             <li>Quality assurance or product verification</li>
