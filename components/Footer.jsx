@@ -218,7 +218,7 @@ export default function Footer() {
                 Contact
               </p>
               <a
-                href="mailto:sanjanacharaya1234@gmail.com"
+                href="mailto:anupamashetter@gmail.com"
                 style={{
                   fontSize: 14,
                   color: "var(--color-text-secondary)",

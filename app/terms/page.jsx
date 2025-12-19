@@ -202,7 +202,7 @@ export default function TermsPage() {
           </h2>
           <p>
             For questions about these terms, contact us at:
-            admin@farmtotable.com
+            anupamashetter@gmail.com
           </p>
         </section>
 

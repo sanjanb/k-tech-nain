@@ -690,7 +690,7 @@ These limitations are intentional to:
 
 For platform issues, technical problems, or general inquiries:
 
-- Contact admin at: `admin@farmtotable.com`
+- Contact admin at: `anupamashetter@gmail.com`
 - Platform is community-driven and fee-free
 - Support is best-effort based on availability
 

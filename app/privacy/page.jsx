@@ -214,7 +214,7 @@ export default function PrivacyPage() {
           </p>
           <p>
             <strong>Account Deletion:</strong> To delete your account, contact
-            us at admin@farmtotable.com. Note that some information may be
+            us at anupamashetter@gmail.com. Note that some information may be
             retained for legitimate business purposes or legal compliance.
           </p>
           <p>
