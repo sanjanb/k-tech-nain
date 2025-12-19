@@ -150,7 +150,7 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Column 3: Transparency & Contact */}
+          {/* Column 3: Legal & Contact */}
           <div>
             <h3
               style={{
@@ -160,7 +160,7 @@ export default function Footer() {
                 margin: "0 0 12px 0",
               }}
             >
-              Transparency
+              Legal
             </h3>
             <ul
               style={{
@@ -169,6 +169,44 @@ export default function Footer() {
                 margin: "0 0 16px 0",
               }}
             >
+              <li style={{ marginBottom: 8 }}>
+                <Link
+                  href="/terms"
+                  style={{
+                    fontSize: 14,
+                    color: "var(--color-text-secondary)",
+                    textDecoration: "none",
+                    transition: "color 0.2s",
+                  }}
+                  onMouseEnter={(e) =>
+                    (e.target.style.color = "var(--color-text-primary)")
+                  }
+                  onMouseLeave={(e) =>
+                    (e.target.style.color = "var(--color-text-secondary)")
+                  }
+                >
+                  Terms of Service
+                </Link>
+              </li>
+              <li style={{ marginBottom: 8 }}>
+                <Link
+                  href="/privacy"
+                  style={{
+                    fontSize: 14,
+                    color: "var(--color-text-secondary)",
+                    textDecoration: "none",
+                    transition: "color 0.2s",
+                  }}
+                  onMouseEnter={(e) =>
+                    (e.target.style.color = "var(--color-text-primary)")
+                  }
+                  onMouseLeave={(e) =>
+                    (e.target.style.color = "var(--color-text-secondary)")
+                  }
+                >
+                  Privacy Policy
+                </Link>
+              </li>
               <li style={{ marginBottom: 8 }}>
                 <Link
                   href="/#verification"
