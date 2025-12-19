@@ -22,10 +22,20 @@ export default function AddProductPage() {
   const [error, setError] = useState("");
 
   const [cropName, setCropName] = useState("");
+  const [category, setCategory] = useState("Vegetables");
   const [price, setPrice] = useState("");
   const [quantity, setQuantity] = useState("");
   const [upiId, setUpiId] = useState("");
   const [image, setImage] = useState(null);
+
+  const categories = [
+    "Vegetables",
+    "Fruits",
+    "Grains",
+    "Dairy",
+    "Spices",
+    "Others",
+  ];
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
@@ -89,6 +99,7 @@ export default function AddProductPage() {
       console.log("Saving product to Firestore...");
       const productData = {
         cropName,
+        category,
         price: parseFloat(price),
         quantity,
         upiId,
