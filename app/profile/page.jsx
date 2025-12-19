@@ -7,6 +7,7 @@ import { onAuthStateChanged } from "firebase/auth";
 import {
   doc,
   getDoc,
+  updateDoc,
   collection,
   query,
   where,
@@ -43,7 +44,8 @@ export default function ProfilePage() {
         // Fetch user profile data
         const userDoc = await getDoc(doc(db, "users", currentUser.uid));
         if (userDoc.exists()) {
-          const data = userDoc.data();
+          const data = userD
+          setEditPhone(data.phoneNumber || "");oc.data();
           setUserData(data);
 
           // Fetch deals based on role
@@ -88,7 +90,25 @@ export default function ProfilePage() {
 
     return () => unsubscribe();
   }, [router]);
+const handleSavePhone = async () => {
+    if (!user) return;
+    setSaving(true);
+    try {
+      await updateDoc(doc(db, "users", user.uid), {
+        phoneNumber: editPhone.trim() || null,
+      });
+      setUserData({ ...userData, phoneNumber: editPhone.trim() || null });
+      setIsEditing(false);
+      alert("Phone number updated successfully!");
+    } catch (error) {
+      console.error("Error updating phone:", error);
+      alert("Failed to update phone number");
+    } finally {
+      setSaving(false);
+    }
+  };
 
+  
   if (loading) {
     return (
       <div
@@ -374,7 +394,77 @@ export default function ProfilePage() {
           border: "1px solid #E5E7EB",
           borderRadius: 8,
         }}
-      >
+      >div style={{ marginBottom: 8 }}>
+            <strong>Phone Number:</strong>{" "}
+            {!isEditing ? (
+              <>
+                <span>{userData.phoneNumber || "Not provided"}</span>
+                <button
+                  onClick={() => setIsEditing(true)}
+                  style={{
+                    marginLeft: 12,
+                    padding: "4px 12px",
+                    fontSize: 12,
+                    background: "var(--color-primary)",
+                    color: "white",
+                    border: "none",
+                    borderRadius: 4,
+                    cursor: "pointer",
+                  }}
+                >
+                  Edit
+                </button>
+              </>
+            ) : (
+              <div style={{ marginTop: 8, display: "flex", gap: 8 }}>
+                <input
+                  type="tel"
+                  value={editPhone}
+                  onChange={(e) => setEditPhone(e.target.value)}
+                  placeholder="+91 9876543210"
+                  style={{
+                    padding: "6px 10px",
+                    border: "1px solid #E5E7EB",
+                    borderRadius: 4,
+                    flex: 1,
+                  }}
+                />
+                <button
+                  onClick={handleSavePhone}
+                  disabled={saving}
+                  style={{
+                    padding: "6px 16px",
+                    fontSize: 12,
+                    background: "var(--color-primary)",
+                    color: "white",
+                    border: "none",
+                    borderRadius: 4,
+                    cursor: "pointer",
+                  }}
+                >
+                  {saving ? "Saving..." : "Save"}
+                </button>
+                <button
+                  onClick={() => {
+                    setIsEditing(false);
+                    setEditPhone(userData.phoneNumber || "");
+                  }}
+                  style={{
+                    padding: "6px 16px",
+                    fontSize: 12,
+                    background: "#6B7280",
+                    color: "white",
+                    border: "none",
+                    borderRadius: 4,
+                    cursor: "pointer",
+                  }}
+                >
+                  Cancel
+                </button>
+              </div>
+            )}
+          </div>
+          <
         <h2
           style={{
             fontSize: 18,
