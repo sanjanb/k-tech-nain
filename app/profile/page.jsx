@@ -394,7 +394,26 @@ const handleSavePhone = async () => {
           border: "1px solid #E5E7EB",
           borderRadius: 8,
         }}
-      >div style={{ marginBottom: 8 }}>
+      >
+        <h2
+          style={{
+            fontSize: 18,
+            fontWeight: 600,
+            color: "var(--color-text-primary)",
+            marginBottom: 12,
+          }}
+        >
+          Account Information
+        </h2>
+        <div style={{ fontSize: 14, color: "var(--color-text-secondary)" }}>
+          <p style={{ marginBottom: 8 }}>
+            <strong>Email:</strong> {userData.email}
+          </p>
+          <p style={{ marginBottom: 8 }}>
+            <strong>Role:</strong>{" "}
+            {userData.role === "farmer" ? "Farmer" : "Buyer"}
+          </p>
+          <div style={{ marginBottom: 8 }}>
             <strong>Phone Number:</strong>{" "}
             {!isEditing ? (
               <>
@@ -445,26 +464,7 @@ const handleSavePhone = async () => {
                   {saving ? "Saving..." : "Save"}
                 </button>
                 <button
-                  onClick={() => {
-                    setIsEditing(false);
-                    setEditPhone(userData.phoneNumber || "");
-                  }}
-                  style={{
-                    padding: "6px 16px",
-                    fontSize: 12,
-                    background: "#6B7280",
-                    color: "white",
-                    border: "none",
-                    borderRadius: 4,
-                    cursor: "pointer",
-                  }}
-                >
-                  Cancel
-                </button>
-              </div>
-            )}
-          </div>
-          <
+           
         <h2
           style={{
             fontSize: 18,
