@@ -13,9 +13,20 @@ export default function BrowsePage() {
 
   // Filter & Sort states
   const [searchQuery, setSearchQuery] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("All");
   const [minPrice, setMinPrice] = useState("");
   const [maxPrice, setMaxPrice] = useState("");
   const [sortBy, setSortBy] = useState("newest");
+
+  const categories = [
+    "All",
+    "Vegetables",
+    "Fruits",
+    "Grains",
+    "Dairy",
+    "Spices",
+    "Others",
+  ];
 
   // Pagination states
   const [currentPage, setCurrentPage] = useState(1);
@@ -69,6 +80,7 @@ export default function BrowsePage() {
 
   // Apply filters and sorting whenever inputs change
   useEffect(() => {
+    setCurrentPage(1); // Reset to first page when filters change
     let filtered = [...allProducts];
 
     // Filter out sold products (buyers should only see available products)
@@ -80,6 +92,13 @@ export default function BrowsePage() {
     if (searchQuery) {
       filtered = filtered.filter((product) =>
         product.cropName.toLowerCase().includes(searchQuery.toLowerCase())
+      );
+    }
+
+    // Category filter
+    if (selectedCategory && selectedCategory !== "All") {
+      filtered = filtered.filter(
+        (product) => product.category === selectedCategory
       );
     }
 
@@ -207,7 +226,33 @@ export default function BrowsePage() {
               style={inputStyle}
             />
           </div>
+Category Filter */}
+          <div>
+            <label
+              style={{
+                display: "block",
+                fontSize: 14,
+                fontWeight: 500,
+                marginBottom: 6,
+                color: "var(--color-text-primary)",
+              }}
+            >
+              Category
+            </label>
+            <select
+              value={selectedCategory}
+              onChange={(e) => setSelectedCategory(e.target.value)}
+              style={inputStyle}
+            >
+              {categories.map((cat) => (
+                <option key={cat} value={cat}>
+                  {cat}
+                </option>
+              ))}
+            </select>
+          </div>
 
+          {/* 
           {/* Min Price */}
           <div>
             <label
