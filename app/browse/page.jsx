@@ -369,7 +369,14 @@ export default function BrowsePage() {
                         </span>
                       )}
                     </div>
-                    <div style={{ display: "flex", gap: 8, marginBottom: 8, flexWrap: "wrap" }}>
+                    <div
+                      style={{
+                        display: "flex",
+                        gap: 8,
+                        marginBottom: 8,
+                        flexWrap: "wrap",
+                      }}
+                    >
                       {product.category && (
                         <span
                           style={{
