@@ -138,8 +138,7 @@ export default function AuthPage() {
                 }}
               />
             </div>
-          </
-          </div>
+          </>
         )}
 
         <div style={{ marginBottom: 12 }}>
