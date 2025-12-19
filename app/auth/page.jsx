@@ -98,7 +98,8 @@ export default function AuthPage() {
           {mode === "login" ? "Login" : "Register"}
         </h1>
 
-        {mo>
+        {mode === "register" && (
+          <>
             <div style={{ marginBottom: 12 }}>
               <label
                 style={{ display: "block", marginBottom: 6, color: "#6B7280" }}
