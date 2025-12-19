@@ -276,7 +276,15 @@ export default function FarmerProfilePage() {
           </div>
         )}
 
-        {/* Phone if available */}
+        {/* Phone Number if available */}
+        {farmer.phoneNumber && (
+          <div style={infoRowStyle}>
+            <span style={labelStyle}>Phone Number</span>
+            <span style={valueStyle}>{farmer.phoneNumber}</span>
+          </div>
+        )}
+
+        {/* Legacy Phone field */}
         {farmer.phone && (
           <div style={infoRowStyle}>
             <span style={labelStyle}>Phone</span>
