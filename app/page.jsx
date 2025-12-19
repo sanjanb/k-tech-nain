@@ -391,7 +391,9 @@ const buttonStyle = {
 };
 
 const secondaryButtonStyle = {
-  display: "inline-block",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
   padding: "16px 32px",
   background: "transparent",
   color: "var(--color-primary)",
@@ -401,9 +403,6 @@ const secondaryButtonStyle = {
   fontSize: 16,
   fontWeight: 500,
   minHeight: 48,
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
 };
 
 const stepStyle = {
