@@ -369,7 +369,37 @@ export default function BrowsePage() {
                         </span>
                       )}
                     </div>
-                    {product.farmerVerified && (
+                    <div style={{ display: "flex", gap: 8, marginBottom: 8, flexWrap: "wrap" }}>
+                      {product.category && (
+                        <span
+                          style={{
+                            fontSize: 11,
+                            fontWeight: 500,
+                            padding: "3px 8px",
+                            borderRadius: 4,
+                            background: "#EFF6FF",
+                            color: "#1E40AF",
+                          }}
+                        >
+                          {product.category}
+                        </span>
+                      )}
+                      {product.farmerVerified && (
+                        <span
+                          style={{
+                            fontSize: 11,
+                            fontWeight: 500,
+                            padding: "3px 8px",
+                            borderRadius: 4,
+                            background: "#D1FAE5",
+                            color: "#065F46",
+                          }}
+                        >
+                          ✓ Verified
+                        </span>
+                      )}
+                    </div>
+                    {false && product.farmerVerified && (
                       <div style={{ marginBottom: 8 }}>
                         <span
                           style={{
