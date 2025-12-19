@@ -44,8 +44,9 @@ export default function ProfilePage() {
         // Fetch user profile data
         const userDoc = await getDoc(doc(db, "users", currentUser.uid));
         if (userDoc.exists()) {
-          const data = userD
-          setEditPhone(data.phoneNumber || "");oc.data();
+          const data = userD;
+          setEditPhone(data.phoneNumber || "");
+          oc.data();
           setUserData(data);
 
           // Fetch deals based on role
@@ -90,7 +91,7 @@ export default function ProfilePage() {
 
     return () => unsubscribe();
   }, [router]);
-const handleSavePhone = async () => {
+  const handleSavePhone = async () => {
     if (!user) return;
     setSaving(true);
     try {
@@ -108,7 +109,6 @@ const handleSavePhone = async () => {
     }
   };
 
-  
   if (loading) {
     return (
       <div
