@@ -421,13 +421,14 @@ export default function ProfilePage() {
                   onClick={() => setIsEditing(true)}
                   style={{
                     marginLeft: 12,
-                    padding: "4px 12px",
-                    fontSize: 12,
+                    padding: "10px 16px",
+                    fontSize: 14,
                     background: "var(--color-primary)",
                     color: "white",
                     border: "none",
                     borderRadius: 4,
                     cursor: "pointer",
+                    minHeight: 44,
                   }}
                 >
                   Edit
@@ -441,23 +442,26 @@ export default function ProfilePage() {
                   onChange={(e) => setEditPhone(e.target.value)}
                   placeholder="+91 9876543210"
                   style={{
-                    padding: "6px 10px",
+                    padding: "12px 14px",
                     border: "1px solid #E5E7EB",
                     borderRadius: 4,
                     flex: 1,
+                    fontSize: 16,
+                    minHeight: 44,
                   }}
                 />
                 <button
                   onClick={handleSavePhone}
                   disabled={saving}
                   style={{
-                    padding: "6px 16px",
-                    fontSize: 12,
+                    padding: "12px 20px",
+                    fontSize: 14,
                     background: "var(--color-primary)",
                     color: "white",
                     border: "none",
                     borderRadius: 4,
                     cursor: "pointer",
+                    minHeight: 44,
                   }}
                 >
                   {saving ? "Saving..." : "Save"}
@@ -468,13 +472,14 @@ export default function ProfilePage() {
                     setEditPhone(userData.phoneNumber || "");
                   }}
                   style={{
-                    padding: "6px 16px",
-                    fontSize: 12,
+                    padding: "12px 20px",
+                    fontSize: 14,
                     background: "#6B7280",
                     color: "white",
                     border: "none",
                     borderRadius: 4,
                     cursor: "pointer",
+                    minHeight: 44,
                   }}
                 >
                   Cancel

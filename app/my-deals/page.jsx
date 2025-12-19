@@ -426,7 +426,7 @@ export default function MyDealsPage() {
                         }
                         disabled={confirming === deal.id}
                         style={{
-                          padding: "10px 20px",
+                          padding: "12px 24px",
                           fontSize: 14,
                           fontWeight: 600,
                           color: "var(--color-white)",
@@ -438,6 +438,7 @@ export default function MyDealsPage() {
                           borderRadius: 6,
                           cursor:
                             confirming === deal.id ? "not-allowed" : "pointer",
+                          minHeight: 44,
                         }}
                       >
                         {confirming === deal.id

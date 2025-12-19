@@ -372,7 +372,7 @@ export default function FarmerPage() {
                           }
                           disabled={confirmingDeal === deal.id}
                           style={{
-                            padding: "10px 20px",
+                            padding: "12px 24px",
                             fontSize: 14,
                             fontWeight: 600,
                             color: "var(--color-white)",
@@ -386,6 +386,7 @@ export default function FarmerPage() {
                               confirmingDeal === deal.id
                                 ? "not-allowed"
                                 : "pointer",
+                            minHeight: 44,
                           }}
                         >
                           {confirmingDeal === deal.id

@@ -426,7 +426,7 @@ export default function ProductDetailPage() {
                 onClick={createDeal}
                 disabled={creatingDeal}
                 style={{
-                  padding: "12px 24px",
+                  padding: "14px 28px",
                   fontSize: 16,
                   fontWeight: 600,
                   color: "var(--color-white)",
@@ -434,6 +434,7 @@ export default function ProductDetailPage() {
                   border: "none",
                   borderRadius: 6,
                   cursor: creatingDeal ? "not-allowed" : "pointer",
+                  minHeight: 48,
                 }}
               >
                 {creatingDeal ? "Creating Deal..." : "Express Interest"}

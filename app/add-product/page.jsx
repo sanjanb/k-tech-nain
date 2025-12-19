@@ -285,7 +285,7 @@ export default function AddProductPage() {
           disabled={submitting}
           style={{
             width: "100%",
-            padding: "12px",
+            padding: "14px 20px",
             background: "var(--color-primary)",
             color: "var(--color-white)",
             border: "none",
@@ -294,6 +294,7 @@ export default function AddProductPage() {
             fontWeight: 500,
             cursor: submitting ? "not-allowed" : "pointer",
             opacity: submitting ? 0.6 : 1,
+            minHeight: 48,
           }}
         >
           {submitting ? "Adding Product..." : "Add Product"}
@@ -317,8 +318,9 @@ const labelStyle = {
 
 const inputStyle = {
   width: "100%",
-  padding: "10px 12px",
+  padding: "12px 14px",
   border: "1px solid #E5E7EB",
   borderRadius: 6,
-  fontSize: 14,
+  fontSize: 16,
+  minHeight: 44,
 };

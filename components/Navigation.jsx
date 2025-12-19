@@ -285,12 +285,14 @@ const profileIconStyle = {
   border: "none",
   color: "var(--color-text-primary)",
   cursor: "pointer",
-  padding: 8,
+  padding: 10,
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
   borderRadius: "50%",
   transition: "background 0.2s",
+  minWidth: 44,
+  minHeight: 44,
 };
 
 const profileDropdownStyle = {
@@ -307,7 +309,8 @@ const profileDropdownStyle = {
 };
 
 const dropdownLinkStyle = {
-  display: "block",
+  display: "flex",
+  alignItems: "center",
   padding: "12px 20px",
   color: "var(--color-text-primary)",
   textDecoration: "none",
@@ -315,6 +318,7 @@ const dropdownLinkStyle = {
   fontWeight: 500,
   borderBottom: "1px solid #F3F4F6",
   transition: "background 0.2s",
+  minHeight: 44,
 };
 
 const dropdownButtonStyle = {
@@ -328,6 +332,7 @@ const dropdownButtonStyle = {
   cursor: "pointer",
   textAlign: "left",
   transition: "background 0.2s",
+  minHeight: 44,
 };
 
 const burgerButtonStyle = {
@@ -337,7 +342,11 @@ const burgerButtonStyle = {
   background: "transparent",
   border: "none",
   cursor: "pointer",
-  padding: 8,
+  padding: 12,
+  minWidth: 44,
+  minHeight: 44,
+  alignItems: "center",
+  justifyContent: "center",
 };
 
 const burgerLineStyle = {
@@ -361,19 +370,23 @@ const mobileLinkStyle = {
   textDecoration: "none",
   fontSize: 16,
   fontWeight: 500,
-  padding: "8px 0",
+  padding: "12px 0",
   display: "block",
+  minHeight: 44,
+  display: "flex",
+  alignItems: "center",
 };
 
 const mobileLogoutButtonStyle = {
   background: "transparent",
   border: "1px solid var(--color-primary)",
   color: "var(--color-primary)",
-  padding: "10px 16px",
+  padding: "12px 16px",
   borderRadius: 6,
   fontSize: 16,
   fontWeight: 500,
   cursor: "pointer",
   textAlign: "left",
   width: "100%",
+  minHeight: 48,
 };

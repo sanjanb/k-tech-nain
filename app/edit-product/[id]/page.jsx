@@ -263,7 +263,7 @@ export default function EditProductPage() {
             disabled={submitting}
             style={{
               flex: 1,
-              padding: "12px",
+              padding: "14px 20px",
               background: "var(--color-primary)",
               color: "var(--color-white)",
               border: "none",
@@ -272,6 +272,7 @@ export default function EditProductPage() {
               fontWeight: 500,
               cursor: submitting ? "not-allowed" : "pointer",
               opacity: submitting ? 0.6 : 1,
+              minHeight: 48,
             }}
           >
             {submitting ? "Updating..." : "Save Changes"}
@@ -280,7 +281,7 @@ export default function EditProductPage() {
             href="/farmer"
             style={{
               flex: 1,
-              padding: "12px",
+              padding: "14px 20px",
               background: "transparent",
               color: "var(--color-text-primary)",
               border: "1px solid #E5E7EB",
@@ -292,6 +293,7 @@ export default function EditProductPage() {
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
+              minHeight: 48,
             }}
           >
             Cancel
@@ -316,8 +318,9 @@ const labelStyle = {
 
 const inputStyle = {
   width: "100%",
-  padding: "10px 12px",
+  padding: "12px 14px",
   border: "1px solid #E5E7EB",
   borderRadius: 6,
-  fontSize: 14,
+  fontSize: 16,
+  minHeight: 44,
 };
