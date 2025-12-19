@@ -41,6 +41,7 @@ Complete guide on how to use the Farm To Table platform, covering all features a
 ## User Roles
 
 ### Farmer
+
 - Lists produce for sale
 - Sets prices and quantities
 - Provides UPI payment details
@@ -49,6 +50,7 @@ Complete guide on how to use the Farm To Table platform, covering all features a
 - Receives buyer feedback
 
 ### Buyer
+
 - Browses available produce
 - Views product details and farmer information
 - Creates deals with farmers
@@ -56,6 +58,7 @@ Complete guide on how to use the Farm To Table platform, covering all features a
 - Provides feedback to farmers
 
 ### Admin
+
 - Verifies farmer accounts
 - Manages platform integrity
 - Access restricted to admin email only
@@ -101,6 +104,7 @@ Complete guide on how to use the Farm To Table platform, covering all features a
 **Location**: `/browse`
 
 **How to Use**:
+
 1. Navigate to "Browse" in the navigation menu
 2. View all available products in a grid layout
 3. Each product card shows:
@@ -114,6 +118,7 @@ Complete guide on how to use the Farm To Table platform, covering all features a
 ### 2. Search and Filter
 
 **Available Filters**:
+
 - **Search by Name**: Enter crop name in the search bar
 - **Price Range**: Set minimum and maximum price
 - **Sort Options**:
@@ -122,6 +127,7 @@ Complete guide on how to use the Farm To Table platform, covering all features a
   - Price: High to Low
 
 **How to Use**:
+
 1. Enter search criteria in the filter section
 2. Products automatically update based on filters
 3. Use pagination to navigate through results (6 products per page)
@@ -131,6 +137,7 @@ Complete guide on how to use the Farm To Table platform, covering all features a
 **Location**: `/product/[id]`
 
 **What You'll See**:
+
 - Full product information
 - High-quality product image
 - Crop name, price, quantity
@@ -140,6 +147,7 @@ Complete guide on how to use the Farm To Table platform, covering all features a
 - "Interested? Make a Deal" button
 
 **How to Use**:
+
 1. Click on any product card from the browse page
 2. Review all product and farmer details
 3. Click "Interested? Make a Deal" to initiate a transaction
@@ -150,12 +158,14 @@ Complete guide on how to use the Farm To Table platform, covering all features a
 **Location**: `/farmer-profile/[id]`
 
 **What You'll See**:
+
 - Farmer's name and verification status
 - All products listed by this farmer
 - Product grid showing available and sold items
 - Back button to return to browsing
 
 **How to Use**:
+
 1. Click "View Farmer Profile" from any product page
 2. Browse all products from this specific farmer
 3. Click on any product to view details
@@ -165,6 +175,7 @@ Complete guide on how to use the Farm To Table platform, covering all features a
 **Location**: `/my-deals`
 
 **What You'll See**:
+
 - All deals you've initiated with farmers
 - Deal status (Pending, Buyer Confirmed, Completed)
 - Product details and farmer information
@@ -173,12 +184,14 @@ Complete guide on how to use the Farm To Table platform, covering all features a
 **How to Use**:
 
 #### Confirm a Deal
+
 1. Navigate to "My Deals" from the navigation menu
 2. Find the deal you want to confirm
 3. Click "Confirm Purchase" when you've received the product
 4. Deal status updates to "Buyer Confirmed"
 
 #### Leave Feedback (After Both Parties Confirm)
+
 1. Wait for both you and the farmer to confirm the deal
 2. Once completed, a "Leave Feedback" button appears
 3. Click "Leave Feedback"
@@ -189,6 +202,7 @@ Complete guide on how to use the Farm To Table platform, covering all features a
 6. Feedback is permanently associated with the farmer
 
 **Deal Statuses Explained**:
+
 - **Pending**: Deal created, waiting for confirmation
 - **Buyer Confirmed**: You confirmed, waiting for farmer
 - **Farmer Confirmed**: Farmer confirmed, waiting for you
@@ -199,6 +213,7 @@ Complete guide on how to use the Farm To Table platform, covering all features a
 **Location**: `/profile`
 
 **What You'll See**:
+
 - Your account information
 - Number of deals completed
 - Recent deals history
@@ -213,6 +228,7 @@ Complete guide on how to use the Farm To Table platform, covering all features a
 **Location**: `/farmer`
 
 **What You'll See**:
+
 - Welcome message with your name
 - "Add New Product" button
 - List of all your products (available and sold)
@@ -224,6 +240,7 @@ Complete guide on how to use the Farm To Table platform, covering all features a
 **Location**: `/add-product`
 
 **How to Use**:
+
 1. Click "Add New Product" from your farmer dashboard
 2. Fill in the product form:
    - **Crop Name**: Name of the produce (e.g., "Organic Tomatoes")
@@ -235,6 +252,7 @@ Complete guide on how to use the Farm To Table platform, covering all features a
 4. Product is immediately listed and visible to all buyers
 
 **Important Notes**:
+
 - Image must be under 500KB (compress if needed)
 - All fields are required
 - UPI ID is shared with interested buyers
@@ -245,6 +263,7 @@ Complete guide on how to use the Farm To Table platform, covering all features a
 **Location**: `/edit-product/[id]`
 
 **How to Use**:
+
 1. From your farmer dashboard, click "Edit" on any product
 2. Update any of the following fields:
    - Crop name
@@ -256,6 +275,7 @@ Complete guide on how to use the Farm To Table platform, covering all features a
 4. Changes are immediately reflected
 
 **When to Edit**:
+
 - Update quantity after partial sales
 - Adjust pricing
 - Change UPI details
@@ -264,10 +284,12 @@ Complete guide on how to use the Farm To Table platform, covering all features a
 ### 4. Manage Product Status
 
 **Available Actions**:
+
 - **Mark as Sold**: When all quantity is sold
 - **Mark as Available**: When restocking a sold item
 
 **How to Use**:
+
 1. From your farmer dashboard, find the product
 2. Click the status toggle button:
    - "Mark as Sold" for available products
@@ -278,11 +300,13 @@ Complete guide on how to use the Farm To Table platform, covering all features a
 ### 5. Delete Product
 
 **How to Use**:
+
 1. From your farmer dashboard, click "Delete" on any product
 2. Confirm the deletion
 3. Product is permanently removed from the platform
 
 **When to Delete**:
+
 - Discontinued products
 - Seasonal items no longer available
 - Incorrect listings
@@ -290,6 +314,7 @@ Complete guide on how to use the Farm To Table platform, covering all features a
 ### 6. Manage Deals
 
 **What You'll See**:
+
 - All deals created by buyers for your products
 - Buyer information and contact details
 - Deal status and confirmation options
@@ -298,12 +323,14 @@ Complete guide on how to use the Farm To Table platform, covering all features a
 **How to Use**:
 
 #### Confirm a Deal
+
 1. Check the deals section on your farmer dashboard
 2. Find the deal you've completed
 3. Click "Confirm as Farmer"
 4. This marks the deal as confirmed from your side
 
 **Deal Confirmation Process**:
+
 - Buyer initiates deal by clicking "Make a Deal"
 - You receive the product offline/arrange delivery
 - Buyer confirms receipt
@@ -316,6 +343,7 @@ Complete guide on how to use the Farm To Table platform, covering all features a
 **Location**: Your farmer dashboard lists all products
 
 **What You'll See**:
+
 - Product image, name, price, quantity
 - Current status (Available/Sold)
 - Edit and Delete buttons
@@ -335,6 +363,7 @@ Complete guide on how to use the Farm To Table platform, covering all features a
 **Location**: `/admin/verify`
 
 **How to Use**:
+
 1. Login with admin email
 2. Navigate to `/admin/verify`
 3. View list of all registered farmers
@@ -345,12 +374,14 @@ Complete guide on how to use the Farm To Table platform, covering all features a
    - Toggle verification button
 
 **Verification Actions**:
+
 - **Verify Farmer**: Click "Verify" on unverified accounts
 - **Unverify Farmer**: Click "Unverify" on verified accounts
 - Verification status is immediately updated
 - Verified badge appears on farmer profiles and products
 
 **Why Verification Matters**:
+
 - Builds trust with buyers
 - Indicates farmer authenticity
 - Highlighted with green badge on listings
@@ -396,17 +427,20 @@ Complete guide on how to use the Farm To Table platform, covering all features a
 ### Feedback System
 
 **Who Can Leave Feedback**:
+
 - Only buyers who completed deals
 - One feedback per deal
 - Cannot edit after submission
 
 **Feedback Components**:
+
 - **Rating**: 1-5 stars
 - **Comment**: Written review of experience
 - **Timestamp**: When feedback was submitted
 - **Public Visibility**: Feedback is associated with farmer profiles
 
 **Best Practices**:
+
 - Be honest and constructive
 - Mention product quality, communication, delivery
 - Focus on the transaction experience
@@ -421,12 +455,14 @@ Complete guide on how to use the Farm To Table platform, covering all features a
 **Location**: `/profile`
 
 **Buyer Profile Shows**:
+
 - Name and email
 - Total deals completed
 - Recent deal history
 - Link to all deals
 
 **Farmer Profile Shows**:
+
 - Name and email
 - Verification status
 - Total products listed
@@ -438,12 +474,14 @@ Complete guide on how to use the Farm To Table platform, covering all features a
 **Location**: `/farmer-profile/[id]`
 
 **Visible to All Users**:
+
 - Farmer name
 - Verification badge (if verified)
 - All farmer's products (available and sold)
 - Product grid for easy browsing
 
 **What's NOT Visible**:
+
 - Email address
 - Personal information
 - UPI ID (only shown in product details to interested buyers)
@@ -455,6 +493,7 @@ Complete guide on how to use the Farm To Table platform, covering all features a
 ### For Farmers
 
 1. **Product Listings**:
+
    - Use clear, high-quality images
    - Compress images to under 500KB
    - Provide accurate crop names
@@ -462,17 +501,20 @@ Complete guide on how to use the Farm To Table platform, covering all features a
    - Specify quantity with units (kg, liters, etc.)
 
 2. **UPI Details**:
+
    - Double-check UPI ID accuracy
    - Keep UPI ID updated
    - Ensure UPI account is active
 
 3. **Product Management**:
+
    - Update quantities after sales
    - Mark products as sold when unavailable
    - Delete outdated listings
    - Keep product information current
 
 4. **Deal Handling**:
+
    - Respond to buyers promptly (outside platform)
    - Confirm deals after completion
    - Maintain quality standards
@@ -487,18 +529,21 @@ Complete guide on how to use the Farm To Table platform, covering all features a
 ### For Buyers
 
 1. **Browsing**:
+
    - Use filters to narrow down options
    - Check farmer verification badges
    - Compare prices across listings
    - View farmer profiles for history
 
 2. **Making Deals**:
+
    - Only create deals for products you intend to buy
    - Contact farmers using provided UPI/details
    - Arrange delivery or pickup directly
    - Confirm deals after receiving products
 
 3. **Payments**:
+
    - Use UPI details from product page
    - Complete payment outside the platform
    - Keep transaction records
@@ -513,12 +558,14 @@ Complete guide on how to use the Farm To Table platform, covering all features a
 ### For Everyone
 
 1. **Security**:
+
    - Keep login credentials secure
    - Don't share passwords
    - Use strong passwords
    - Log out from shared devices
 
 2. **Communication**:
+
    - Conduct transactions outside the platform
    - Use provided contact details (UPI, etc.)
    - Be professional and respectful
@@ -537,42 +584,49 @@ Complete guide on how to use the Farm To Table platform, covering all features a
 ### Common Issues and Solutions
 
 #### Cannot Login
+
 - Verify email and password are correct
 - Check if you're registered
 - Ensure internet connection is stable
 - Try resetting password (if feature available)
 
 #### Cannot See Products
+
 - Check internet connection
 - Verify Firebase/Firestore is configured
 - Ensure you're on the Browse page
 - Try refreshing the page
 
 #### Image Upload Fails
+
 - Check file size (must be under 500KB)
 - Use supported formats (JPEG, PNG)
 - Compress image if too large
 - Ensure internet connection is stable
 
 #### Product Not Showing to Buyers
+
 - Check product status (must be "available")
 - Verify product was successfully created
 - Refresh the browse page
 - Ensure product isn't marked as sold
 
 #### Cannot Confirm Deal
+
 - Verify you're logged in
 - Check if you're the correct party (buyer/farmer)
 - Ensure deal isn't already confirmed by you
 - Try refreshing the page
 
 #### Feedback Button Not Showing
+
 - Verify deal is completed (both parties confirmed)
 - Check if you haven't already given feedback
 - Ensure you're the buyer (only buyers give feedback)
 - Refresh the page
 
 #### Admin Page Access Denied
+
 - Verify you're using the admin email
 - Admin email must be exactly: `admin@farmtotable.com`
 - Ensure you're logged in
@@ -581,18 +635,21 @@ Complete guide on how to use the Farm To Table platform, covering all features a
 ### Technical Issues
 
 #### Firebase Connection Errors
+
 - Check internet connection
 - Verify Firebase configuration in `/lib/firebase.js`
 - Ensure Firestore database is enabled
 - Check Firebase console for service status
 
 #### Page Not Loading
+
 - Clear browser cache
 - Try different browser
 - Check internet connection
 - Verify URL is correct
 
 #### Session Expired
+
 - Login again
 - Session timeout is normal
 - Keep credentials saved (securely)
@@ -619,6 +676,7 @@ The platform is intentionally minimal and focused. The following are NOT support
 ### Design Decisions
 
 These limitations are intentional to:
+
 - Keep platform simple and free
 - Avoid legal complexities of payment processing
 - Minimize development and maintenance
@@ -631,6 +689,7 @@ These limitations are intentional to:
 ## Contact and Support
 
 For platform issues, technical problems, or general inquiries:
+
 - Contact admin at: `admin@farmtotable.com`
 - Platform is community-driven and fee-free
 - Support is best-effort based on availability
@@ -642,6 +701,7 @@ For platform issues, technical problems, or general inquiries:
 **Farm To Table** is a simple, direct connection platform between farmers and buyers. It eliminates intermediaries while keeping the platform minimal, transparent, and free.
 
 **Key Principles**:
+
 - Direct farmer-buyer connection
 - No platform fees or commissions
 - Off-platform transactions
@@ -649,6 +709,7 @@ For platform issues, technical problems, or general inquiries:
 - Simple, focused functionality
 
 **Success Factors**:
+
 - Farmers: List quality products, maintain accurate info, confirm deals
 - Buyers: Browse responsibly, complete transactions, leave feedback
 - Admin: Verify farmers, maintain platform integrity
