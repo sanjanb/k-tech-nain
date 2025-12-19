@@ -44,10 +44,9 @@ export default function ProfilePage() {
         // Fetch user profile data
         const userDoc = await getDoc(doc(db, "users", currentUser.uid));
         if (userDoc.exists()) {
-          const data = userD;
-          setEditPhone(data.phoneNumber || "");
-          oc.data();
+          const data = userDoc.data();
           setUserData(data);
+          setEditPhone(data.phoneNumber || "");
 
           // Fetch deals based on role
           const dealsQuery =
