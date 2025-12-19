@@ -211,6 +211,22 @@ export default function EditProductPage() {
         </div>
 
         <div style={fieldStyle}>
+          <label style={labelStyle}>Category</label>
+          <select
+            value={category}
+            onChange={(e) => setCategory(e.target.value)}
+            required
+            style={inputStyle}
+          >
+            {categories.map((cat) => (
+              <option key={cat} value={cat}>
+                {cat}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        <div style={fieldStyle}>
           <label style={labelStyle}>Price (₹ per kg)</label>
           <input
             type="number"
