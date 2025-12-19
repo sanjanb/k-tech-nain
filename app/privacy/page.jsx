@@ -169,9 +169,7 @@ export default function PrivacyPage() {
           <h2 style={{ fontSize: 24, fontWeight: 600, marginBottom: 16 }}>
             5. Data Security
           </h2>
-          <p>
-            We implement security measures to protect your information:
-          </p>
+          <p>We implement security measures to protect your information:</p>
           <ul style={{ marginLeft: 20 }}>
             <li>Passwords are encrypted using Firebase Authentication</li>
             <li>Data transmission is secured via HTTPS</li>
@@ -193,9 +191,7 @@ export default function PrivacyPage() {
             purposes. The platform uses minimal session management provided by
             Firebase Authentication to keep you logged in.
           </p>
-          <p>
-            We do NOT use:
-          </p>
+          <p>We do NOT use:</p>
           <ul style={{ marginLeft: 20 }}>
             <li>Analytics tracking (Google Analytics, etc.)</li>
             <li>Advertising cookies</li>
