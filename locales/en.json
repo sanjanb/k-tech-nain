@@ -1,0 +1,84 @@
+{
+  "common": {
+    "loading": "Loading...",
+    "save": "Save",
+    "cancel": "Cancel",
+    "edit": "Edit",
+    "delete": "Delete",
+    "confirm": "Confirm",
+    "close": "Close",
+    "submit": "Submit",
+    "back": "Back",
+    "next": "Next"
+  },
+  "auth": {
+    "login": "Login",
+    "register": "Register",
+    "logout": "Logout",
+    "email": "Email",
+    "password": "Password",
+    "name": "Name",
+    "role": "Role",
+    "farmer": "Farmer",
+    "buyer": "Buyer"
+  },
+  "profile": {
+    "title": "Profile",
+    "personalInfo": "Personal Information",
+    "contactInfo": "Contact Information",
+    "paymentDetails": "Payment Details",
+    "language": "Language",
+    "languagePreference": "Language Preference",
+    "phoneNumber": "Phone Number",
+    "updateProfile": "Update Profile",
+    "profileUpdated": "Profile updated successfully!"
+  },
+  "deals": {
+    "myDeals": "My Deals",
+    "dealConfirmed": "Deal Confirmed",
+    "confirmDeal": "Confirm Deal",
+    "dealId": "Deal ID",
+    "buyerConfirmed": "Buyer Confirmed",
+    "farmerConfirmed": "Farmer Confirmed",
+    "bothConfirmed": "Both Parties Confirmed",
+    "pendingConfirmation": "Pending Confirmation",
+    "alreadyConfirmed": "You have already confirmed this deal",
+    "confirmationSuccess": "Deal confirmed successfully! A confirmation notification has been sent to your registered email.",
+    "confirmationError": "Failed to confirm deal. Please try again."
+  },
+  "products": {
+    "myProducts": "My Products",
+    "addProduct": "Add Product",
+    "editProduct": "Edit Product",
+    "productName": "Product Name",
+    "category": "Category",
+    "price": "Price",
+    "quantity": "Quantity",
+    "status": "Status",
+    "available": "Available",
+    "sold": "Sold",
+    "image": "Image",
+    "description": "Description"
+  },
+  "notifications": {
+    "notificationSent": "Notification sent to your registered email",
+    "emailSent": "Email notification sent",
+    "dealConfirmationSent": "Deal confirmation notification sent to both parties",
+    "checkEmail": "Please check your email for details"
+  },
+  "payment": {
+    "upiId": "UPI ID",
+    "qrCode": "QR Code",
+    "paymentInfo": "Payment Information",
+    "uploadQR": "Upload QR Code",
+    "validUpiRequired": "Please enter a valid UPI ID",
+    "paymentDetailsOptional": "Payment details are optional but recommended"
+  },
+  "errors": {
+    "generic": "Something went wrong. Please try again.",
+    "networkError": "Network error. Please check your connection.",
+    "invalidInput": "Invalid input. Please check your data.",
+    "unauthorized": "You are not authorized to perform this action.",
+    "notFound": "The requested resource was not found."
+  }
+}
