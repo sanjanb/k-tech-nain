@@ -23,6 +23,7 @@ npm install
 ```
 
 This installs:
+
 - `firebase-admin` - Firebase Admin SDK
 - `firebase-functions` - Cloud Functions SDK
 
@@ -36,25 +37,28 @@ This installs:
 2. Get free API key (100 emails/day)
 3. Verify sender email address
 4. Install SendGrid SDK:
+
    ```bash
    cd functions
    npm install @sendgrid/mail
    ```
 
 5. Configure Firebase:
+
    ```bash
    firebase functions:config:set sendgrid.key="YOUR_API_KEY"
    ```
 
 6. Update `functions/index.js`:
+
    ```javascript
-   const sgMail = require('@sendgrid/mail');
+   const sgMail = require("@sendgrid/mail");
    sgMail.setApiKey(functions.config().sendgrid.key);
-   
+
    async function sendEmail(emailData) {
      await sgMail.send({
        to: emailData.to,
-       from: 'your-verified-email@example.com',
+       from: "your-verified-email@example.com",
        subject: emailData.subject,
        text: emailData.text,
        html: emailData.html,
@@ -68,12 +72,14 @@ This installs:
 2. Verify domain or email in SES console
 3. Get AWS access keys
 4. Install AWS SDK:
+
    ```bash
    cd functions
    npm install aws-sdk
    ```
 
 5. Configure Firebase:
+
    ```bash
    firebase functions:config:set aws.access_key="YOUR_ACCESS_KEY"
    firebase functions:config:set aws.secret_key="YOUR_SECRET_KEY"
@@ -81,26 +87,29 @@ This installs:
    ```
 
 6. Update `functions/index.js`:
+
    ```javascript
-   const AWS = require('aws-sdk');
+   const AWS = require("aws-sdk");
    const ses = new AWS.SES({
      region: functions.config().aws.region,
      accessKeyId: functions.config().aws.access_key,
      secretAccessKey: functions.config().aws.secret_key,
    });
-   
+
    async function sendEmail(emailData) {
-     await ses.sendEmail({
-       Source: 'notifications@yourdomain.com',
-       Destination: { ToAddresses: [emailData.to] },
-       Message: {
-         Subject: { Data: emailData.subject },
-         Body: {
-           Text: { Data: emailData.text },
-           Html: { Data: emailData.html }
-         }
-       }
-     }).promise();
+     await ses
+       .sendEmail({
+         Source: "notifications@yourdomain.com",
+         Destination: { ToAddresses: [emailData.to] },
+         Message: {
+           Subject: { Data: emailData.subject },
+           Body: {
+             Text: { Data: emailData.text },
+             Html: { Data: emailData.html },
+           },
+         },
+       })
+       .promise();
    }
    ```
 
@@ -109,28 +118,31 @@ This installs:
 1. Enable 2-factor auth on Gmail
 2. Generate app password
 3. Install Nodemailer:
+
    ```bash
    cd functions
    npm install nodemailer
    ```
 
 4. Configure Firebase:
+
    ```bash
    firebase functions:config:set smtp.user="your-email@gmail.com"
    firebase functions:config:set smtp.password="your-app-password"
    ```
 
 5. Update `functions/index.js`:
+
    ```javascript
-   const nodemailer = require('nodemailer');
+   const nodemailer = require("nodemailer");
    const transporter = nodemailer.createTransporter({
-     service: 'gmail',
+     service: "gmail",
      auth: {
        user: functions.config().smtp.user,
        pass: functions.config().smtp.password,
-     }
+     },
    });
-   
+
    async function sendEmail(emailData) {
      await transporter.sendMail({
        from: functions.config().smtp.user,
@@ -161,6 +173,7 @@ firebase deploy --only functions
 ```
 
 Expected output:
+
 ```
 ✔ functions[onDealConfirmation(us-central1)] Successful update operation.
 ✔ functions[processNotification(us-central1)] Successful create operation.
@@ -188,19 +201,23 @@ Expected output:
 ### Manual Test
 
 1. Create two test accounts:
+
    - Account A (Farmer): farmer@test.com
    - Account B (Buyer): buyer@test.com
 
 2. Log in as Farmer:
+
    - Create a product listing
    - Note the product ID
 
 3. Log in as Buyer:
+
    - Browse products
    - Express interest in farmer's product (creates deal)
    - Confirm the deal (sets `buyerConfirmed = true`)
 
 4. Log in as Farmer:
+
    - Go to Farmer Dashboard
    - Confirm the deal (sets `farmerConfirmed = true`)
 
@@ -212,6 +229,7 @@ Expected output:
 ### Verify Firestore
 
 Expected `notification_logs` entries:
+
 ```javascript
 {
   eventType: "DEAL_CONFIRMED",
@@ -243,6 +261,7 @@ firebase functions:log
 ```
 
 Look for:
+
 - "Processing notification: [notification-id]"
 - "Would send email: [email-data]" (if email service not integrated)
 - "Notification processed successfully"
@@ -254,6 +273,7 @@ Look for:
 ### View Function Execution
 
 Firebase Console > Functions > Dashboard shows:
+
 - Total invocations
 - Execution time
 - Error rate
@@ -261,20 +281,24 @@ Firebase Console > Functions > Dashboard shows:
 ### Common Issues
 
 **Issue**: Functions not deploying
+
 - **Fix**: Enable billing in Firebase Console
 - **Fix**: Run `firebase login` again
 
 **Issue**: Email not sending
+
 - **Check**: Email service API key is correct
 - **Check**: Sender email is verified
 - **Check**: Recipient email is valid
 - **Check**: Function logs for errors
 
 **Issue**: Duplicate emails
+
 - **Check**: Idempotency logic in `onDealConfirmation`
 - **Check**: Firestore index is created
 
 **Issue**: Functions timing out
+
 - **Check**: Email service is responding
 - **Check**: Firestore queries are optimized
 - **Increase**: Function timeout in `firebase.json`
@@ -300,6 +324,7 @@ Before going live:
 ## Cost Estimates
 
 ### Firebase Functions
+
 - Free tier: 2M invocations/month
 - Expected: ~6K invocations/month (100 deals/day)
 - Cost: $0 (within free tier)
@@ -307,11 +332,13 @@ Before going live:
 ### Email Service
 
 **SendGrid Free**:
+
 - 100 emails/day = 3,000/month
 - Sufficient for ~1,500 deals/month
 - Cost: $0
 
 **AWS SES**:
+
 - $0.10 per 1,000 emails
 - 6,000 emails/month = $0.60/month
 - Unlimited volume
