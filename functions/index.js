@@ -3,8 +3,8 @@
  * Triggers email notifications on deal status changes
  */
 
-const functions = require('firebase-functions');
-const admin = require('firebase-admin');
+const functions = require("firebase-functions");
+const admin = require("firebase-admin");
 
 // Initialize Firebase Admin
 admin.initializeApp();
@@ -15,14 +15,14 @@ const db = admin.firestore();
  * Notification Event Types
  */
 const NOTIFICATION_EVENTS = {
-  DEAL_CONFIRMED: 'DEAL_CONFIRMED',
-  DEAL_COMPLETED: 'DEAL_COMPLETED',
+  DEAL_CONFIRMED: "DEAL_CONFIRMED",
+  DEAL_COMPLETED: "DEAL_COMPLETED",
 };
 
 const NOTIFICATION_STATUS = {
-  PENDING: 'PENDING',
-  SENT: 'SENT',
-  FAILED: 'FAILED',
+  PENDING: "PENDING",
+  SENT: "SENT",
+  FAILED: "FAILED",
 };
 
 /**
@@ -30,45 +30,60 @@ const NOTIFICATION_STATUS = {
  * When a new notification is queued (by client), process it
  */
 exports.processNotification = functions.firestore
-  .document('notification_logs/{notificationId}')
+  .document("notification_logs/{notificationId}")
   .onCreate(async (snap, context) => {
     const notification = snap.data();
     const notificationId = context.params.notificationId;
-    
-    console.log('Processing notification:', notificationId, notification);
-    
+
+    console.log("Processing notification:", notificationId, notification);
+
     try {
       // Get deal details
-      const dealDoc = await db.collection('deals').doc(notification.dealId).get();
+      const dealDoc = await db
+        .collection("deals")
+        .doc(notification.dealId)
+        .get();
       if (!dealDoc.exists) {
-        throw new Error('Deal not found');
+        throw new Error("Deal not found");
       }
       const deal = { id: dealDoc.id, ...dealDoc.data() };
-      
+
       // Get product details
-      const productDoc = await db.collection('products').doc(deal.productId).get();
+      const productDoc = await db
+        .collection("products")
+        .doc(deal.productId)
+        .get();
       if (!productDoc.exists) {
-        throw new Error('Product not found');
+        throw new Error("Product not found");
       }
       const product = productDoc.data();
-      
+
       // Get recipient details
-      const recipientDoc = await db.collection('users').doc(notification.recipientId).get();
+      const recipientDoc = await db
+        .collection("users")
+        .doc(notification.recipientId)
+        .get();
       if (!recipientDoc.exists) {
-        throw new Error('Recipient not found');
+        throw new Error("Recipient not found");
       }
       const recipient = recipientDoc.data();
-      
+
       // Get other party details (farmer or buyer)
-      const otherPartyId = recipient.role === 'farmer' ? deal.buyerId : deal.farmerId;
-      const otherPartyDoc = await db.collection('users').doc(otherPartyId).get();
-      const otherParty = otherPartyDoc.exists ? otherPartyDoc.data() : { name: 'Unknown' };
-      
+      const otherPartyId =
+        recipient.role === "farmer" ? deal.buyerId : deal.farmerId;
+      const otherPartyDoc = await db
+        .collection("users")
+        .doc(otherPartyId)
+        .get();
+      const otherParty = otherPartyDoc.exists
+        ? otherPartyDoc.data()
+        : { name: "Unknown" };
+
       // Validate recipient has email
       if (!recipient.email) {
-        throw new Error('Recipient has no email address');
+        throw new Error("Recipient has no email address");
       }
-      
+
       // Prepare email data
       const emailData = {
         to: recipient.email,
@@ -79,14 +94,14 @@ exports.processNotification = functions.firestore
         otherPartyName: otherParty.name,
         eventType: notification.eventType,
       };
-      
+
       // TODO: Integrate with actual email service (SendGrid, AWS SES, etc.)
       // For now, we'll just log the email that would be sent
-      console.log('Would send email:', emailData);
-      
+      console.log("Would send email:", emailData);
+
       // In production, uncomment this and implement your email service:
       // await sendEmail(emailData);
-      
+
       // Update notification log as sent
       await snap.ref.update({
         status: NOTIFICATION_STATUS.SENT,
@@ -94,12 +109,11 @@ exports.processNotification = functions.firestore
         attempts: (notification.attempts || 0) + 1,
         lastAttemptAt: admin.firestore.FieldValue.serverTimestamp(),
       });
-      
-      console.log('Notification processed successfully:', notificationId);
-      
+
+      console.log("Notification processed successfully:", notificationId);
     } catch (error) {
-      console.error('Error processing notification:', error);
-      
+      console.error("Error processing notification:", error);
+
       // Update notification log as failed
       await snap.ref.update({
         status: NOTIFICATION_STATUS.FAILED,
@@ -107,7 +121,7 @@ exports.processNotification = functions.firestore
         lastAttemptAt: admin.firestore.FieldValue.serverTimestamp(),
         errorMessage: error.message,
       });
-      
+
       // Don't throw error to prevent infinite retries
       // Firebase will retry failed functions automatically
     }
@@ -118,54 +132,55 @@ exports.processNotification = functions.firestore
  * Trigger when both parties confirm a deal
  */
 exports.onDealConfirmation = functions.firestore
-  .document('deals/{dealId}')
+  .document("deals/{dealId}")
   .onUpdate(async (change, context) => {
     const previousDeal = change.before.data();
     const currentDeal = change.after.data();
     const dealId = context.params.dealId;
-    
+
     // Check if deal just became fully confirmed
-    const wasConfirmed = previousDeal.buyerConfirmed && previousDeal.farmerConfirmed;
-    const isNowConfirmed = currentDeal.buyerConfirmed && currentDeal.farmerConfirmed;
-    
+    const wasConfirmed =
+      previousDeal.buyerConfirmed && previousDeal.farmerConfirmed;
+    const isNowConfirmed =
+      currentDeal.buyerConfirmed && currentDeal.farmerConfirmed;
+
     if (!wasConfirmed && isNowConfirmed) {
-      console.log('Deal confirmed, queuing notifications:', dealId);
-      
+      console.log("Deal confirmed, queuing notifications:", dealId);
+
       try {
         // Create notification logs for both parties
         // These will trigger the processNotification function above
         const batch = db.batch();
-        
+
         // Buyer notification
-        const buyerNotificationRef = db.collection('notification_logs').doc();
+        const buyerNotificationRef = db.collection("notification_logs").doc();
         batch.set(buyerNotificationRef, {
           eventType: NOTIFICATION_EVENTS.DEAL_CONFIRMED,
           dealId: dealId,
           recipientId: currentDeal.buyerId,
-          channel: 'EMAIL',
+          channel: "EMAIL",
           status: NOTIFICATION_STATUS.PENDING,
           createdAt: admin.firestore.FieldValue.serverTimestamp(),
           attempts: 0,
         });
-        
+
         // Farmer notification
-        const farmerNotificationRef = db.collection('notification_logs').doc();
+        const farmerNotificationRef = db.collection("notification_logs").doc();
         batch.set(farmerNotificationRef, {
           eventType: NOTIFICATION_EVENTS.DEAL_CONFIRMED,
           dealId: dealId,
           recipientId: currentDeal.farmerId,
-          channel: 'EMAIL',
+          channel: "EMAIL",
           status: NOTIFICATION_STATUS.PENDING,
           createdAt: admin.firestore.FieldValue.serverTimestamp(),
           attempts: 0,
         });
-        
+
         await batch.commit();
-        
-        console.log('Notification logs created for deal:', dealId);
-        
+
+        console.log("Notification logs created for deal:", dealId);
       } catch (error) {
-        console.error('Error creating notification logs:', error);
+        console.error("Error creating notification logs:", error);
       }
     }
   });
@@ -185,8 +200,8 @@ async function sendEmail(emailData) {
   //   text: getEmailBody(emailData),
   //   html: getEmailBodyHTML(emailData),
   // });
-  
+
   // For now, just log
-  console.log('Sending email to:', emailData.to);
+  console.log("Sending email to:", emailData.to);
   return Promise.resolve();
 }
