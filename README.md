@@ -8,6 +8,8 @@ A direct farmer-to-buyer marketplace platform that eliminates intermediaries fro
 
 ---
 
+![image](assets\Screenshot 2025-12-17 101852.png)
+
 ## Table of Contents
 
 - [Overview](#overview)
