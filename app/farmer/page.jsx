@@ -132,7 +132,9 @@ export default function FarmerPage() {
         )
       );
 
-      alert("Deal confirmed successfully! A confirmation notification has been sent to your registered email.");
+      alert(
+        "Deal confirmed successfully! A confirmation notification has been sent to your registered email."
+      );
     } catch (err) {
       console.error("Error confirming deal:", err);
       alert("Failed to confirm deal. Please try again.");
