@@ -123,8 +123,8 @@ export default function ProfilePage() {
         phoneNumber: editPhone.trim() || null,
         language: editLanguage,
       });
-      setUserData({ 
-        ...userData, 
+      setUserData({
+        ...userData,
         phoneNumber: editPhone.trim() || null,
         language: editLanguage,
       });
