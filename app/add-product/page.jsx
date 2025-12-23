@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 import { auth, db, storage } from "../../lib/firebase";
 import { onAuthStateChanged } from "firebase/auth";
 import {
@@ -278,9 +279,12 @@ export default function AddProductPage() {
               lineHeight: 1.5,
             }}
           >
-            💡 <strong>Tip:</strong> To add UPI payment details (optional), 
-            go to your <Link href="/profile" style={{ color: "#1E40AF", fontWeight: 600 }}>Profile</Link> page 
-            after listing this product.
+            💡 <strong>Tip:</strong> To add UPI payment details (optional), go
+            to your{" "}
+            <Link href="/profile" style={{ color: "#1E40AF", fontWeight: 600 }}>
+              Profile
+            </Link>{" "}
+            page after listing this product.
           </p>
         </div>
 
