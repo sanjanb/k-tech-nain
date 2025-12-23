@@ -25,7 +25,6 @@ export default function AddProductPage() {
   const [category, setCategory] = useState("Vegetables");
   const [price, setPrice] = useState("");
   const [quantity, setQuantity] = useState("");
-  const [upiId, setUpiId] = useState("");
   const [image, setImage] = useState(null);
 
   const categories = [
@@ -102,7 +101,6 @@ export default function AddProductPage() {
         category,
         price: parseFloat(price),
         quantity,
-        upiId,
         imageUrl,
         farmerId: user.uid,
         status: "available",
@@ -243,18 +241,6 @@ export default function AddProductPage() {
         </div>
 
         <div style={fieldStyle}>
-          <label style={labelStyle}>UPI ID</label>
-          <input
-            type="text"
-            value={upiId}
-            onChange={(e) => setUpiId(e.target.value)}
-            required
-            style={inputStyle}
-            placeholder="e.g., farmer@upi"
-          />
-        </div>
-
-        <div style={fieldStyle}>
           <label style={labelStyle}>Product Image (optional, max 500KB)</label>
           <input
             type="file"
@@ -271,6 +257,30 @@ export default function AddProductPage() {
             }}
           >
             Tip: Compress images to under 500KB for best performance
+          </p>
+        </div>
+
+        {/* Payment Details Info */}
+        <div
+          style={{
+            background: "#EFF6FF",
+            border: "1px solid #BFDBFE",
+            borderRadius: 8,
+            padding: 16,
+            marginBottom: 20,
+          }}
+        >
+          <p
+            style={{
+              fontSize: 14,
+              color: "#1E40AF",
+              margin: 0,
+              lineHeight: 1.5,
+            }}
+          >
+            💡 <strong>Tip:</strong> To add UPI payment details (optional), 
+            go to your <Link href="/profile" style={{ color: "#1E40AF", fontWeight: 600 }}>Profile</Link> page 
+            after listing this product.
           </p>
         </div>
 
