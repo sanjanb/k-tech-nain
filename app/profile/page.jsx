@@ -517,7 +517,8 @@ export default function ProfilePage() {
               lineHeight: 1.5,
             }}
           >
-            Add UPI payment details to help buyers pay you directly. This is completely optional.
+            Add UPI payment details to help buyers pay you directly. This is
+            completely optional.
           </p>
 
           {/* Disclaimer */}
@@ -538,8 +539,8 @@ export default function ProfilePage() {
                 lineHeight: 1.5,
               }}
             >
-              <strong>Note:</strong> The platform does not process or verify payments. 
-              All payments happen directly between you and the buyer.
+              <strong>Note:</strong> The platform does not process or verify
+              payments. All payments happen directly between you and the buyer.
             </p>
           </div>
 
@@ -692,7 +693,8 @@ export default function ProfilePage() {
                         marginBottom: 0,
                       }}
                     >
-                      Format: username@bankname (e.g., farmer123@paytm, 9876543210@ybl)
+                      Format: username@bankname (e.g., farmer123@paytm,
+                      9876543210@ybl)
                     </p>
                   </div>
 
@@ -760,7 +762,8 @@ export default function ProfilePage() {
                         color: "white",
                         border: "none",
                         borderRadius: 6,
-                        cursor: saving || uploadingQr ? "not-allowed" : "pointer",
+                        cursor:
+                          saving || uploadingQr ? "not-allowed" : "pointer",
                         opacity: saving || uploadingQr ? 0.6 : 1,
                         minHeight: 44,
                       }}
@@ -790,7 +793,8 @@ export default function ProfilePage() {
                         color: "white",
                         border: "none",
                         borderRadius: 6,
-                        cursor: saving || uploadingQr ? "not-allowed" : "pointer",
+                        cursor:
+                          saving || uploadingQr ? "not-allowed" : "pointer",
                         opacity: saving || uploadingQr ? 0.6 : 1,
                         minHeight: 44,
                       }}
