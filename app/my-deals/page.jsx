@@ -126,7 +126,9 @@ export default function MyDealsPage() {
         )
       );
 
-      alert("Deal confirmed successfully! A confirmation notification has been sent to your registered email.");
+      alert(
+        "Deal confirmed successfully! A confirmation notification has been sent to your registered email."
+      );
     } catch (error) {
       console.error("Error confirming deal:", error);
       alert("Failed to confirm deal. Please try again.");
