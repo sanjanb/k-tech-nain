@@ -488,6 +488,323 @@ export default function ProfilePage() {
         </Link>
       </div>
 
+      {/* Payment Details Section (Farmers Only) */}
+      {userData.role === "farmer" && (
+        <div
+          style={{
+            marginBottom: 32,
+            padding: 20,
+            background: "var(--color-white)",
+            border: "1px solid #E5E7EB",
+            borderRadius: 8,
+          }}
+        >
+          <h2
+            style={{
+              fontSize: 20,
+              fontWeight: 600,
+              color: "var(--color-text-primary)",
+              marginBottom: 8,
+            }}
+          >
+            Payment Details (Optional)
+          </h2>
+          <p
+            style={{
+              fontSize: 14,
+              color: "var(--color-text-secondary)",
+              marginBottom: 16,
+              lineHeight: 1.5,
+            }}
+          >
+            Add UPI payment details to help buyers pay you directly. This is completely optional.
+          </p>
+
+          {/* Disclaimer */}
+          <div
+            style={{
+              background: "#FEF3C7",
+              border: "1px solid #FCD34D",
+              borderRadius: 6,
+              padding: 12,
+              marginBottom: 20,
+            }}
+          >
+            <p
+              style={{
+                fontSize: 13,
+                color: "#92400E",
+                margin: 0,
+                lineHeight: 1.5,
+              }}
+            >
+              <strong>Note:</strong> The platform does not process or verify payments. 
+              All payments happen directly between you and the buyer.
+            </p>
+          </div>
+
+          {/* Enable Payment Toggle */}
+          <div style={{ marginBottom: 20 }}>
+            <label
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: 12,
+                cursor: "pointer",
+                fontSize: 15,
+                fontWeight: 500,
+              }}
+            >
+              <input
+                type="checkbox"
+                checked={paymentEnabled}
+                onChange={(e) => {
+                  setPaymentEnabled(e.target.checked);
+                  if (!e.target.checked && !editingPayment) {
+                    // User is disabling - ask for confirmation
+                    if (userData.upiId || userData.qrCodeUrl) {
+                      const confirmed = confirm(
+                        "This will remove your payment details. Continue?"
+                      );
+                      if (confirmed) {
+                        setEditingPayment(true);
+                      } else {
+                        setPaymentEnabled(true);
+                      }
+                    }
+                  } else if (e.target.checked) {
+                    setEditingPayment(true);
+                  }
+                }}
+                style={{
+                  width: 18,
+                  height: 18,
+                  cursor: "pointer",
+                }}
+              />
+              Enable QR Payment
+            </label>
+          </div>
+
+          {/* Payment Fields (shown when enabled) */}
+          {paymentEnabled && (
+            <div>
+              {!editingPayment ? (
+                <div>
+                  {/* Display current payment info */}
+                  <div style={{ marginBottom: 16 }}>
+                    <p
+                      style={{
+                        fontSize: 14,
+                        fontWeight: 600,
+                        color: "var(--color-text-primary)",
+                        marginBottom: 4,
+                      }}
+                    >
+                      UPI ID:
+                    </p>
+                    <p
+                      style={{
+                        fontSize: 15,
+                        color: "var(--color-text-secondary)",
+                        margin: 0,
+                      }}
+                    >
+                      {userData.upiId || "Not provided"}
+                    </p>
+                  </div>
+
+                  {userData.qrCodeUrl && (
+                    <div style={{ marginBottom: 16 }}>
+                      <p
+                        style={{
+                          fontSize: 14,
+                          fontWeight: 600,
+                          color: "var(--color-text-primary)",
+                          marginBottom: 8,
+                        }}
+                      >
+                        QR Code:
+                      </p>
+                      <img
+                        src={userData.qrCodeUrl}
+                        alt="Payment QR Code"
+                        style={{
+                          maxWidth: 200,
+                          height: "auto",
+                          border: "1px solid #E5E7EB",
+                          borderRadius: 8,
+                        }}
+                      />
+                    </div>
+                  )}
+
+                  <button
+                    onClick={() => setEditingPayment(true)}
+                    style={{
+                      padding: "10px 16px",
+                      fontSize: 14,
+                      background: "var(--color-primary)",
+                      color: "white",
+                      border: "none",
+                      borderRadius: 6,
+                      cursor: "pointer",
+                      minHeight: 44,
+                    }}
+                  >
+                    Edit Payment Details
+                  </button>
+                </div>
+              ) : (
+                <div>
+                  {/* Edit mode */}
+                  <div style={{ marginBottom: 16 }}>
+                    <label
+                      style={{
+                        display: "block",
+                        fontSize: 14,
+                        fontWeight: 600,
+                        color: "var(--color-text-primary)",
+                        marginBottom: 6,
+                      }}
+                    >
+                      UPI ID (optional)
+                    </label>
+                    <input
+                      type="text"
+                      value={editUpiId}
+                      onChange={(e) => setEditUpiId(e.target.value)}
+                      placeholder="e.g., farmer@paytm"
+                      style={{
+                        width: "100%",
+                        padding: "12px 14px",
+                        border: "1px solid #E5E7EB",
+                        borderRadius: 6,
+                        fontSize: 15,
+                        minHeight: 44,
+                      }}
+                    />
+                    <p
+                      style={{
+                        fontSize: 12,
+                        color: "var(--color-text-secondary)",
+                        marginTop: 4,
+                        marginBottom: 0,
+                      }}
+                    >
+                      Format: username@bankname (e.g., farmer123@paytm, 9876543210@ybl)
+                    </p>
+                  </div>
+
+                  <div style={{ marginBottom: 16 }}>
+                    <label
+                      style={{
+                        display: "block",
+                        fontSize: 14,
+                        fontWeight: 600,
+                        color: "var(--color-text-primary)",
+                        marginBottom: 6,
+                      }}
+                    >
+                      QR Code Image (optional, PNG/JPEG only, max 2MB)
+                    </label>
+                    <input
+                      type="file"
+                      accept="image/png,image/jpeg,image/jpg"
+                      onChange={(e) => setQrCodeFile(e.target.files[0])}
+                      style={{
+                        width: "100%",
+                        padding: "12px 14px",
+                        border: "1px solid #E5E7EB",
+                        borderRadius: 6,
+                        fontSize: 14,
+                        minHeight: 44,
+                      }}
+                    />
+                    <p
+                      style={{
+                        fontSize: 12,
+                        color: "var(--color-text-secondary)",
+                        marginTop: 4,
+                        marginBottom: 0,
+                      }}
+                    >
+                      Upload a screenshot of your UPI payment QR code
+                    </p>
+                  </div>
+
+                  {paymentError && (
+                    <div
+                      style={{
+                        color: "#B91C1C",
+                        fontSize: 14,
+                        marginBottom: 12,
+                        padding: 8,
+                        background: "#FEE2E2",
+                        borderRadius: 4,
+                      }}
+                    >
+                      {paymentError}
+                    </div>
+                  )}
+
+                  <div style={{ display: "flex", gap: 8 }}>
+                    <button
+                      onClick={handleSavePaymentDetails}
+                      disabled={saving || uploadingQr}
+                      style={{
+                        padding: "12px 20px",
+                        fontSize: 14,
+                        fontWeight: 500,
+                        background: "var(--color-primary)",
+                        color: "white",
+                        border: "none",
+                        borderRadius: 6,
+                        cursor: saving || uploadingQr ? "not-allowed" : "pointer",
+                        opacity: saving || uploadingQr ? 0.6 : 1,
+                        minHeight: 44,
+                      }}
+                    >
+                      {saving
+                        ? uploadingQr
+                          ? "Uploading QR..."
+                          : "Saving..."
+                        : "Save"}
+                    </button>
+                    <button
+                      onClick={() => {
+                        setEditingPayment(false);
+                        setEditUpiId(userData.upiId || "");
+                        setQrCodeFile(null);
+                        setPaymentError("");
+                        // If no existing payment data, disable payment
+                        if (!userData.upiId && !userData.qrCodeUrl) {
+                          setPaymentEnabled(false);
+                        }
+                      }}
+                      disabled={saving || uploadingQr}
+                      style={{
+                        padding: "12px 20px",
+                        fontSize: 14,
+                        background: "#6B7280",
+                        color: "white",
+                        border: "none",
+                        borderRadius: 6,
+                        cursor: saving || uploadingQr ? "not-allowed" : "pointer",
+                        opacity: saving || uploadingQr ? 0.6 : 1,
+                        minHeight: 44,
+                      }}
+                    >
+                      Cancel
+                    </button>
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
+        </div>
+      )}
+
       {/* Account Info */}
       <div
         style={{
