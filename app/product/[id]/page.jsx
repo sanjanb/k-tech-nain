@@ -589,7 +589,8 @@ export default function ProductDetailPage() {
                     lineHeight: 1.5,
                   }}
                 >
-                  <strong>Direct payment to farmer</strong> - Payment goes directly to the farmer using the UPI details above.
+                  <strong>Direct payment to farmer</strong> - Payment goes
+                  directly to the farmer using the UPI details above.
                 </p>
               </div>
             </div>
@@ -638,7 +639,8 @@ export default function ProductDetailPage() {
                   lineHeight: 1.5,
                 }}
               >
-                <strong>Note:</strong> The farmer has not provided QR payment details. Please contact them via email to arrange payment.
+                <strong>Note:</strong> The farmer has not provided QR payment
+                details. Please contact them via email to arrange payment.
               </p>
             </div>
           )}
