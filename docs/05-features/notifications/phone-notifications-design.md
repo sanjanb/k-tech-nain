@@ -17,10 +17,12 @@ This document outlines the design and implementation path for adding SMS and Wha
 ### What's Ready
 
 1. **User Profile Schema**:
+
    - `phoneNumber` field already exists in user documents
    - Currently optional, no validation
 
 2. **Notification Log Schema**:
+
    - `channel` field supports `'EMAIL'` and `'SMS'`
    - Infrastructure ready for multi-channel notifications
 
@@ -96,40 +98,41 @@ Update notification status
 ```javascript
 export function validatePhoneNumber(phone) {
   // Remove all non-digits
-  const cleaned = phone.replace(/\D/g, '');
-  
+  const cleaned = phone.replace(/\D/g, "");
+
   // Check if it's a valid Indian mobile number
   // Format: +91 followed by 10 digits
   const regex = /^(?:\+91|91)?[6-9]\d{9}$/;
-  
+
   return regex.test(cleaned);
 }
 
 export function formatPhoneNumber(phone) {
-  const cleaned = phone.replace(/\D/g, '');
-  
+  const cleaned = phone.replace(/\D/g, "");
+
   // Add +91 prefix if not present
-  if (!cleaned.startsWith('91') && cleaned.length === 10) {
+  if (!cleaned.startsWith("91") && cleaned.length === 10) {
     return `+91${cleaned}`;
   }
-  
-  if (cleaned.startsWith('91') && cleaned.length === 12) {
+
+  if (cleaned.startsWith("91") && cleaned.length === 12) {
     return `+${cleaned}`;
   }
-  
+
   return `+${cleaned}`;
 }
 ```
 
 **Usage in Profile Page**:
+
 ```javascript
 const handlePhoneNumberChange = (value) => {
   setEditPhone(value);
-  
+
   if (validatePhoneNumber(value)) {
-    setPhoneError('');
+    setPhoneError("");
   } else {
-    setPhoneError('Please enter a valid Indian mobile number');
+    setPhoneError("Please enter a valid Indian mobile number");
   }
 };
 ```
@@ -143,12 +146,14 @@ const handlePhoneNumberChange = (value) => {
 **Cost**: $0.0079 per SMS in India
 
 **Setup**:
+
 ```bash
 cd functions
 npm install twilio
 ```
 
 **Configuration**:
+
 ```bash
 firebase functions:config:set twilio.account_sid="YOUR_ACCOUNT_SID"
 firebase functions:config:set twilio.auth_token="YOUR_AUTH_TOKEN"
@@ -156,8 +161,9 @@ firebase functions:config:set twilio.phone_number="+1234567890"
 ```
 
 **Code** (`functions/smsService.js`):
+
 ```javascript
-const twilio = require('twilio');
+const twilio = require("twilio");
 
 const client = twilio(
   functions.config().twilio.account_sid,
@@ -171,10 +177,10 @@ async function sendSMS(phoneNumber, message) {
       from: functions.config().twilio.phone_number,
       to: phoneNumber,
     });
-    
+
     return { success: true, messageId: result.sid };
   } catch (error) {
-    console.error('SMS send error:', error);
+    console.error("SMS send error:", error);
     return { success: false, error: error.message };
   }
 }
@@ -187,28 +193,30 @@ module.exports = { sendSMS };
 **Cost**: $0.00645 per SMS in India
 
 **Setup**:
+
 ```bash
 cd functions
 npm install aws-sdk
 ```
 
 **Code**:
+
 ```javascript
-const AWS = require('aws-sdk');
-const sns = new AWS.SNS({region: 'ap-south-1'});
+const AWS = require("aws-sdk");
+const sns = new AWS.SNS({ region: "ap-south-1" });
 
 async function sendSMS(phoneNumber, message) {
   const params = {
     Message: message,
     PhoneNumber: phoneNumber,
     MessageAttributes: {
-      'AWS.SNS.SMS.SMSType': {
-        DataType: 'String',
-        StringValue: 'Transactional'
-      }
-    }
+      "AWS.SNS.SMS.SMSType": {
+        DataType: "String",
+        StringValue: "Transactional",
+      },
+    },
   };
-  
+
   try {
     const result = await sns.publish(params).promise();
     return { success: true, messageId: result.MessageId };
@@ -223,6 +231,7 @@ async function sendSMS(phoneNumber, message) {
 **Cost**: Starting at ₹0.10 per SMS
 
 **Features**:
+
 - India-focused
 - DLT template registration
 - OTP support
@@ -236,16 +245,16 @@ async function sendSMS(phoneNumber, message) {
 ```javascript
 export function getSMSTemplate(eventType, data) {
   const { productName, dealId, recipientRole } = data;
-  
+
   switch (eventType) {
-    case 'DEAL_CONFIRMED':
-      return recipientRole === 'farmer'
+    case "DEAL_CONFIRMED":
+      return recipientRole === "farmer"
         ? `Farm2Table: Deal confirmed for ${productName}. Check your dashboard for buyer details. ID: ${dealId}`
         : `Farm2Table: Deal confirmed for ${productName}. Check your dashboard for payment info. ID: ${dealId}`;
-    
-    case 'DEAL_COMPLETED':
+
+    case "DEAL_COMPLETED":
       return `Farm2Table: Deal ${dealId} marked complete. Leave feedback in your dashboard.`;
-    
+
     default:
       return `Farm2Table: Update on deal ${dealId}. Login to view details.`;
   }
@@ -258,6 +267,7 @@ export function validateSMSLength(message) {
 ```
 
 **SMS Length Guidelines**:
+
 - Single SMS: 160 characters
 - Concatenated SMS: 153 characters per segment
 - Unicode (Hindi): 70 characters per SMS
@@ -272,116 +282,121 @@ export function validateSMSLength(message) {
 // Add to state
 const [smsEnabled, setSmsEnabled] = useState(false);
 const [phoneVerified, setPhoneVerified] = useState(false);
-const [verificationCode, setVerificationCode] = useState('');
-const [sentVerificationCode, setSentVerificationCode] = useState('');
+const [verificationCode, setVerificationCode] = useState("");
+const [sentVerificationCode, setSentVerificationCode] = useState("");
 
 // Verification flow
 const sendVerificationCode = async () => {
   if (!validatePhoneNumber(editPhone)) {
-    alert('Please enter a valid phone number');
+    alert("Please enter a valid phone number");
     return;
   }
-  
+
   // Generate 6-digit code
   const code = Math.floor(100000 + Math.random() * 900000).toString();
   setSentVerificationCode(code);
-  
+
   // Send SMS with verification code
   const message = `Farm To Table verification code: ${code}. Valid for 10 minutes.`;
-  
+
   // TODO: Call SMS service
-  console.log('Sending SMS:', message, 'to', editPhone);
-  
-  alert('Verification code sent!');
+  console.log("Sending SMS:", message, "to", editPhone);
+
+  alert("Verification code sent!");
 };
 
 const verifyPhone = () => {
   if (verificationCode === sentVerificationCode) {
     setPhoneVerified(true);
-    alert('Phone number verified!');
+    alert("Phone number verified!");
   } else {
-    alert('Invalid verification code');
+    alert("Invalid verification code");
   }
 };
 
 const saveSMSPreferences = async () => {
   if (!phoneVerified) {
-    alert('Please verify your phone number first');
+    alert("Please verify your phone number first");
     return;
   }
-  
-  await updateDoc(doc(db, 'users', user.uid), {
+
+  await updateDoc(doc(db, "users", user.uid), {
     phoneNumber: formatPhoneNumber(editPhone),
     phoneVerified: true,
     notificationPreferences: {
       email: true,
       sms: smsEnabled,
-    }
+    },
   });
-  
-  alert('SMS preferences saved!');
+
+  alert("SMS preferences saved!");
 };
 ```
 
 **UI Component**:
+
 ```jsx
-{/* SMS Notification Section (Farmer Profile) */}
-{userData?.role === 'farmer' && (
-  <div style={styles.section}>
-    <h3>SMS Notifications (Optional)</h3>
-    
-    <div style={styles.infoBox}>
-      <p>Receive instant SMS when deals are confirmed.</p>
-      <p><strong>Cost:</strong> Free for first 100 SMS/month, then ₹0.10/SMS</p>
-    </div>
-    
-    <label style={styles.label}>
-      <input
-        type="checkbox"
-        checked={smsEnabled}
-        onChange={(e) => setSmsEnabled(e.target.checked)}
-        disabled={!phoneVerified}
-      />
-      Enable SMS Notifications
-    </label>
-    
-    {!phoneVerified && (
-      <div style={styles.verificationSection}>
-        <input
-          type="tel"
-          placeholder="+91 98765 43210"
-          value={editPhone}
-          onChange={(e) => setEditPhone(e.target.value)}
-          style={styles.input}
-        />
-        <button onClick={sendVerificationCode} style={styles.button}>
-          Send Verification Code
-        </button>
-        
-        {sentVerificationCode && (
-          <>
-            <input
-              type="text"
-              placeholder="Enter 6-digit code"
-              value={verificationCode}
-              onChange={(e) => setVerificationCode(e.target.value)}
-              style={styles.input}
-            />
-            <button onClick={verifyPhone} style={styles.button}>
-              Verify
-            </button>
-          </>
-        )}
+{
+  /* SMS Notification Section (Farmer Profile) */
+}
+{
+  userData?.role === "farmer" && (
+    <div style={styles.section}>
+      <h3>SMS Notifications (Optional)</h3>
+
+      <div style={styles.infoBox}>
+        <p>Receive instant SMS when deals are confirmed.</p>
+        <p>
+          <strong>Cost:</strong> Free for first 100 SMS/month, then ₹0.10/SMS
+        </p>
       </div>
-    )}
-    
-    {phoneVerified && (
-      <p style={styles.successText}>
-        ✓ Phone number verified: {editPhone}
-      </p>
-    )}
-  </div>
-)}
+
+      <label style={styles.label}>
+        <input
+          type="checkbox"
+          checked={smsEnabled}
+          onChange={(e) => setSmsEnabled(e.target.checked)}
+          disabled={!phoneVerified}
+        />
+        Enable SMS Notifications
+      </label>
+
+      {!phoneVerified && (
+        <div style={styles.verificationSection}>
+          <input
+            type="tel"
+            placeholder="+91 98765 43210"
+            value={editPhone}
+            onChange={(e) => setEditPhone(e.target.value)}
+            style={styles.input}
+          />
+          <button onClick={sendVerificationCode} style={styles.button}>
+            Send Verification Code
+          </button>
+
+          {sentVerificationCode && (
+            <>
+              <input
+                type="text"
+                placeholder="Enter 6-digit code"
+                value={verificationCode}
+                onChange={(e) => setVerificationCode(e.target.value)}
+                style={styles.input}
+              />
+              <button onClick={verifyPhone} style={styles.button}>
+                Verify
+              </button>
+            </>
+          )}
+        </div>
+      )}
+
+      {phoneVerified && (
+        <p style={styles.successText}>✓ Phone number verified: {editPhone}</p>
+      )}
+    </div>
+  );
+}
 ```
 
 ---
@@ -392,21 +407,24 @@ const saveSMSPreferences = async () => {
 
 ```javascript
 exports.processNotification = functions.firestore
-  .document('notification_logs/{notificationId}')
+  .document("notification_logs/{notificationId}")
   .onCreate(async (snap, context) => {
     const notification = snap.data();
-    
+
     // Get recipient preferences
-    const recipientDoc = await db.collection('users').doc(notification.recipientId).get();
+    const recipientDoc = await db
+      .collection("users")
+      .doc(notification.recipientId)
+      .get();
     const recipient = recipientDoc.data();
-    
+
     // Check if SMS enabled and phone verified
-    const shouldSendSMS = 
-      notification.channel === 'SMS' &&
+    const shouldSendSMS =
+      notification.channel === "SMS" &&
       recipient.notificationPreferences?.sms &&
       recipient.phoneVerified &&
       recipient.phoneNumber;
-    
+
     if (shouldSendSMS) {
       // Send SMS
       const smsMessage = getSMSTemplate(notification.eventType, {
@@ -414,22 +432,22 @@ exports.processNotification = functions.firestore
         dealId: deal.id,
         recipientRole: recipient.role,
       });
-      
+
       const smsResult = await sendSMS(recipient.phoneNumber, smsMessage);
-      
+
       if (smsResult.success) {
         await snap.ref.update({
-          status: 'SENT',
+          status: "SENT",
           sentAt: admin.firestore.FieldValue.serverTimestamp(),
           messageId: smsResult.messageId,
         });
       } else {
         // Fallback to email if SMS fails
         await sendEmail(emailData);
-        
+
         await snap.ref.update({
-          status: 'SENT',
-          sentVia: 'EMAIL_FALLBACK',
+          status: "SENT",
+          sentVia: "EMAIL_FALLBACK",
           smsError: smsResult.error,
         });
       }
@@ -455,28 +473,30 @@ const MAX_SMS_GLOBAL_PER_DAY = 500;
 async function checkSMSRateLimit(userId) {
   const today = new Date();
   today.setHours(0, 0, 0, 0);
-  
+
   // Check user limit
-  const userSMSQuery = await db.collection('notification_logs')
-    .where('recipientId', '==', userId)
-    .where('channel', '==', 'SMS')
-    .where('createdAt', '>=', today)
+  const userSMSQuery = await db
+    .collection("notification_logs")
+    .where("recipientId", "==", userId)
+    .where("channel", "==", "SMS")
+    .where("createdAt", ">=", today)
     .get();
-  
+
   if (userSMSQuery.size >= MAX_SMS_PER_USER_PER_DAY) {
-    return { allowed: false, reason: 'User daily limit exceeded' };
+    return { allowed: false, reason: "User daily limit exceeded" };
   }
-  
+
   // Check global limit
-  const globalSMSQuery = await db.collection('notification_logs')
-    .where('channel', '==', 'SMS')
-    .where('createdAt', '>=', today)
+  const globalSMSQuery = await db
+    .collection("notification_logs")
+    .where("channel", "==", "SMS")
+    .where("createdAt", ">=", today)
     .get();
-  
+
   if (globalSMSQuery.size >= MAX_SMS_GLOBAL_PER_DAY) {
-    return { allowed: false, reason: 'Platform daily limit exceeded' };
+    return { allowed: false, reason: "Platform daily limit exceeded" };
   }
-  
+
   return { allowed: true };
 }
 ```
@@ -487,12 +507,12 @@ async function checkSMSRateLimit(userId) {
 
 ### SMS Pricing Comparison
 
-| Provider | Cost per SMS (India) | Free Tier | Notes |
-|----------|---------------------|-----------|-------|
-| Twilio | $0.0079 (₹0.66) | None | Global, reliable |
-| AWS SNS | $0.00645 (₹0.54) | None | AWS ecosystem |
-| MSG91 | ₹0.10 | 100 credits | India-specific |
-| Firebase Extensions | ₹0.85 | None | Easy setup |
+| Provider            | Cost per SMS (India) | Free Tier   | Notes            |
+| ------------------- | -------------------- | ----------- | ---------------- |
+| Twilio              | $0.0079 (₹0.66)      | None        | Global, reliable |
+| AWS SNS             | $0.00645 (₹0.54)     | None        | AWS ecosystem    |
+| MSG91               | ₹0.10                | 100 credits | India-specific   |
+| Firebase Extensions | ₹0.85                | None        | Easy setup       |
 
 ### Monthly Cost Estimates
 
@@ -509,16 +529,19 @@ async function checkSMSRateLimit(userId) {
 ## Security Considerations
 
 1. **Phone Verification**:
+
    - Require SMS verification before enabling
    - Store verification timestamp
    - Limit verification attempts (3 per hour)
 
 2. **Rate Limiting**:
+
    - 10 SMS per user per day
    - 500 SMS global per day
    - Block suspicious patterns
 
 3. **Opt-out**:
+
    - Easy disable in profile
    - Respect user preferences
    - Include STOP keyword in SMS
@@ -552,18 +575,21 @@ For commercial SMS in India, you must:
 ## Rollout Plan
 
 ### Version 10.1: SMS Foundation
+
 - [ ] Add phone validation
 - [ ] Create SMS templates
 - [ ] Add user preferences UI
 - [ ] Test with dummy SMS service
 
 ### Version 10.2: SMS Beta
+
 - [ ] Integrate MSG91/Twilio
 - [ ] Enable for verified users only
 - [ ] Monitor costs and delivery rates
 - [ ] Gather user feedback
 
 ### Version 11.0: SMS Production
+
 - [ ] Complete DLT registration
 - [ ] Add WhatsApp Business API
 - [ ] Implement advanced rate limiting
