@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { auth, db } from "../../lib/firebase";
+import { auth, db, storage } from "../../lib/firebase";
 import { onAuthStateChanged } from "firebase/auth";
 import {
   doc,
@@ -13,7 +13,13 @@ import {
   where,
   getDocs,
 } from "firebase/firestore";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import Link from "next/link";
+import {
+  validateUpiId,
+  formatUpiId,
+  getUpiValidationError,
+} from "../../lib/upiValidation";
 
 // Helper function to check if deal is completed
 const isDealCompleted = (deal) => {
@@ -31,6 +37,14 @@ export default function ProfilePage() {
   const [editPhone, setEditPhone] = useState("");
   const [saving, setSaving] = useState(false);
 
+  // Payment details state
+  const [paymentEnabled, setPaymentEnabled] = useState(false);
+  const [editingPayment, setEditingPayment] = useState(false);
+  const [editUpiId, setEditUpiId] = useState("");
+  const [qrCodeFile, setQrCodeFile] = useState(null);
+  const [uploadingQr, setUploadingQr] = useState(false);
+  const [paymentError, setPaymentError] = useState("");
+
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
       if (!currentUser) {
@@ -47,6 +61,13 @@ export default function ProfilePage() {
           const data = userDoc.data();
           setUserData(data);
           setEditPhone(data.phoneNumber || "");
+
+          // Initialize payment data for farmers
+          if (data.role === "farmer") {
+            const hasPaymentInfo = !!(data.upiId || data.qrCodeUrl);
+            setPaymentEnabled(hasPaymentInfo);
+            setEditUpiId(data.upiId || "");
+          }
 
           // Fetch deals based on role
           const dealsQuery =
@@ -105,6 +126,85 @@ export default function ProfilePage() {
       alert("Failed to update phone number");
     } finally {
       setSaving(false);
+    }
+  };
+
+  const handleSavePaymentDetails = async () => {
+    if (!user) return;
+    setPaymentError("");
+
+    // If payment is disabled, clear all payment data
+    if (!paymentEnabled) {
+      setSaving(true);
+      try {
+        await updateDoc(doc(db, "users", user.uid), {
+          upiId: null,
+          qrCodeUrl: null,
+        });
+        setUserData({ ...userData, upiId: null, qrCodeUrl: null });
+        setEditUpiId("");
+        setQrCodeFile(null);
+        setEditingPayment(false);
+        alert("Payment details removed successfully!");
+      } catch (error) {
+        console.error("Error removing payment details:", error);
+        setPaymentError("Failed to remove payment details");
+      } finally {
+        setSaving(false);
+      }
+      return;
+    }
+
+    // Validate UPI ID if provided
+    if (editUpiId.trim() && !validateUpiId(editUpiId.trim())) {
+      setPaymentError(getUpiValidationError(editUpiId.trim()));
+      return;
+    }
+
+    setSaving(true);
+    try {
+      let qrCodeUrl = userData.qrCodeUrl || null;
+
+      // Upload new QR code if provided
+      if (qrCodeFile) {
+        // Validate file type
+        if (!qrCodeFile.type.match(/image\/(png|jpeg|jpg)/)) {
+          setPaymentError("QR code must be PNG or JPEG format");
+          setSaving(false);
+          return;
+        }
+
+        // Validate file size (max 2MB)
+        if (qrCodeFile.size > 2 * 1024 * 1024) {
+          setPaymentError("QR code image must be less than 2MB");
+          setSaving(false);
+          return;
+        }
+
+        setUploadingQr(true);
+        const qrRef = ref(storage, `qr-codes/${user.uid}/${Date.now()}-${qrCodeFile.name}`);
+        await uploadBytes(qrRef, qrCodeFile);
+        qrCodeUrl = await getDownloadURL(qrRef);
+        setUploadingQr(false);
+      }
+
+      // Update Firestore
+      const updateData = {
+        upiId: editUpiId.trim() ? formatUpiId(editUpiId.trim()) : null,
+        qrCodeUrl,
+      };
+
+      await updateDoc(doc(db, "users", user.uid), updateData);
+      setUserData({ ...userData, ...updateData });
+      setQrCodeFile(null);
+      setEditingPayment(false);
+      alert("Payment details updated successfully!");
+    } catch (error) {
+      console.error("Error updating payment details:", error);
+      setPaymentError("Failed to update payment details");
+    } finally {
+      setSaving(false);
+      setUploadingQr(false);
     }
   };
 
