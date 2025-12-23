@@ -37,15 +37,18 @@ User Receives Email
 ### System Components
 
 1. **Client-Side Libraries** (`/lib`)
+
    - `notificationEvents.js` - Event types, constants, helpers
    - `notificationTemplates.js` - Email subject/body templates
    - `notificationService.js` - Client-side notification queue management
 
 2. **Firebase Cloud Functions** (`/functions`)
+
    - `onDealConfirmation` - Monitors deal updates, creates notification logs
    - `processNotification` - Sends emails based on notification logs
 
 3. **Frontend Integration** (`/app`)
+
    - Updated deal confirmation feedback messages
    - User notification status display
 
@@ -62,15 +65,18 @@ User Receives Email
 **Objective**: Establish data structures and event definitions
 
 **Deliverables**:
+
 - Event type constants (`DEAL_CONFIRMED`, `DEAL_COMPLETED`)
 - Deal status lifecycle defined
 - Notification log schema created
 - Helper functions for event detection
 
 **Files Created**:
+
 - [lib/notificationEvents.js](../lib/notificationEvents.js)
 
 **Key Functions**:
+
 - `getDealStateTransitionEvent()` - Detects state changes
 - `isDealConfirmed()` - Validates deal confirmation status
 - `createNotificationLogEntry()` - Generates log metadata
@@ -83,11 +89,13 @@ User Receives Email
 **Objective**: Create Firebase Functions to detect and respond to deal confirmations
 
 **Deliverables**:
+
 - Cloud Function to monitor deal updates
 - Automatic notification log creation
 - Idempotency checks to prevent duplicates
 
 **Files Created**:
+
 - [functions/index.js](../functions/index.js)
 - [functions/package.json](../functions/package.json)
 - [firebase.json](../firebase.json)
@@ -96,7 +104,7 @@ User Receives Email
 
 ```javascript
 exports.onDealConfirmation = functions.firestore
-  .document('deals/{dealId}')
+  .document("deals/{dealId}")
   .onUpdate(async (change, context) => {
     // Detects when both buyerConfirmed and farmerConfirmed become true
     // Creates notification logs for both parties
@@ -104,9 +112,12 @@ exports.onDealConfirmation = functions.firestore
 ```
 
 **Trigger Logic**:
+
 ```javascript
-const wasConfirmed = previousDeal.buyerConfirmed && previousDeal.farmerConfirmed;
-const isNowConfirmed = currentDeal.buyerConfirmed && currentDeal.farmerConfirmed;
+const wasConfirmed =
+  previousDeal.buyerConfirmed && previousDeal.farmerConfirmed;
+const isNowConfirmed =
+  currentDeal.buyerConfirmed && currentDeal.farmerConfirmed;
 
 if (!wasConfirmed && isNowConfirmed) {
   // Create notification logs
@@ -120,12 +131,14 @@ if (!wasConfirmed && isNowConfirmed) {
 **Objective**: Send transactional emails for confirmed deals
 
 **Deliverables**:
+
 - Email templates (plain text + HTML)
 - Email sending function (placeholder)
 - Notification processing function
 - Status tracking (SENT/FAILED)
 
 **Files Created**:
+
 - [lib/notificationTemplates.js](../lib/notificationTemplates.js)
 
 **Email Template Structure**:
@@ -140,6 +153,7 @@ if (!wasConfirmed && isNowConfirmed) {
 ```
 
 **Email Content Includes**:
+
 - Recipient name
 - Product name
 - Other party name (farmer/buyer)
@@ -152,13 +166,14 @@ if (!wasConfirmed && isNowConfirmed) {
 To enable actual email sending, integrate one of these services in `functions/index.js`:
 
 **Option 1: SendGrid**
+
 ```javascript
-const sgMail = require('@sendgrid/mail');
+const sgMail = require("@sendgrid/mail");
 sgMail.setApiKey(functions.config().sendgrid.key);
 
 await sgMail.send({
   to: emailData.to,
-  from: 'notifications@farmtotable.app',
+  from: "notifications@farmtotable.app",
   subject: emailData.subject,
   text: emailData.text,
   html: emailData.html,
@@ -166,37 +181,41 @@ await sgMail.send({
 ```
 
 **Option 2: AWS SES**
-```javascript
-const AWS = require('aws-sdk');
-const ses = new AWS.SES({region: 'us-east-1'});
 
-await ses.sendEmail({
-  Source: 'notifications@farmtotable.app',
-  Destination: { ToAddresses: [emailData.to] },
-  Message: {
-    Subject: { Data: emailData.subject },
-    Body: {
-      Text: { Data: emailData.text },
-      Html: { Data: emailData.html }
-    }
-  }
-}).promise();
+```javascript
+const AWS = require("aws-sdk");
+const ses = new AWS.SES({ region: "us-east-1" });
+
+await ses
+  .sendEmail({
+    Source: "notifications@farmtotable.app",
+    Destination: { ToAddresses: [emailData.to] },
+    Message: {
+      Subject: { Data: emailData.subject },
+      Body: {
+        Text: { Data: emailData.text },
+        Html: { Data: emailData.html },
+      },
+    },
+  })
+  .promise();
 ```
 
 **Option 3: Nodemailer (SMTP)**
+
 ```javascript
-const nodemailer = require('nodemailer');
+const nodemailer = require("nodemailer");
 const transporter = nodemailer.createTransporter({
-  host: 'smtp.gmail.com',
+  host: "smtp.gmail.com",
   port: 587,
   auth: {
     user: functions.config().smtp.user,
     pass: functions.config().smtp.password,
-  }
+  },
 });
 
 await transporter.sendMail({
-  from: 'notifications@farmtotable.app',
+  from: "notifications@farmtotable.app",
   to: emailData.to,
   subject: emailData.subject,
   text: emailData.text,
@@ -211,23 +230,28 @@ await transporter.sendMail({
 **Objective**: Inform users when notifications are sent
 
 **Deliverables**:
+
 - Updated confirmation success messages
 - Client-side notification service utilities
 - Notification history retrieval functions
 
 **Files Modified**:
+
 - [app/my-deals/page.jsx](../app/my-deals/page.jsx)
 - [app/farmer/page.jsx](../app/farmer/page.jsx)
 
 **Files Created**:
+
 - [lib/notificationService.js](../lib/notificationService.js)
 
 **User Feedback**:
 
 When a user confirms a deal, they now see:
+
 > "Deal confirmed successfully! A confirmation notification has been sent to your registered email."
 
 **Additional UI Features Available**:
+
 - `queueNotification()` - Manually queue notifications
 - `getDealNotificationHistory()` - View notification history for a deal
 - `getUserNotificationHistory()` - View user's notification history
@@ -240,6 +264,7 @@ When a user confirms a deal, they now see:
 **Objective**: Ensure notifications are reliable and prevent abuse
 
 **Deliverables**:
+
 - Idempotency checks (prevent duplicate emails)
 - Error handling and retry logic
 - Notification attempt tracking
@@ -248,21 +273,24 @@ When a user confirms a deal, they now see:
 **Reliability Features**:
 
 1. **Duplicate Prevention**:
+
    - `isDuplicateNotification()` checks existing logs before queuing
    - Firebase Function checks deal state transition (not just update)
 
 2. **Error Handling**:
+
    ```javascript
    try {
      // Send email
-     status = SENT
+     status = SENT;
    } catch (error) {
-     status = FAILED
-     errorMessage = error.message
+     status = FAILED;
+     errorMessage = error.message;
    }
    ```
 
 3. **Attempt Tracking**:
+
    - Each notification log tracks `attempts`, `lastAttemptAt`, `sentAt`
    - Failed notifications can be manually retried
 
@@ -270,6 +298,7 @@ When a user confirms a deal, they now see:
    > "This is an automated transactional message. Please do not reply to this email."
 
 **Security Considerations**:
+
 - No sensitive data in emails (no passwords, payment details)
 - Only registered email addresses receive notifications
 - Platform provides connection only (not payment processing)
@@ -281,6 +310,7 @@ When a user confirms a deal, they now see:
 **Objective**: Allow SMS/WhatsApp notifications without current implementation
 
 **Deliverables**:
+
 - Phone number field in user profile (already exists)
 - Channel support in notification logs (`EMAIL` / `SMS`)
 - Documentation for SMS integration
@@ -294,10 +324,10 @@ When ready to add SMS notifications:
 3. **Update Cloud Functions** - Add SMS sending logic:
 
 ```javascript
-if (notification.channel === 'SMS') {
+if (notification.channel === "SMS") {
   await sendSMS({
     to: recipient.phoneNumber,
-    message: getSMSTemplate(notification.eventType, data)
+    message: getSMSTemplate(notification.eventType, data),
   });
 }
 ```
@@ -306,8 +336,9 @@ if (notification.channel === 'SMS') {
 5. **Rate Limiting** - Prevent SMS abuse (more expensive than email)
 
 **SMS Template Example**:
+
 ```
-Farm To Table: Your deal for [Product Name] has been confirmed. 
+Farm To Table: Your deal for [Product Name] has been confirmed.
 Log in to view details. Deal ID: [DealID]
 ```
 
@@ -334,6 +365,7 @@ Log in to view details. Deal ID: [DealID]
 ```
 
 **Firestore Indexes**:
+
 ```
 Collection: notification_logs
 - eventType (ASC) + dealId (ASC) + recipientId (ASC)
@@ -364,17 +396,20 @@ npm install
 Choose and configure one email provider:
 
 **SendGrid**:
+
 ```bash
 firebase functions:config:set sendgrid.key="YOUR_SENDGRID_API_KEY"
 ```
 
 **AWS SES**:
+
 ```bash
 firebase functions:config:set aws.access_key="YOUR_ACCESS_KEY"
 firebase functions:config:set aws.secret_key="YOUR_SECRET_KEY"
 ```
 
 **SMTP**:
+
 ```bash
 firebase functions:config:set smtp.user="your_email@gmail.com"
 firebase functions:config:set smtp.password="your_app_password"
@@ -412,10 +447,12 @@ npm run serve
 ```
 
 This starts:
+
 - Functions emulator on http://localhost:5001
 - Firestore emulator on http://localhost:8080
 
 **Test Workflow**:
+
 1. Update a deal document to trigger `onDealConfirmation`
 2. Check emulator logs for notification log creation
 3. Verify `processNotification` is triggered
@@ -439,11 +476,13 @@ This starts:
 ### Firebase Console Monitoring
 
 1. **Functions Dashboard**: `https://console.firebase.google.com/project/YOUR_PROJECT/functions`
+
    - View function execution count
    - Monitor errors and crashes
    - Check execution time
 
 2. **Firestore Database**: Check `notification_logs` collection
+
    - Filter by status (FAILED) to see errors
    - Monitor growth rate
    - Set up cleanup for old logs (>30 days)
@@ -466,7 +505,7 @@ This starts:
 ### Firebase Functions Pricing
 
 - **Free Tier**: 2M invocations/month, 400K GB-seconds
-- **Estimated Usage**: 
+- **Estimated Usage**:
   - 2 function calls per deal confirmation
   - Average 100 deals/day = 6,000 calls/month
   - Well within free tier
@@ -474,10 +513,12 @@ This starts:
 ### Email Service Pricing
 
 **SendGrid**:
+
 - Free: 100 emails/day
 - Essentials: $15/month for 50K emails
 
 **AWS SES**:
+
 - $0.10 per 1,000 emails
 - 100 deals/day = 200 emails/day = $0.60/month
 
@@ -498,16 +539,19 @@ This starts:
 ### Planned Enhancements
 
 **Version 10.1**:
+
 - [ ] Add notification preferences to user profile
 - [ ] Support notification muting
 - [ ] Add unsubscribe link to emails
 
 **Version 10.2**:
+
 - [ ] In-app notification center
 - [ ] Real-time notification badge
 - [ ] Mark notifications as read
 
 **Version 11.0**:
+
 - [ ] SMS notifications (opt-in)
 - [ ] WhatsApp Business integration
 - [ ] Advanced email templates with branding
@@ -519,6 +563,7 @@ This starts:
 ### Email Not Sending
 
 **Check**:
+
 1. Firebase Functions deployed: `firebase deploy --only functions`
 2. Email service configured: `firebase functions:config:get`
 3. Recipient has email in profile
@@ -526,6 +571,7 @@ This starts:
 5. Review Firebase Functions logs: `firebase functions:log`
 
 **Common Issues**:
+
 - Email service API key invalid
 - Sender email not verified (AWS SES)
 - Recipient email bounced/blocked
@@ -534,18 +580,21 @@ This starts:
 ### Duplicate Notifications
 
 **Check**:
+
 1. `onDealConfirmation` logic validates state transition
 2. `isDuplicateNotification` is working correctly
 3. No manual notification log creation bypassing checks
 
 **Fix**: Add composite index on `notification_logs`:
+
 ```javascript
-eventType + dealId + recipientId + status
+eventType + dealId + recipientId + status;
 ```
 
 ### Function Not Triggering
 
 **Check**:
+
 1. Functions deployed successfully
 2. Firestore collection name matches (`deals`, `notification_logs`)
 3. Document path matches trigger pattern
@@ -566,6 +615,7 @@ eventType + dealId + recipientId + status
 ## Support
 
 For questions or issues with notification implementation:
+
 - Check Firebase Functions logs first
 - Review `notification_logs` collection for error details
 - Consult email service provider documentation
