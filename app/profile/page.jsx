@@ -182,7 +182,10 @@ export default function ProfilePage() {
         }
 
         setUploadingQr(true);
-        const qrRef = ref(storage, `qr-codes/${user.uid}/${Date.now()}-${qrCodeFile.name}`);
+        const qrRef = ref(
+          storage,
+          `qr-codes/${user.uid}/${Date.now()}-${qrCodeFile.name}`
+        );
         await uploadBytes(qrRef, qrCodeFile);
         qrCodeUrl = await getDownloadURL(qrRef);
         setUploadingQr(false);
