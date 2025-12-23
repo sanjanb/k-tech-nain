@@ -45,6 +45,9 @@ export default function ProfilePage() {
   const [uploadingQr, setUploadingQr] = useState(false);
   const [paymentError, setPaymentError] = useState("");
 
+  // Language preference state
+  const [editLanguage, setEditLanguage] = useState("en");
+
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
       if (!currentUser) {
@@ -61,6 +64,7 @@ export default function ProfilePage() {
           const data = userDoc.data();
           setUserData(data);
           setEditPhone(data.phoneNumber || "");
+          setEditLanguage(data.language || "en");
 
           // Initialize payment data for farmers
           if (data.role === "farmer") {
@@ -117,13 +121,18 @@ export default function ProfilePage() {
     try {
       await updateDoc(doc(db, "users", user.uid), {
         phoneNumber: editPhone.trim() || null,
+        language: editLanguage,
       });
-      setUserData({ ...userData, phoneNumber: editPhone.trim() || null });
+      setUserData({ 
+        ...userData, 
+        phoneNumber: editPhone.trim() || null,
+        language: editLanguage,
+      });
       setIsEditing(false);
-      alert("Phone number updated successfully!");
+      alert("Profile updated successfully!");
     } catch (error) {
-      console.error("Error updating phone:", error);
-      alert("Failed to update phone number");
+      console.error("Error updating profile:", error);
+      alert("Failed to update profile");
     } finally {
       setSaving(false);
     }
