@@ -32,6 +32,7 @@ Farm To Table is a minimal web platform designed to connect farmers directly wit
 ### Problem Statement
 
 Traditional agricultural supply chains suffer from:
+
 - Excessive intermediary fees reducing farmer profits
 - Lack of transparency in pricing and sourcing
 - Complex commission structures
@@ -40,6 +41,7 @@ Traditional agricultural supply chains suffer from:
 ### Solution
 
 Farm To Table addresses these issues by:
+
 - Providing a free, zero-commission marketplace
 - Enabling direct farmer-to-buyer connections
 - Facilitating transparent pricing and product information
@@ -92,18 +94,21 @@ Farm To Table addresses these issues by:
 ## Technology Stack
 
 ### Frontend
+
 - **Framework**: Next.js 16.0 (App Router)
 - **UI Library**: React 19.2
 - **Styling**: CSS Custom Properties
 - **State Management**: React Hooks
 
 ### Backend
+
 - **Database**: Firebase Firestore
 - **Authentication**: Firebase Auth (Email/Password)
 - **Storage**: Firebase Storage (QR codes)
 - **Hosting**: Vercel-ready
 
 ### Development Tools
+
 - **Package Manager**: npm
 - **Version Control**: Git
 - **Code Editor**: VS Code recommended
@@ -115,6 +120,7 @@ Farm To Table addresses these issues by:
 ### Data Model
 
 **Users Collection**
+
 ```javascript
 {
   uid: string,
@@ -130,6 +136,7 @@ Farm To Table addresses these issues by:
 ```
 
 **Products Collection**
+
 ```javascript
 {
   id: string,
@@ -145,6 +152,7 @@ Farm To Table addresses these issues by:
 ```
 
 **Deals Collection**
+
 ```javascript
 {
   id: string,
@@ -181,12 +189,14 @@ Farm To Table addresses these issues by:
 ### Installation
 
 1. Clone the repository:
+
 ```bash
 git clone https://github.com/sanjanb/k-tech-nain.git
 cd k-tech-nain
 ```
 
 2. Install dependencies:
+
 ```bash
 npm install
 ```
@@ -205,6 +215,7 @@ NEXT_PUBLIC_FIREBASE_APP_ID=your_app_id
 ```
 
 4. Set up Firebase:
+
    - Create a new Firebase project
    - Enable Email/Password authentication
    - Create a Firestore database (production or test mode)
@@ -212,6 +223,7 @@ NEXT_PUBLIC_FIREBASE_APP_ID=your_app_id
    - Copy configuration to `.env.local`
 
 5. Start development server:
+
 ```bash
 npm run dev
 ```
@@ -223,6 +235,7 @@ npm run dev
 ## User Roles
 
 ### Farmer
+
 - Register with farmer role
 - Create and manage product listings
 - Set prices and quantities
@@ -233,6 +246,7 @@ npm run dev
 - Access farmer dashboard
 
 ### Buyer
+
 - Register with buyer role
 - Browse products without login
 - Search and filter listings
@@ -243,6 +257,7 @@ npm run dev
 - Confirm completed purchases
 
 ### Admin (Future)
+
 - Verify farmer identities
 - Moderate content
 - Handle disputes
@@ -324,6 +339,7 @@ npm run start
 ### Environment Variables
 
 Required environment variables (see `.env.example`):
+
 - Firebase configuration (6 variables)
 - All must be prefixed with `NEXT_PUBLIC_` for client access
 
@@ -387,6 +403,7 @@ Comprehensive documentation is available in the `/docs` directory:
 ## Current Scope and Limitations
 
 ### Included Features
+
 - Product listing and discovery
 - User authentication and profiles
 - Direct payment information sharing
@@ -395,6 +412,7 @@ Comprehensive documentation is available in the `/docs` directory:
 - Mobile responsive design
 
 ### Intentional Exclusions
+
 - In-platform payment processing
 - Messaging system
 - Logistics coordination
@@ -428,12 +446,14 @@ Contributions are welcome! Please follow these guidelines:
 ## Roadmap
 
 ### Version 8.0 (Planned)
+
 - Enhanced farmer verification
 - Location-based product discovery
 - Multi-language support
 - Performance optimizations
 
 ### Version 9.0 (Future)
+
 - Mobile application (iOS/Android)
 - Advanced search filters
 - Seasonal product recommendations
