@@ -465,31 +465,137 @@ export default function ProductDetailPage() {
             Payment & Contact Details
           </h2>
 
-          <div style={{ marginBottom: 16 }}>
-            <p
+          {/* Show QR payment option if farmer has provided it */}
+          {farmer && (farmer.upiId || farmer.qrCodeUrl) && (
+            <div
               style={{
-                fontSize: 12,
-                textTransform: "uppercase",
-                color: "var(--color-text-secondary)",
-                margin: "0 0 4px 0",
-                fontWeight: 600,
-                letterSpacing: "0.5px",
+                background: "#F0F9FF",
+                border: "2px solid var(--color-primary)",
+                borderRadius: 8,
+                padding: 16,
+                marginBottom: 20,
               }}
             >
-              UPI ID
-            </p>
-            <p
-              style={{
-                fontSize: 16,
-                fontWeight: 500,
-                color: "var(--color-text-primary)",
-                margin: 0,
-              }}
-            >
-              {product.upiId || "Not provided"}
-            </p>
-          </div>
+              <h3
+                style={{
+                  fontSize: 16,
+                  fontWeight: 600,
+                  color: "var(--color-text-primary)",
+                  margin: 0,
+                  marginBottom: 12,
+                }}
+              >
+                Pay via UPI
+              </h3>
 
+              {farmer.qrCodeUrl && (
+                <div style={{ marginBottom: 16, textAlign: "center" }}>
+                  <img
+                    src={farmer.qrCodeUrl}
+                    alt="Payment QR Code"
+                    style={{
+                      maxWidth: 250,
+                      height: "auto",
+                      border: "2px solid #E5E7EB",
+                      borderRadius: 8,
+                      marginBottom: 8,
+                    }}
+                  />
+                  <p
+                    style={{
+                      fontSize: 13,
+                      color: "var(--color-text-secondary)",
+                      margin: 0,
+                    }}
+                  >
+                    Scan QR code to pay <strong>{farmer.name}</strong>
+                  </p>
+                </div>
+              )}
+
+              {farmer.upiId && (
+                <div style={{ marginBottom: 8 }}>
+                  <p
+                    style={{
+                      fontSize: 12,
+                      textTransform: "uppercase",
+                      color: "var(--color-text-secondary)",
+                      margin: "0 0 4px 0",
+                      fontWeight: 600,
+                      letterSpacing: "0.5px",
+                    }}
+                  >
+                    UPI ID
+                  </p>
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: 8,
+                      background: "var(--color-white)",
+                      padding: "10px 12px",
+                      borderRadius: 6,
+                      border: "1px solid #E5E7EB",
+                    }}
+                  >
+                    <p
+                      style={{
+                        fontSize: 16,
+                        fontWeight: 500,
+                        color: "var(--color-text-primary)",
+                        margin: 0,
+                        flex: 1,
+                        fontFamily: "monospace",
+                      }}
+                    >
+                      {farmer.upiId}
+                    </p>
+                    <button
+                      onClick={() => {
+                        navigator.clipboard.writeText(farmer.upiId);
+                        alert("UPI ID copied to clipboard!");
+                      }}
+                      style={{
+                        padding: "6px 12px",
+                        fontSize: 12,
+                        fontWeight: 500,
+                        background: "var(--color-primary)",
+                        color: "white",
+                        border: "none",
+                        borderRadius: 4,
+                        cursor: "pointer",
+                      }}
+                    >
+                      Copy
+                    </button>
+                  </div>
+                </div>
+              )}
+
+              <div
+                style={{
+                  background: "#DBEAFE",
+                  border: "1px solid #93C5FD",
+                  borderRadius: 6,
+                  padding: 10,
+                  marginTop: 12,
+                }}
+              >
+                <p
+                  style={{
+                    fontSize: 12,
+                    color: "#1E40AF",
+                    margin: 0,
+                    lineHeight: 1.5,
+                  }}
+                >
+                  <strong>Direct payment to farmer</strong> - Payment goes directly to the farmer using the UPI details above.
+                </p>
+              </div>
+            </div>
+          )}
+
+          {/* Contact information */}
           <div style={{ marginBottom: 16 }}>
             <p
               style={{
@@ -514,27 +620,28 @@ export default function ProductDetailPage() {
             </p>
           </div>
 
-          <div
-            style={{
-              background: "#EFF6FF",
-              border: "1px solid #BFDBFE",
-              borderRadius: 6,
-              padding: 12,
-              marginTop: 20,
-            }}
-          >
-            <p
+          {/* Fallback message if no QR payment */}
+          {farmer && !farmer.upiId && !farmer.qrCodeUrl && (
+            <div
               style={{
-                fontSize: 13,
-                color: "#1E40AF",
-                margin: 0,
-                lineHeight: 1.5,
+                background: "#FEF3C7",
+                border: "1px solid #FCD34D",
+                borderRadius: 6,
+                padding: 12,
               }}
             >
-              <strong>Direct payment to farmer</strong> - Complete payment
-              directly using the UPI ID provided above.
-            </p>
-          </div>
+              <p
+                style={{
+                  fontSize: 13,
+                  color: "#92400E",
+                  margin: 0,
+                  lineHeight: 1.5,
+                }}
+              >
+                <strong>Note:</strong> The farmer has not provided QR payment details. Please contact them via email to arrange payment.
+              </p>
+            </div>
+          )}
         </div>
 
         <hr
